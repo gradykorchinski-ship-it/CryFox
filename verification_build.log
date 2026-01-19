@@ -1,0 +1,17 @@
+ninja: Entering directory `Build/performance'
+ninja: warning: premature end of file; recovering
+[1/3] Building CXX object Lagom/Libraries/LibBrowser/CMakeFiles/LibBrowser.dir/PasswordVault.cpp.o
+FAILED: [code=1] Lagom/Libraries/LibBrowser/CMakeFiles/LibBrowser.dir/PasswordVault.cpp.o 
+/usr/bin/c++ -DENABLE_COMPILETIME_FORMAT_CHECK -DLibBrowser_EXPORTS -D_FILE_OFFSET_BITS=64 -I/home/stormz/Desktop/CryFoxBird/CryFox -I/home/stormz/Desktop/CryFoxBird/CryFox/Services -I/home/stormz/Desktop/CryFoxBird/CryFox/Libraries -I/home/stormz/Desktop/CryFoxBird/CryFox/Build/performance/Lagom -I/home/stormz/Desktop/CryFoxBird/CryFox/Build/performance/Lagom/Services -I/home/stormz/Desktop/CryFoxBird/CryFox/Build/performance/Lagom/Libraries -I/home/stormz/Desktop/CryFoxBird/CryFox/Meta/Lagom/../.. -I/home/stormz/Desktop/CryFoxBird/CryFox/Meta/Lagom/../../Libraries -I/home/stormz/Desktop/CryFoxBird/CryFox/Meta/Lagom/../../Services -I/home/stormz/Desktop/CryFoxBird/CryFox/Build/performance -isystem /home/stormz/Desktop/CryFoxBird/CryFox/Build/performance/vcpkg_installed/x64-linux-dynamic/include -O3 -march=native -std=c++23 -fPIC -fdiagnostics-color=always -march=native -Wall -Wextra -fno-exceptions -ffp-contract=off -Wcast-qual -Wformat=2 -Wimplicit-fallthrough -Wlogical-op -Wmissing-declarations -Wmissing-field-initializers -Wsuggest-override -Wno-invalid-offsetof -Wno-unknown-warning-option -Wno-unused-command-line-argument -Werror -Wno-expansion-to-defined -Wno-literal-suffix -Wno-unqualified-std-cast-call -Wvla -Wno-array-bounds -Wno-stringop-overflow -Wno-dangling-reference -fno-semantic-interposition -fvisibility-inlines-hidden -fstack-protector-strong -fstrict-flex-arrays=2 -Wno-maybe-uninitialized -Wno-shorten-64-to-32 -fsigned-char -ggnu-pubnames -O2 -g1 -MD -MT Lagom/Libraries/LibBrowser/CMakeFiles/LibBrowser.dir/PasswordVault.cpp.o -MF Lagom/Libraries/LibBrowser/CMakeFiles/LibBrowser.dir/PasswordVault.cpp.o.d -o Lagom/Libraries/LibBrowser/CMakeFiles/LibBrowser.dir/PasswordVault.cpp.o -c /home/stormz/Desktop/CryFoxBird/CryFox/Libraries/LibBrowser/PasswordVault.cpp
+/home/stormz/Desktop/CryFoxBird/CryFox/Libraries/LibBrowser/PasswordVault.cpp: In member function ‘AK::ErrorOr<void> Browser::PasswordVault::add_password(Browser::PasswordEntry&)’:
+/home/stormz/Desktop/CryFoxBird/CryFox/Libraries/LibBrowser/PasswordVault.cpp:147:5: error: ‘TRY_OR_RETURN_ERROR’ was not declared in this scope
+  147 |     TRY_OR_RETURN_ERROR(sqlite3_open(m_database_path.to_byte_string().characters(), &db), Error::from_string_literal("Open failed"));
+      |     ^~~~~~~~~~~~~~~~~~~
+At global scope:
+cc1plus: note: unrecognized command-line option ‘-Wno-shorten-64-to-32’ may have been intended to silence earlier diagnostics
+cc1plus: note: unrecognized command-line option ‘-Wno-unqualified-std-cast-call’ may have been intended to silence earlier diagnostics
+cc1plus: note: unrecognized command-line option ‘-Wno-unused-command-line-argument’ may have been intended to silence earlier diagnostics
+cc1plus: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+[2/3] Building CXX object Lagom/Libraries/LibAuth/CMakeFiles/LibAuth.dir/LocalAuthManager.cpp.o
+[3/3] Building CXX object Lagom/Libraries/LibAuth/CMakeFiles/LibAuth.dir/SupabaseClient.cpp.o
+ninja: build stopped: subcommand failed.

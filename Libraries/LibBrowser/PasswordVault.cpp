@@ -10,7 +10,7 @@
 #include <LibBrowser/PasswordVault.h>
 #include <LibCore/System.h>
 #include <LibCrypto/Cipher/AES.h>
-#include <LibCrypto/Random.h>
+#include <LibCrypto/SecureRandom.h>
 #include <sqlite3.h>
 #include <stdlib.h>
 #include <time.h>
@@ -95,11 +95,11 @@ ErrorOr<String> PasswordVault::encrypt_password(String const& password)
         return Error::from_string_literal("Not authenticated");
 
     auto master_key_base64 = Auth::LocalAuthManager::the().session_key();
-    auto master_key = TRY(decode_base64(master_key_base64));
+    auto master_key = TRY(decode_base64(master_key_base64.bytes_as_string_view()));
 
     // IV (12 bytes)
     u8 iv_bytes[12];
-    Crypto::fill_with_random(iv_bytes, sizeof(iv_bytes));
+    Crypto::fill_with_secure_random({ iv_bytes, sizeof(iv_bytes) });
 
     Crypto::Cipher::AESGCMCipher cipher(master_key.bytes());
     auto encrypted = TRY(cipher.encrypt(password.bytes(), { iv_bytes, 12 }, {}, 16));
@@ -119,9 +119,9 @@ ErrorOr<String> PasswordVault::decrypt_password(String const& encrypted_password
         return Error::from_string_literal("Not authenticated");
 
     auto master_key_base64 = Auth::LocalAuthManager::the().session_key();
-    auto master_key = TRY(decode_base64(master_key_base64));
+    auto master_key = TRY(decode_base64(master_key_base64.bytes_as_string_view()));
 
-    auto decoded = TRY(decode_base64(encrypted_password_base64));
+    auto decoded = TRY(decode_base64(encrypted_password_base64.bytes_as_string_view()));
     if (decoded.size() < 12 + 16)
         return Error::from_string_literal("Invalid encrypted password data");
 
@@ -144,7 +144,9 @@ ErrorOr<void> PasswordVault::add_password(PasswordEntry& entry)
     time_t now = time(nullptr);
 
     sqlite3* db;
-    TRY_OR_RETURN_ERROR(sqlite3_open(m_database_path.to_byte_string().characters(), &db), Error::from_string_literal("Open failed"));
+    int rc = sqlite3_open(m_database_path.to_byte_string().characters(), &db);
+    if (rc != SQLITE_OK)
+        return Error::from_string_literal("Open failed");
 
     char const* sql = "INSERT INTO passwords (url, username, encrypted_password, last_modified) VALUES (?, ?, ?, ?)";
     sqlite3_stmt* stmt;
@@ -155,7 +157,7 @@ ErrorOr<void> PasswordVault::add_password(PasswordEntry& entry)
     sqlite3_bind_text(stmt, 3, encrypted.to_byte_string().characters(), -1, SQLITE_TRANSIENT);
     sqlite3_bind_int64(stmt, 4, now);
 
-    int rc = sqlite3_step(stmt);
+    rc = sqlite3_step(stmt);
     if (rc == SQLITE_DONE) {
         entry.id = static_cast<int>(sqlite3_last_insert_rowid(db));
     }

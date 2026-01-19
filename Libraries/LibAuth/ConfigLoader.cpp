@@ -15,14 +15,14 @@ namespace Auth {
 ErrorOr<String> ConfigLoader::find_config_file()
 {
     // Try current directory first
-    if (Core::File::exists(".supabase.config"sv))
+    if (!Core::System::stat(".supabase.config"sv).is_error())
         return ".supabase.config"_string;
 
     // Try home directory
-    auto home = TRY(Core::System::getenv("HOME"sv));
-    if (home.has_value()) {
-        auto home_config = TRY(String::formatted("{}/.config/cryfox/.supabase.config", home.value()));
-        if (Core::File::exists(home_config))
+    char const* home_env = ::getenv("HOME");
+    if (home_env) {
+        auto home_config = TRY(String::formatted("{}/.config/cryfox/.supabase.config", home_env));
+        if (!Core::System::stat(home_config.bytes_as_string_view()).is_error())
             return home_config;
     }
 
@@ -36,7 +36,7 @@ ErrorOr<HashMap<String, String>> ConfigLoader::load_config(StringView config_pat
     auto content_string = TRY(String::from_utf8(contents));
 
     HashMap<String, String> config;
-    auto lines = content_string.split_view('\n');
+    auto lines = content_string.bytes_as_string_view().split_view('\n');
 
     for (auto line : lines) {
         line = line.trim_whitespace();
@@ -62,7 +62,7 @@ ErrorOr<HashMap<String, String>> ConfigLoader::load_config(StringView config_pat
 ErrorOr<String> ConfigLoader::get_supabase_url()
 {
     auto config_path = TRY(find_config_file());
-    auto config = TRY(load_config(config_path));
+    auto config = TRY(load_config(config_path.bytes_as_string_view()));
 
     auto url = config.get("SUPABASE_URL"_string);
     if (!url.has_value() || url->is_empty())
@@ -74,7 +74,7 @@ ErrorOr<String> ConfigLoader::get_supabase_url()
 ErrorOr<String> ConfigLoader::get_supabase_key()
 {
     auto config_path = TRY(find_config_file());
-    auto config = TRY(load_config(config_path));
+    auto config = TRY(load_config(config_path.bytes_as_string_view()));
 
     auto key = config.get("SUPABASE_ANON_KEY"_string);
     if (!key.has_value() || key->is_empty())

@@ -12,7 +12,7 @@
 #include <LibCore/File.h>
 #include <LibCore/System.h>
 #include <LibCrypto/Hash/Argon2.h>
-#include <LibCrypto/Random.h>
+#include <LibCrypto/SecureRandom.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -48,7 +48,7 @@ ErrorOr<void> LocalAuthManager::load_config()
         return Error::from_string_literal("HOME environment variable not set");
 
     auto config_path = TRY(String::formatted("{}/.config/cryfox/auth.json", home_env));
-    auto file_or_error = Core::File::open(config_path.to_byte_string(), Core::File::OpenMode::Read);
+    auto file_or_error = Core::File::open(config_path.bytes_as_string_view(), Core::File::OpenMode::Read);
     if (file_or_error.is_error())
         return {};
 
@@ -76,10 +76,10 @@ ErrorOr<void> LocalAuthManager::save_config()
         return Error::from_string_literal("HOME environment variable not set");
 
     auto config_dir = TRY(String::formatted("{}/.config/cryfox", home_env));
-    (void)Core::System::mkdir(config_dir.to_byte_string(), 0700);
+    (void)Core::System::mkdir(config_dir.bytes_as_string_view(), 0700);
 
     auto config_path = TRY(String::formatted("{}/auth.json", config_dir));
-    auto file = TRY(Core::File::open(config_path.to_byte_string(), Core::File::OpenMode::Write));
+    auto file = TRY(Core::File::open(config_path.bytes_as_string_view(), Core::File::OpenMode::Write));
 
     JsonObject obj;
     obj.set("hash"sv, JsonValue(m_password_hash));
@@ -95,12 +95,12 @@ ErrorOr<void> LocalAuthManager::setup_master_password(String const& password)
 {
     // Generate salt
     u8 salt_bytes[16];
-    Crypto::fill_with_random(salt_bytes, sizeof(salt_bytes));
-    m_salt = encode_base64(ReadonlyBytes { salt_bytes, sizeof(salt_bytes) });
+    Crypto::fill_with_secure_random({ salt_bytes, sizeof(salt_bytes) });
+    m_salt = MUST(encode_base64(ReadonlyBytes { salt_bytes, sizeof(salt_bytes) }));
 
     // Derive password hash
     Crypto::Hash::Argon2 argon2(Crypto::Hash::Argon2Type::Argon2id);
-    auto salt_buf = TRY(decode_base64(m_salt));
+    auto salt_buf = TRY(decode_base64(m_salt.bytes_as_string_view()));
 
     auto hash_result = TRY(argon2.derive_key(
         password.bytes(),
@@ -114,7 +114,7 @@ ErrorOr<void> LocalAuthManager::setup_master_password(String const& password)
         32     // tag length
         ));
 
-    m_password_hash = encode_base64(hash_result.bytes());
+    m_password_hash = MUST(encode_base64(hash_result.bytes()));
     TRY(save_config());
 
     return {};
@@ -126,7 +126,7 @@ ErrorOr<bool> LocalAuthManager::verify_master_password(String const& password)
         return false;
 
     Crypto::Hash::Argon2 argon2(Crypto::Hash::Argon2Type::Argon2id);
-    auto salt_buf = TRY(decode_base64(m_salt));
+    auto salt_buf = TRY(decode_base64(m_salt.bytes_as_string_view()));
 
     auto hash_result = TRY(argon2.derive_key(
         password.bytes(),
@@ -139,7 +139,7 @@ ErrorOr<bool> LocalAuthManager::verify_master_password(String const& password)
         {},
         32));
 
-    auto calculated_hash = encode_base64(hash_result.bytes());
+    auto calculated_hash = TRY(encode_base64(hash_result.bytes()));
     if (calculated_hash == m_password_hash) {
         m_authenticated = true;
 
@@ -154,7 +154,7 @@ ErrorOr<bool> LocalAuthManager::verify_master_password(String const& password)
             "vault"sv.bytes(),
             {},
             32));
-        m_session_key = encode_base64(session_key_result.bytes());
+        m_session_key = MUST(encode_base64(session_key_result.bytes()));
 
         return true;
     }
