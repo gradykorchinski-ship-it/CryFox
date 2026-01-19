@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2020-2021, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2021, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021, Max Wipfli <mail@maxwipfli.ch>
  * Copyright (c) 2024, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

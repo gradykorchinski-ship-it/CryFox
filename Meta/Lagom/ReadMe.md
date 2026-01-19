@@ -13,9 +13,9 @@ Lagom is used by the Serenity project in the following ways:
 - [Build tools](./Tools) required to build Serenity itself using Serenity's own C++ libraries are in Lagom.
 - [Unit tests](../../Documentation/Testing.md) in CI are built using the Lagom build for host systems to ensure portability.
 - [Continuous fuzzing](#fuzzing-on-oss-fuzz) is done with the help of OSS-fuzz using the Lagom build.
-- [The Ladybird browser](../../README.md) uses Lagom to provide LibWeb and LibJS for non-Serenity systems.
-- [ECMA 262 spec tests](https://ladybirdbrowser.github.io/libjs-website/test262) for LibJS are run per-commit and tracked on [LibJS website](https://ladybirdbrowser.github.io/libjs-website/).
-- [Wasm spec tests](https://ladybirdbrowser.github.io/libjs-website/wasm) for LibWasm are run per-commit and tracked on [LibJS website](https://ladybirdbrowser.github.io/libjs-website/).
+- [The CryFox browser](../../README.md) uses Lagom to provide LibWeb and LibJS for non-Serenity systems.
+- [ECMA 262 spec tests](https://cryfoxbrowser.github.io/libjs-website/test262) for LibJS are run per-commit and tracked on [LibJS website](https://cryfoxbrowser.github.io/libjs-website/).
+- [Wasm spec tests](https://cryfoxbrowser.github.io/libjs-website/wasm) for LibWasm are run per-commit and tracked on [LibJS website](https://cryfoxbrowser.github.io/libjs-website/).
 
 ## Using Lagom in an External Project
 It is possible to use Lagom for your own projects outside of Serenity too!
@@ -87,7 +87,7 @@ on the second stage of the CMake build, or in your environment.
 There are many quirky files that exercise a lot of interesting edge cases.
 We should probably keep track of them, somewhere.
 
-We have a [bmp suite and a jpg suite and several others](https://github.com/LadybirdWebBrowser/ladybird/tree/master/Base/res/html/misc).
+We have a [bmp suite and a jpg suite and several others](https://github.com/CryFoxWebBrowser/cryfox/tree/master/Base/res/html/misc).
 They are GPL'ed, and therefore not quite as compatible with the rest of Serenity.
 That's probably not a problem, but keeping "our" testcases separate from those GPL'ed suits sounds like a good idea.
 

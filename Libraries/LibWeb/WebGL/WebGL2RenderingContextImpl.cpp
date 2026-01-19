@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024-2025, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
- * Copyright (c) 2024-2025, Luke Wilde <luke@ladybird.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2024-2025, Luke Wilde <luke@cryfox.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  * Copyright (c) 2025, Undefine <undefine@undefine.pl>
  *
  * SPDX-License-Identifier: BSD-2-Clause

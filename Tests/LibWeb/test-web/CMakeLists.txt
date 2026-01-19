@@ -7,11 +7,11 @@ set(SOURCES
 )
 
 add_executable(test-web ${SOURCES})
-add_dependencies(test-web ladybird_build_resource_files ImageDecoder RequestServer WebContent WebWorker)
+add_dependencies(test-web cryfox_build_resource_files ImageDecoder RequestServer WebContent WebWorker)
 target_link_libraries(test-web PRIVATE AK LibCore LibDiff LibFileSystem LibGfx LibImageDecoderClient LibIPC LibJS LibMain LibRequests LibURL LibWeb LibWebView)
 
 if (APPLE)
-    target_compile_definitions(test-web PRIVATE LADYBIRD_BINARY_PATH="$<TARGET_FILE_DIR:ladybird>")
+    target_compile_definitions(test-web PRIVATE CRYFOX_BINARY_PATH="$<TARGET_FILE_DIR:cryfox>")
 elseif (WIN32)
     target_link_libraries(test-web PRIVATE LibDevTools)
     find_package(pthread REQUIRED)
@@ -33,6 +33,6 @@ if (BUILD_TESTING)
     )
 
     set_tests_properties(LibWeb PROPERTIES
-        ENVIRONMENT LADYBIRD_SOURCE_DIR=${LADYBIRD_PROJECT_ROOT}
+        ENVIRONMENT CRYFOX_SOURCE_DIR=${CRYFOX_PROJECT_ROOT}
         TIMEOUT_SIGNAL_NAME SIGTERM)
 endif()

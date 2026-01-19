@@ -4,7 +4,7 @@ This file covers a few advanced scenarios that go beyond what the basic build gu
 
 ## Ninja build targets
 
-The `Meta/ladybird.py` script provides an abstraction over the build targets which are made available by CMake. The
+The `Meta/cryfox.py` script provides an abstraction over the build targets which are made available by CMake. The
 following build targets cannot be accessed through the script and have to be used directly by changing the current
 directory to `Build/release` and then running `ninja <target>`:
 
@@ -17,7 +17,7 @@ directory to `Build/release` and then running `ninja <target>`:
 There are some optional features that can be enabled during compilation that are intended to help with specific types of development work or introduce experimental features. Currently, the following build options are available:
 - `ENABLE_ADDRESS_SANITIZER`: builds in runtime checks for memory corruption bugs (like buffer overflows and memory leaks) in Lagom test cases.
 - `ENABLE_MEMORY_SANITIZER`: enables runtime checks for uninitialized memory accesses in Lagom test cases.
-- `ENABLE_UNDEFINED_SANITIZER`: builds in runtime checks for [undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) (like null pointer dereferences and signed integer overflows) in Lagom and Ladybird.
+- `ENABLE_UNDEFINED_SANITIZER`: builds in runtime checks for [undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) (like null pointer dereferences and signed integer overflows) in Lagom and CryFox.
 - `UNDEFINED_BEHAVIOR_IS_FATAL`: makes all undefined behavior sanitizer errors non-recoverable. This option reduces the performance overhead of `ENABLE_UNDEFINED_SANITIZER`.
 - `ENABLE_COMPILER_EXPLORER_BUILD`: Skip building non-library entities in Lagom (this only applies to Lagom).
 - `ENABLE_FUZZERS`: builds [fuzzers](../Meta/Lagom/ReadMe.md#fuzzing) for various parts of the system.
@@ -28,8 +28,8 @@ There are some optional features that can be enabled during compilation that are
 - `LAGOM_TOOLS_ONLY`: Skips building libraries, utilities and tests for [Lagom](../Meta/Lagom/ReadMe.md). Mostly only useful for cross-compilation.
 - `INCLUDE_WASM_SPEC_TESTS`: downloads and includes the WebAssembly spec testsuite tests. In order to use this option, you will need to install `prettier` and `wasm-tools`.
 - `INCLUDE_FLAC_SPEC_TESTS`: downloads and includes the xiph.org FLAC test suite.
-- `LADYBIRD_CACHE_DIR`: sets the location of a shared cache of downloaded files. Should not need to be set manually unless managing a distribution package.
-- `ENABLE_NETWORK_DOWNLOADS`: allows downloading files from the internet during the build. Default on, turning off enables offline builds. For offline builds, the structure of the LADYBIRD_CACHE_DIR must be set up the way that the build expects.
+- `CRYFOX_CACHE_DIR`: sets the location of a shared cache of downloaded files. Should not need to be set manually unless managing a distribution package.
+- `ENABLE_NETWORK_DOWNLOADS`: allows downloading files from the internet during the build. Default on, turning off enables offline builds. For offline builds, the structure of the CRYFOX_CACHE_DIR must be set up the way that the build expects.
 - `ENABLE_CLANG_PLUGINS`: enables Clang plugins which analyze the code for programming mistakes. See [Clang Plugins](#clang-plugins) below.
 
 Many parts of the codebase have debug functionality, mostly consisting of additional messages printed to the debug console. This is done via the `<component_name>_DEBUG` macros, which can be enabled individually at build time. They are listed in [this file](../Meta/CMake/all_the_debug_macros.cmake).
@@ -52,7 +52,7 @@ For example, boolean options such as `ENABLE_<setting>` or `<component_name>_DEB
 
 ```console
 # Reconfigure an existing binary directory with process debug enabled
-$ cmake -B Build/ladybird -DPROCESS_DEBUG=ON
+$ cmake -B Build/cryfox -DPROCESS_DEBUG=ON
 ```
 
 For more information on how the CMake cache works, see the CMake guide for [Running CMake](https://cmake.org/runningcmake/). Additional context is available in the CMake documentation for
@@ -73,7 +73,7 @@ Some OS distributions don't ship bleeding-edge clang-format binaries. Below are 
 
 Clangd will automatically look for configuration information in files
 named `.clangd` in each of the parent directories of the file being
-edited. The Ladybird source code repository has a top-level `.clangd`
+edited. The CryFox source code repository has a top-level `.clangd`
 configuration file in the root directory. One of the configuration
 stanzas in that file specifies the location for a compilation database.
 Depending on your build configuration (e.g., Debug, default, Sanitizer,
@@ -102,33 +102,33 @@ file hashes.
 
 ## Building the Flatpak
 
-Ladybird has an in-tree Flatpak manifest that can be used to build a Flatpak package for Ladybird. The recommended way
+CryFox has an in-tree Flatpak manifest that can be used to build a Flatpak package for CryFox. The recommended way
 to build the Flatpak is to use the `flatpak-builder` tool, which is available in most distributions. See the
 [Flatpak setup documentation](https://flatpak.org/setup/) on how to configure your environment for user Flatpak
-builds, and to configure the Flathub repo. The Ladybird Flatpak manifest at
-`Meta/CMake/flatpak/org.ladybird.Ladybird.json` can be built with the following command:
+builds, and to configure the Flathub repo. The CryFox Flatpak manifest at
+`Meta/CMake/flatpak/org.cryfox.CryFox.json` can be built with the following command:
 
 ```bash
 flatpak-builder --user --force-clean --install-deps-from=flathub \
   --ccache --repo=Build/repo --install Build/flatpak \
-  Meta/CMake/flatpak/org.ladybird.Ladybird.json 
+  Meta/CMake/flatpak/org.cryfox.CryFox.json 
 ```
 
 This command will build the Flatpak bundle and install it into the local Flatpak repository at `Build/repo`. Expect this
-to take a long time, as it will download and build all the dependencies of Ladybird as well. `flatpak-builder` will drop
+to take a long time, as it will download and build all the dependencies of CryFox as well. `flatpak-builder` will drop
 caches and build files in `.flatpak-builder`, as well as in the two subfolders `Build/repo` and `Build/flatpak`.
 
 The Flatpak can be run with the following command:
 
 ```bash
-flatpak run --user org.ladybird.Ladybird
+flatpak run --user org.cryfox.CryFox
 ```
 
 In order to debug the Flatpak, you can pass the `--devel` and `--command=sh` flags to `flatpak run`. This will drop you
 into a shell in the Flatpak sandbox:
 
 ```bash
-flatpak run --user --command=sh --devel org.ladybird.Ladybird
+flatpak run --user --command=sh --devel org.cryfox.CryFox
 ```
 
 ## Debugging without any optimizations
@@ -189,10 +189,10 @@ That will restore your git environment to the state it was in before you patched
 
 ## Building with Swift support
 
-There is experimental Swift 6 support in the Ladybird codebase. This experiment intends to determine whether Swift 6 and
-its improved C++ interoperability is a good choice for new memory-safe and concurrent code for Ladybird.
+There is experimental Swift 6 support in the CryFox codebase. This experiment intends to determine whether Swift 6 and
+its improved C++ interoperability is a good choice for new memory-safe and concurrent code for CryFox.
 
-Building with Swift 6 support requires a main snapshot toolchain. The Ladybird team is actively working with the Swift
+Building with Swift 6 support requires a main snapshot toolchain. The CryFox team is actively working with the Swift
 team to improve the C++ interop features to meet the needs of our project.
 
 The best way to get started is with `swiftly`. After setting up a `swiftly` toolchain, any of the existing build presets
@@ -218,10 +218,10 @@ so be sure to clear them out if you change the default home/bin directories.
 
 ### Build with Swift
 
-The simplest way to enable Swift is to use the `Swift_Release` preset and `ladybird.py`.
+The simplest way to enable Swift is to use the `Swift_Release` preset and `cryfox.py`.
 
 ```bash
-./Meta/ladybird.py build --preset Swift_Release
+./Meta/cryfox.py build --preset Swift_Release
 ```
 
 Note that because building with Swift support requires use of `clang` and `clang++` from a Swift toolchain, a standard

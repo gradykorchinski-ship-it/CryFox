@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021, Luke Wilde <lukew@serenityos.org>
- * Copyright (c) 2024, Tim Ledbetter <tim.ledbetter@ladybird.org>
+ * Copyright (c) 2024, Tim Ledbetter <tim.ledbetter@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

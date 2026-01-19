@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -35,11 +35,11 @@ static void open_urls_from_client(Vector<URL::URL> const& urls, WebView::NewWind
     }
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     AK::set_rich_debug_enabled(true);
 
-    auto app = TRY(Ladybird::Application::create(arguments));
+    auto app = TRY(CryFox::Application::create(arguments));
     WebView::BrowserProcess browser_process;
 
     if (auto const& browser_options = WebView::Application::browser_options(); !browser_options.headless_mode.has_value()) {

@@ -29,7 +29,7 @@ describe("normal behavior", () => {
         testCalendars(new Intl.Locale("ar", { calendar: "hebrew" }), ["hebrew"]);
 
         // Invalid calendars also take precedence.
-        testCalendars(new Intl.Locale("en-u-ca-ladybird"), ["ladybird"]);
-        testCalendars(new Intl.Locale("en", { calendar: "ladybird" }), ["ladybird"]);
+        testCalendars(new Intl.Locale("en-u-ca-cryfox"), ["cryfox"]);
+        testCalendars(new Intl.Locale("en", { calendar: "cryfox" }), ["cryfox"]);
     });
 });

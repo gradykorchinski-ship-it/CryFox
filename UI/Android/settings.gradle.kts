@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Ladybird"
+rootProject.name = "CryFox"

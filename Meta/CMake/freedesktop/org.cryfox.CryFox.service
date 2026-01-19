@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.cryfox.CryFox
+Exec=CryFox --force-new-process

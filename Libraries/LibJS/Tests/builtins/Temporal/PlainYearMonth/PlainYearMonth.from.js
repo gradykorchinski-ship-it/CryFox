@@ -108,18 +108,18 @@ describe("errors", () => {
         }).toThrowWithMessage(RangeError, "Invalid calendar identifier 'iso8602'");
 
         expect(() => {
-            Temporal.PlainYearMonth.from("2023-02[u-ca=ladybird]");
-        }).toThrowWithMessage(RangeError, "Invalid calendar identifier 'ladybird'");
+            Temporal.PlainYearMonth.from("2023-02[u-ca=cryfox]");
+        }).toThrowWithMessage(RangeError, "Invalid calendar identifier 'cryfox'");
     });
 
     test("doesn't throw non-iso8601 calendar error when using a superset format string such as DateTime", () => {
-        // NOTE: This will still throw, but only because "ladybird" is not a recognised calendar, not because of the string format restriction.
+        // NOTE: This will still throw, but only because "cryfox" is not a recognised calendar, not because of the string format restriction.
         try {
-            Temporal.PlainYearMonth.from("2023-02-10T22:57[u-ca=ladybird]");
+            Temporal.PlainYearMonth.from("2023-02-10T22:57[u-ca=cryfox]");
         } catch (e) {
             expect(e).toBeInstanceOf(RangeError);
             expect(e.message).not.toBe("MM-DD string format can only be used with the iso8601 calendar");
-            expect(e.message).toBe("Invalid calendar identifier 'ladybird'");
+            expect(e.message).toBe("Invalid calendar identifier 'cryfox'");
         }
     });
 });

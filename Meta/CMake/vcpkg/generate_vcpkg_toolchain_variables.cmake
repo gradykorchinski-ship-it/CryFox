@@ -12,7 +12,7 @@ if (NOT WIN32)
 endif()
 
 # Workaround for bad patchelf interaction with binutils 2.43.50
-# https://github.com/LadybirdBrowser/ladybird/issues/2149
+# https://github.com/CryFoxBrowser/cryfox/issues/2149
 # https://github.com/microsoft/vcpkg/issues/41576
 # https://github.com/NixOS/patchelf/issues/568
 # https://bugzilla.redhat.com/show_bug.cgi?id=2319341

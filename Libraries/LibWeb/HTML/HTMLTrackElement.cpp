@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020, the SerenityOS developers.
  * Copyright (c) 2024, Jamie Mansfield <jmansfield@cadixdev.org>
- * Copyright (c) 2025, Tim Ledbetter <tim.ledbetter@ladybird.org>
+ * Copyright (c) 2025, Tim Ledbetter <tim.ledbetter@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

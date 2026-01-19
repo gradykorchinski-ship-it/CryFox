@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2022-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -44,8 +44,8 @@ enum class InterfaceMode {
 };
 WEB_API void set_default_interface_mode(InterfaceMode);
 
-struct WEB_API LadybirdOptions {
-    explicit LadybirdOptions(JsonObject const& capabilities);
+struct WEB_API CryFoxOptions {
+    explicit CryFoxOptions(JsonObject const& capabilities);
 
     bool headless { false };
 };

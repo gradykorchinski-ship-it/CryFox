@@ -14,7 +14,7 @@
 #import <Interface/Event.h>
 #import <Utilities/Conversions.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 static Web::UIEvents::KeyModifier ns_modifiers_to_key_modifiers(NSEventModifierFlags modifier_flags, Optional<Web::UIEvents::MouseButton&> button = {})
 {
@@ -103,7 +103,7 @@ Web::DragEvent ns_event_to_drag_event(Web::DragEvent::Type type, id<NSDraggingIn
                                                                        options:nil];
 
         for (NSURL* file in file_list) {
-            auto file_path = Ladybird::ns_string_to_byte_string([file path]);
+            auto file_path = CryFox::ns_string_to_byte_string([file path]);
             callback(file_path);
         }
     };

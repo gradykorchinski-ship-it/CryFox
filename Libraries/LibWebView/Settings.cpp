@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -59,7 +59,7 @@ static ErrorOr<JsonObject> read_settings_file(StringView settings_path)
     auto settings_json = TRY(JsonValue::from_string(settings_contents));
 
     if (!settings_json.is_object())
-        return Error::from_string_literal("Expected Ladybird settings to be a JSON object");
+        return Error::from_string_literal("Expected CryFox settings to be a JSON object");
     return move(settings_json.as_object());
 }
 
@@ -76,15 +76,15 @@ static ErrorOr<void> write_settings_file(StringView settings_path, JsonValue con
 
 Settings Settings::create(Badge<Application>)
 {
-    // FIXME: Move this to a generic "Ladybird config directory" helper.
-    auto settings_directory = ByteString::formatted("{}/Ladybird", Core::StandardPaths::config_directory());
+    // FIXME: Move this to a generic "CryFox config directory" helper.
+    auto settings_directory = ByteString::formatted("{}/CryFox", Core::StandardPaths::config_directory());
     auto settings_path = ByteString::formatted("{}/Settings.json", settings_directory);
 
     Settings settings { move(settings_path) };
 
     auto settings_json = read_settings_file(settings.m_settings_path);
     if (settings_json.is_error()) {
-        warnln("Unable to read Ladybird settings: {}", settings_json.error());
+        warnln("Unable to read CryFox settings: {}", settings_json.error());
         return settings;
     }
 
@@ -113,6 +113,9 @@ Settings Settings::create(Badge<Application>)
         if (auto search_engine_name = search_engine->get_string(search_engine_name_key); search_engine_name.has_value())
             settings.m_search_engine = settings.find_search_engine_by_name(*search_engine_name);
     }
+
+    if (!settings.m_search_engine.has_value())
+        settings.m_search_engine = settings.find_search_engine_by_name("DuckDuckGo"sv);
 
     if (settings.m_search_engine.has_value()) {
         if (auto autocomplete_engine = settings_json.value().get_object(autocomplete_engine_key); autocomplete_engine.has_value()) {
@@ -143,6 +146,8 @@ Settings Settings::create(Badge<Application>)
 
     if (auto global_privacy_control = settings_json.value().get_bool(global_privacy_control_key); global_privacy_control.has_value())
         settings.m_global_privacy_control = *global_privacy_control ? GlobalPrivacyControl::Yes : GlobalPrivacyControl::No;
+    else
+        settings.m_global_privacy_control = GlobalPrivacyControl::Yes;
 
     if (auto dns_settings = settings_json.value().get(dns_settings_key); dns_settings.has_value())
         settings.m_dns_settings = parse_dns_settings(*dns_settings);
@@ -249,11 +254,11 @@ void Settings::restore_defaults()
     m_new_tab_page_url = URL::about_newtab();
     m_default_zoom_level_factor = initial_zoom_level_factor;
     m_languages = { default_language };
-    m_search_engine.clear();
+    m_search_engine = find_search_engine_by_name("DuckDuckGo"sv);
     m_custom_search_engines.clear();
     m_autocomplete_engine.clear();
     m_autoplay = SiteSetting {};
-    m_global_privacy_control = GlobalPrivacyControl::No;
+    m_global_privacy_control = GlobalPrivacyControl::Yes;
     m_dns_settings = SystemDNS {};
 
     persist_settings();
@@ -494,7 +499,7 @@ void Settings::persist_settings()
     auto settings = serialize_json();
 
     if (auto result = write_settings_file(m_settings_path, settings); result.is_error())
-        warnln("Unable to persist Ladybird settings: {}", result.error());
+        warnln("Unable to persist CryFox settings: {}", result.error());
 }
 
 void Settings::add_observer(Badge<SettingsObserver>, SettingsObserver& observer)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025, Gregory Bertilson <gregory@ladybird.org>
+ * Copyright (c) 2022-2025, Gregory Bertilson <gregory@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

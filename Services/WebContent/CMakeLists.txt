@@ -14,10 +14,10 @@ set(SOURCES
 
 if (ANDROID)
     add_library(webcontentservice SHARED
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/WebContentService.cpp
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/WebContentServiceJNI.cpp
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/LadybirdServiceBaseJNI.cpp
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/JNIHelpers.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/WebContentService.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/WebContentServiceJNI.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/CryFoxServiceBaseJNI.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/JNIHelpers.cpp
         ${SOURCES}
     )
     target_link_libraries(webcontentservice PRIVATE android)
@@ -27,8 +27,8 @@ else()
 endif()
 
 target_include_directories(webcontentservice PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../..>)
-target_include_directories(webcontentservice PUBLIC $<BUILD_INTERFACE:${LADYBIRD_SOURCE_DIR}>)
-target_include_directories(webcontentservice PUBLIC $<BUILD_INTERFACE:${LADYBIRD_SOURCE_DIR}/Services/>)
+target_include_directories(webcontentservice PUBLIC $<BUILD_INTERFACE:${CRYFOX_SOURCE_DIR}>)
+target_include_directories(webcontentservice PUBLIC $<BUILD_INTERFACE:${CRYFOX_SOURCE_DIR}/Services/>)
 
 target_link_libraries(webcontentservice PUBLIC LibCore LibCrypto LibFileSystem LibGfx LibHTTP LibIPC LibJS LibMain LibMedia LibWeb LibWebSocket LibRequests LibWebView LibImageDecoderClient LibGC)
 target_link_libraries(webcontentservice PRIVATE OpenSSL::Crypto OpenSSL::SSL)
@@ -44,7 +44,7 @@ endif()
 
 
 target_sources(webcontentservice PUBLIC FILE_SET server TYPE HEADERS
-    BASE_DIRS ${LADYBIRD_SOURCE_DIR}/Services
+    BASE_DIRS ${CRYFOX_SOURCE_DIR}/Services
     FILES ConnectionFromClient.h
           ConsoleGlobalEnvironmentExtensions.h
           Forward.h

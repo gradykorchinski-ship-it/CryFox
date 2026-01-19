@@ -59,7 +59,7 @@ namespace Web {
 #    error Unknown OS
 #endif
 
-#define BROWSER_NAME "Ladybird"
+#define BROWSER_NAME "CryFox"
 #define BROWSER_VERSION "1.0"
 
 // NB: Some web servers treat us very badly unless we pretend to be one of the major browsers.

@@ -29,7 +29,7 @@ describe("normal behavior", () => {
         testHourCycles(new Intl.Locale("ar", { collation: "h24" }), ["h24"]);
 
         // Invalid hourCycles also take precedence when specified in the locale string. Unlike other
-        // properties, Locale("en", { hourCycle: "ladybird" }) will explicitly throw.
-        testHourCycles(new Intl.Locale("en-u-hc-ladybird"), ["ladybird"]);
+        // properties, Locale("en", { hourCycle: "cryfox" }) will explicitly throw.
+        testHourCycles(new Intl.Locale("en-u-hc-cryfox"), ["cryfox"]);
     });
 });

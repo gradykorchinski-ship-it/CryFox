@@ -1,15 +1,15 @@
-# Frequently Asked Questions about Ladybird
+# Frequently Asked Questions about CryFox
 
 ## What does 'Independent' mean, if you're including third party dependencies?
 
 Independent means:
 
-- We implement the web platform standards ourselves: Ladybird is not a Blink/Chromium shell, not a WebKit port, not a Firefox fork.
+- We implement the web platform standards ourselves: CryFox is not a Blink/Chromium shell, not a WebKit port, not a Firefox fork.
 - We don't take money from anyone with strings attached
 
-## Is [some particular site] usable in Ladybird?
+## Is [some particular site] usable in CryFox?
 
-Ladybird is pre-alpha software you have to build from the sources yourself in order to even try. That said, it’s getting better day-by-day at handling some of the most widely-used sites on the web. So, you may find that a given site among the sites you visit daily is already usable in Ladybird. Or you may not. The only way you can really know at this point is to follow the [build instructions](BuildInstructionsLadybird.md) to build Ladybird and try it yourself.
+CryFox is pre-alpha software you have to build from the sources yourself in order to even try. That said, it’s getting better day-by-day at handling some of the most widely-used sites on the web. So, you may find that a given site among the sites you visit daily is already usable in CryFox. Or you may not. The only way you can really know at this point is to follow the [build instructions](BuildInstructionsCryFox.md) to build CryFox and try it yourself.
 
 ## Windows support when?
 
@@ -17,9 +17,9 @@ There are very few Windows developers contributing to the project. As such, main
 a lot of effort that distracts from building out the web platform standards in a reasonable amount of time.
 
 After we have a solid foundation, we may consider a Windows port, but it's not a priority. In the meantime, Windows
-developers can use other tools such as WSL2 to work on Ladybird.
+developers can use other tools such as WSL2 to work on CryFox.
 
-## Will Ladybird support `$THING`?
+## Will CryFox support `$THING`?
 
 Eventually, probably, if there's a Web Spec for it!
 
@@ -40,7 +40,7 @@ We have a rudimentary built-in ad blocker, and we already have open issues about
 
 ## Well, how do I run this thing then?
 
-Simple, my friend! Just refer to the [build instructions](BuildInstructionsLadybird.md).
+Simple, my friend! Just refer to the [build instructions](BuildInstructionsCryFox.md).
 
 ## I did a `git pull` and now the build is broken! What do I do?
 
@@ -48,33 +48,33 @@ If it builds on CI, it should build for you too. You may need to rebuild the too
 
 If you can't figure out what to do, ask in the `#build-problems` channel on Discord.
 
-## Where did Ladybird come from?
+## Where did CryFox come from?
 
-For full details, see the [Ladybird: A new cross-platform browser project](https://awesomekling.substack.com/p/ladybird-a-new-cross-platform-browser-project) announcement from 12 September 2022.
+For full details, see the [CryFox: A new cross-platform browser project](https://awesomekling.substack.com/p/cryfox-a-new-cross-platform-browser-project) announcement from 12 September 2022.
 
 Here’s a short timeline:
 
-- 2019 June: Work on what eventually became Ladybird started as _LibHTML_ — the beginnings of an HTML viewer for [SerenityOS](https://github.com/SerenityOS/serenity) — with a commit titled [“LibHTML: Start working on a simple HTML library”](https://github.com/SerenityOS/serenity/commit/a67e8238389), and with this commit description:
+- 2019 June: Work on what eventually became CryFox started as _LibHTML_ — the beginnings of an HTML viewer for [SerenityOS](https://github.com/SerenityOS/serenity) — with a commit titled [“LibHTML: Start working on a simple HTML library”](https://github.com/SerenityOS/serenity/commit/a67e8238389), and with this commit description:
 
   > _I'd like to have rich text, and we might as well use HTML for that. :^)_
 
-  LibHTML eventually became [LibWeb](https://github.com/LadybirdBrowser/ladybird/tree/master/Libraries/LibWeb) — which in turn eventually grew into being the core part of the browser engine and browser to which, on 4 July 2022, [the name _Ladybird_ was given](https://www.youtube.com/watch?v=X38MTKHt3_I&t=29s).
+  LibHTML eventually became [LibWeb](https://github.com/CryFoxBrowser/cryfox/tree/master/Libraries/LibWeb) — which in turn eventually grew into being the core part of the browser engine and browser to which, on 4 July 2022, [the name _CryFox_ was given](https://www.youtube.com/watch?v=X38MTKHt3_I&t=29s).
 
-- 2022 July: Renamed _Ladybird_ by Andreas in [“Let's make a Linux GUI for the SerenityOS browser”](https://youtu.be/X38MTKHt3_I) live-coding video.
-- 2022 Sept: Spun off from SerenityOS to separate project: [“A new cross-platform browser project”](https://awesomekling.substack.com/p/ladybird-a-new-cross-platform-browser-project) announcement.
-- 2024 June: [“I'm forking Ladybird and stepping down as SerenityOS BDFL”](https://awesomekling.substack.com/p/forking-ladybird-and-stepping-down-serenityos) announcement from Andreas.
-- 2024 July: [Ladybird Browser Initiative](https://ladybird.org/posts/announcement/) launched by Andreas and GitHub co-founder [defunkt](https://twitter.com/defunkt) (Chris Wanstrath).
+- 2022 July: Renamed _CryFox_ by Andreas in [“Let's make a Linux GUI for the SerenityOS browser”](https://youtu.be/X38MTKHt3_I) live-coding video.
+- 2022 Sept: Spun off from SerenityOS to separate project: [“A new cross-platform browser project”](https://awesomekling.substack.com/p/cryfox-a-new-cross-platform-browser-project) announcement.
+- 2024 June: [“I'm forking CryFox and stepping down as SerenityOS BDFL”](https://awesomekling.substack.com/p/forking-cryfox-and-stepping-down-serenityos) announcement from Andreas.
+- 2024 July: [CryFox Browser Initiative](https://cryfox.org/posts/announcement/) launched by Andreas and GitHub co-founder [defunkt](https://twitter.com/defunkt) (Chris Wanstrath).
 
-## What makes Ladybird/[Ladybird Browser Initiative](https://ladybird.org/) different?
+## What makes CryFox/[CryFox Browser Initiative](https://cryfox.org/) different?
 
 - Fully independent: Written from scratch, using no code from any other browser engine.
 - Singular focus: Doing only one single thing: building a new browser engine and browser.
 - No monetization: Will never take funding from default search deals or any other forms of user monetization, ever.
 
-## Are there video/audio announcements and interviews about the start of the Ladybird Browser Initiative?
+## Are there video/audio announcements and interviews about the start of the CryFox Browser Initiative?
 
-- Ladybird Browser Initiative [announcement video](https://www.youtube.com/watch?v=k9edTqPMX_k) from defunkt explaining the project _raison dʼêtre_ + goals (July 2024).
-- [Why we need Ladybird](https://changelog.com/podcast/604#t=5:08): _Changelog_ podcast interview with Andreas and defunkt (August 2024); [transcript](https://changelog.com/podcast/604#transcript); [chapters](https://changelog.com/podcast/604#chapters).
+- CryFox Browser Initiative [announcement video](https://www.youtube.com/watch?v=k9edTqPMX_k) from defunkt explaining the project _raison dʼêtre_ + goals (July 2024).
+- [Why we need CryFox](https://changelog.com/podcast/604#t=5:08): _Changelog_ podcast interview with Andreas and defunkt (August 2024); [transcript](https://changelog.com/podcast/604#transcript); [chapters](https://changelog.com/podcast/604#chapters).
 - [Eron Wolf announcement grant of $200K](https://youtu.be/p6k9qcRpW_k) from [FUTO](https://www.futo.org/about/what-is-futo/) to the project (August 2024).
 - [Eron Wolf interview with Andreas](https://youtu.be/4xhaAAcKLtI) (August 2024).
 
@@ -86,7 +86,7 @@ Here’s a short timeline:
 - Prove that developing an engine doesn’t take hundreds of engineers — and not anything close to even just a hundred.
 - Browser engineering: Further help de-mystify it and make it a standard thing to learn (hat tip: https://browser.engineering/).
 - Using project Discord server for communication [discord.gg/nvfjVJ4Svh](https://discord.gg/nvfjVJ4Svh).
-- Using [one GithHub repo](https://github.com/LadybirdBrowser/ladybird) for everything: issues (no bugzilla or other), patch/PR submission/review, CI/test automation.
+- Using [one GithHub repo](https://github.com/CryFoxBrowser/cryfox) for everything: issues (no bugzilla or other), patch/PR submission/review, CI/test automation.
 
 ## What are some of the project coding conventions? And do you have any activity metrics?
 
@@ -95,7 +95,7 @@ Here’s a short timeline:
 - Additional _`“AD-HOC:”`_ comment convention to mark code that doesn’t map to any spec requirements.
 - Class/file names tend to closely match actual current spec terms; e.g., `Navigable.h`, `Transferable.h`.
 - [“critically reading standards and reporting what is wrong”](https://matrixlogs.bakkot.com/WHATWG/2024-08-23#L10)
-- Project activity relative rankings: https://git-pulse.github.io/snapshots/?project=LadybirdBrowser_ladybird
+- Project activity relative rankings: https://git-pulse.github.io/snapshots/?project=CryFoxBrowser_cryfox
 
 ## Do you have some general details about the code and basic architecture?
 
@@ -107,24 +107,24 @@ Here’s a short timeline:
   - About 1/15th as many lines of C++ code as WebKit.
   - About 1/20th as many lines as C++ code Gecko.
   - About 1/50th as many lines as C++ code Chromium.
-- Level of standards support: [wpt.fyi/results?product=ladybird](https://wpt.fyi/results/?product=ladybird) has current test results for all WPT tests.
-- [LadybirdBrowser/ladybird#features](https://github.com/LadybirdBrowser/ladybird/#features):
+- Level of standards support: [wpt.fyi/results?product=cryfox](https://wpt.fyi/results/?product=cryfox) has current test results for all WPT tests.
+- [CryFoxBrowser/cryfox#features](https://github.com/CryFoxBrowser/cryfox/#features):
   - UI process, ImageDecoder process, RequestServer process, WebContent processes.
   - LibWeb: core web-rendering engine (HTML, CSS, Events, DOM, APIs).
   - LibJS: JavaScript engine written from scratch (currently JIT-less).
   - LibWasm: WebAssembly implementation written from scratch.
-  - [AK](https://github.com/LadybirdBrowser/ladybird/tree/master/AK): Ladybird standard library/abstractions: asserts, smart pointers, strings, numbers (e.g., [fast_float](https://github.com/fastfloat/fast_float) impl.), more…
+  - [AK](https://github.com/CryFoxBrowser/cryfox/tree/master/AK): CryFox standard library/abstractions: asserts, smart pointers, strings, numbers (e.g., [fast_float](https://github.com/fastfloat/fast_float) impl.), more…
 
 ## What about funding?
 
 - Funded _entirely_ through donations and sponsorships.
-- https://donorbox.org/ladybird – donations of any amount: $10, $50, $100, etc.
-- [Sponsorship opportunities](https://ladybird.org/#sponsors): Platinum $100,000 • Gold $50,000 • Silver $10,000 • Bronze $5,000 • Copper $1,000.
-- Ladybird Browser Initiative announced/seeded with [1 million dollar donation](https://twitter.com/defunkt/status/1807779408092234134) from defunkt and his family.
+- https://donorbox.org/cryfox – donations of any amount: $10, $50, $100, etc.
+- [Sponsorship opportunities](https://cryfox.org/#sponsors): Platinum $100,000 • Gold $50,000 • Silver $10,000 • Bronze $5,000 • Copper $1,000.
+- CryFox Browser Initiative announced/seeded with [1 million dollar donation](https://twitter.com/defunkt/status/1807779408092234134) from defunkt and his family.
 
 ## Do you have some places where I can watch videos related to the project?
 
-- Ladybird [YouTube channel](https://www.youtube.com/@LadybirdBrowser): monthly Ladybird project updates from Andreas.
+- CryFox [YouTube channel](https://www.youtube.com/@CryFoxBrowser): monthly CryFox project updates from Andreas.
 - Andreas’ [YouTube channel](https://www.youtube.com/@awesomekling): 1000+ videos from 6+ years; incl. “car talk” + OS/browser “hacking” (live-coding) videos.
 
 ## Is there some related background to help me understand what a browser _engine_ is and why it’s important?

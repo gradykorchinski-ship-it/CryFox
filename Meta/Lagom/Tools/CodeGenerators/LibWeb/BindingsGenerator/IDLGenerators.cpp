@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2020-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021-2023, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2021-2025, Luke Wilde <luke@ladybird.org>
+ * Copyright (c) 2021-2025, Luke Wilde <luke@cryfox.org>
  * Copyright (c) 2022, Ali Mohammad Pur <mpfard@serenityos.org>
  * Copyright (c) 2023-2024, Kenneth Myhra <kennethmyhra@serenityos.org>
  * Copyright (c) 2023-2026, Shannon Booth <shannon@serenityos.org>

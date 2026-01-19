@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023, Tim Flynn <trflynn89@serenityos.org>
- * Copyright (c) 2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2024, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2024-2025, Shannon Booth <shannon@serenityos.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -44,7 +44,7 @@ ErrorOr<Utf16String> generate_new_blob_url()
 
     // 6. If serialized is "null", set it to an implementation-defined value.
     if (serialized == "null"sv)
-        serialized = "ladybird"_string;
+        serialized = "cryfox"_string;
 
     // 7. Append serialized to result.
     TRY(result.try_append(serialized));

@@ -1,4 +1,4 @@
-# Ladybird C++ coding style
+# CryFox C++ coding style
 
 For low-level styling (spaces, parentheses, brace placement, etc), all code should follow the format specified in `.clang-format` in the project root.
 
@@ -9,7 +9,7 @@ See [lint-clang-format.py](../Meta/lint-clang-format.py) for the version enforce
 See [AdvancedBuildInstructions.md](AdvancedBuildInstructions.md#clang-format-updates) for instructions on how to get an
 up-to-date version if your OS distribution does not ship the correct version.
 
-This document describes the coding style used for C++ code in the Ladybird Browser project. All new code should conform to this style.
+This document describes the coding style used for C++ code in the CryFox Browser project. All new code should conform to this style.
 
 We'll definitely be tweaking and amending this over time, so let's consider it a living document. :)
 

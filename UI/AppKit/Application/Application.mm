@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -11,7 +11,7 @@
 
 #import <Application/Application.h>
 #import <Application/ApplicationDelegate.h>
-#import <Interface/LadybirdWebView.h>
+#import <Interface/CryFoxWebView.h>
 #import <Interface/Tab.h>
 #import <Interface/TabController.h>
 
@@ -19,7 +19,7 @@
 #    error "This project requires ARC"
 #endif
 
-namespace Ladybird {
+namespace CryFox {
 
 Application::Application() = default;
 
@@ -63,7 +63,7 @@ Optional<ByteString> Application::ask_user_for_download_folder() const
     if ([panel runModal] != NSModalResponseOK)
         return {};
 
-    return Ladybird::ns_string_to_byte_string([[panel URL] path]);
+    return CryFox::ns_string_to_byte_string([[panel URL] path]);
 }
 
 void Application::display_download_confirmation_dialog(StringView download_name, LexicalPath const& path) const
@@ -73,11 +73,11 @@ void Application::display_download_confirmation_dialog(StringView download_name,
     auto message = MUST(String::formatted("{} saved to: {}", download_name, path));
 
     auto* dialog = [[NSAlert alloc] init];
-    [dialog setMessageText:Ladybird::string_to_ns_string(message)];
+    [dialog setMessageText:CryFox::string_to_ns_string(message)];
     [[dialog addButtonWithTitle:@"OK"] setTag:NSModalResponseOK];
     [[dialog addButtonWithTitle:@"Open folder"] setTag:NSModalResponseContinue];
 
-    __block auto* ns_path = Ladybird::string_to_ns_string(path.string());
+    __block auto* ns_path = CryFox::string_to_ns_string(path.string());
 
     [dialog beginSheetModalForWindow:[delegate activeTab]
                    completionHandler:^(NSModalResponse response) {
@@ -92,7 +92,7 @@ void Application::display_error_dialog(StringView error_message) const
     ApplicationDelegate* delegate = [NSApp delegate];
 
     auto* dialog = [[NSAlert alloc] init];
-    [dialog setMessageText:Ladybird::string_to_ns_string(error_message)];
+    [dialog setMessageText:CryFox::string_to_ns_string(error_message)];
 
     [dialog beginSheetModalForWindow:[delegate activeTab]
                    completionHandler:nil];
@@ -103,7 +103,7 @@ Utf16String Application::clipboard_text() const
     auto* paste_board = [NSPasteboard generalPasteboard];
 
     if (auto* contents = [paste_board stringForType:NSPasteboardTypeString])
-        return Ladybird::ns_string_to_utf16_string(contents);
+        return CryFox::ns_string_to_utf16_string(contents);
     return {};
 }
 
@@ -124,7 +124,7 @@ Vector<Web::Clipboard::SystemClipboardRepresentation> Application::clipboard_ent
         else
             continue;
 
-        auto data = Ladybird::ns_data_to_string([paste_board dataForType:type]);
+        auto data = CryFox::ns_data_to_string([paste_board dataForType:type]);
         representations.empend(move(data), move(mime_type));
     }
 
@@ -148,7 +148,7 @@ void Application::insert_clipboard_entry(Web::Clipboard::SystemClipboardRepresen
     auto* paste_board = [NSPasteboard generalPasteboard];
     [paste_board clearContents];
 
-    [paste_board setData:Ladybird::string_to_ns_data(entry.data)
+    [paste_board setData:CryFox::string_to_ns_data(entry.data)
                  forType:pasteboard_type];
 }
 

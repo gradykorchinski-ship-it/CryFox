@@ -20,18 +20,18 @@ endif()
 
 # Pass additional information to vcpkg toolchain files if we are using vcpkg.
 if (CMAKE_TOOLCHAIN_FILE MATCHES "vcpkg.cmake$")
-    set(CMAKE_PROJECT_ladybird_INCLUDE_BEFORE "Meta/CMake/vcpkg/generate_vcpkg_toolchain_variables.cmake")
+    set(CMAKE_PROJECT_cryfox_INCLUDE_BEFORE "Meta/CMake/vcpkg/generate_vcpkg_toolchain_variables.cmake")
 endif()
 
 if (APPLE AND NOT CMAKE_OSX_SYSROOT)
     set(CMAKE_OSX_SYSROOT macosx)
 endif()
 
-project(ladybird
+project(cryfox
         VERSION 0.1.0
         LANGUAGES C CXX
-        DESCRIPTION "Ladybird Web Browser"
-        HOMEPAGE_URL "https://ladybird.org"
+        DESCRIPTION "CryFox Web Browser"
+        HOMEPAGE_URL "https://cryfox.org"
 )
 
 if (ANDROID OR IOS)
@@ -40,8 +40,8 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(LADYBIRD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-list(APPEND CMAKE_MODULE_PATH "${LADYBIRD_SOURCE_DIR}/Meta/CMake")
+set(CRYFOX_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+list(APPEND CMAKE_MODULE_PATH "${CRYFOX_SOURCE_DIR}/Meta/CMake")
 
 include(UI/cmake/EnableLagom.cmake)
 include(lagom_options NO_POLICY_SCOPE)
@@ -80,14 +80,14 @@ if (ENABLE_GUI_TARGETS)
 endif()
 
 add_custom_target(lint-shell-scripts
-    COMMAND "${ladybird_SOURCE_DIR}/Meta/lint-shell-scripts.sh"
+    COMMAND "${cryfox_SOURCE_DIR}/Meta/lint-shell-scripts.sh"
     USES_TERMINAL
 )
 
 find_package(Python3 COMPONENTS Interpreter)
 if (Python3_FOUND)
     add_custom_target(check-style
-        COMMAND ${Python3_EXECUTABLE} "${ladybird_SOURCE_DIR}/Meta/check-style.py"
+        COMMAND ${Python3_EXECUTABLE} "${cryfox_SOURCE_DIR}/Meta/check-style.py"
         USES_TERMINAL
     )
 endif()

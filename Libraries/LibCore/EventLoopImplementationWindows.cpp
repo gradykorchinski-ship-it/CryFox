@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2024-2025, stasoid <stasoid@yahoo.com>
  * Copyright (c) 2025, ayeteadoe <ayeteadoe@gmail.com>
  * Copyright (c) 2025, Ryszard Goc <ryszardgoc@gmail.com>

@@ -13,7 +13,7 @@
 #import <Interface/Palette.h>
 #import <Utilities/Conversions.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 bool is_using_dark_system_theme()
 {

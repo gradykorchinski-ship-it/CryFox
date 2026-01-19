@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2024, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -9,11 +9,11 @@
 #include <AK/Types.h>
 
 #import <Cocoa/Cocoa.h>
-#import <Interface/LadybirdWebViewWindow.h>
+#import <Interface/CryFoxWebViewWindow.h>
 
-@class LadybirdWebView;
+@class CryFoxWebView;
 
-@interface Tab : LadybirdWebViewWindow
+@interface Tab : CryFoxWebViewWindow
 
 - (instancetype)init;
 - (instancetype)initAsChild:(Tab*)parent

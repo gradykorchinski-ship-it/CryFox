@@ -5,7 +5,7 @@
  */
 
 #include "JNIHelpers.h"
-#include "LadybirdServiceBase.h"
+#include "CryFoxServiceBase.h"
 #include "WebContentService.h"
 #include <jni.h>
 
@@ -15,14 +15,14 @@ jmethodID bind_request_server_method;
 jmethodID bind_image_decoder_method;
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_serenityos_ladybird_WebContentService_nativeInit(JNIEnv*, jobject);
+Java_org_serenityos_cryfox_WebContentService_nativeInit(JNIEnv*, jobject);
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_serenityos_ladybird_WebContentService_nativeInit(JNIEnv* env, jobject thiz)
+Java_org_serenityos_cryfox_WebContentService_nativeInit(JNIEnv* env, jobject thiz)
 {
     global_instance = env->NewGlobalRef(thiz);
 
-    auto local_class = env->FindClass("org/serenityos/ladybird/WebContentService");
+    auto local_class = env->FindClass("org/serenityos/cryfox/WebContentService");
     if (!local_class)
         TODO();
     global_class_reference = reinterpret_cast<jclass>(env->NewGlobalRef(local_class));
@@ -41,12 +41,12 @@ Java_org_serenityos_ladybird_WebContentService_nativeInit(JNIEnv* env, jobject t
 
 void bind_request_server_java(int ipc_socket)
 {
-    Ladybird::JavaEnvironment env(global_vm);
+    CryFox::JavaEnvironment env(global_vm);
     env.get()->CallVoidMethod(global_instance, bind_request_server_method, ipc_socket);
 }
 
 void bind_image_decoder_java(int ipc_socket)
 {
-    Ladybird::JavaEnvironment env(global_vm);
+    CryFox::JavaEnvironment env(global_vm);
     env.get()->CallVoidMethod(global_instance, bind_image_decoder_method, ipc_socket);
 }

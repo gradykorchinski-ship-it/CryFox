@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2018-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021, the SerenityOS developers.
- * Copyright (c) 2021-2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2021-2025, Sam Atkins <sam@cryfox.org>
  * Copyright (c) 2024, Matthew Olsson <mattco@serenityos.org>
- * Copyright (c) 2025-2026, Tim Ledbetter <tim.ledbetter@ladybird.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025-2026, Tim Ledbetter <tim.ledbetter@cryfox.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

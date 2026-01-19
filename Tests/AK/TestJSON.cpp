@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2020, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -349,7 +349,7 @@ TEST_CASE(fallible_json_object_for_each)
     {
         "name": "anon",
         "home": "/home/anon",
-        "default_browser": "Ladybird"
+        "default_browser": "CryFox"
     })"sv;
 
     auto json = JsonValue::from_string(raw_json).value();
@@ -389,7 +389,7 @@ TEST_CASE(fallible_json_array_for_each)
     [
         "anon",
         "/home/anon",
-        "Ladybird"
+        "CryFox"
     ])"sv;
 
     auto json = JsonValue::from_string(raw_json).value();

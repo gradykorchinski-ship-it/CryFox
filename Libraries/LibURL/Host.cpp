@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021, Max Wipfli <mail@maxwipfli.ch>
  * Copyright (c) 2023-2025, Shannon Booth <shannon@serenityos.org>
- * Copyright (c) 2024, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

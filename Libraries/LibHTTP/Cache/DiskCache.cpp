@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -20,7 +20,7 @@ static constexpr auto INDEX_DATABASE = "INDEX"sv;
 ErrorOr<DiskCache> DiskCache::create(Mode mode)
 {
     auto cache_name = mode == Mode::Normal ? "Cache"sv : "TestCache"sv;
-    auto cache_directory = LexicalPath::join(Core::StandardPaths::cache_directory(), "Ladybird"sv, cache_name);
+    auto cache_directory = LexicalPath::join(Core::StandardPaths::cache_directory(), "CryFox"sv, cache_name);
 
     auto database = TRY(Database::Database::create(cache_directory.string(), INDEX_DATABASE));
     auto index = TRY(CacheIndex::create(database));

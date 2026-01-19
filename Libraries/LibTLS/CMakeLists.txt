@@ -4,7 +4,7 @@ set(SOURCES
     TLSv12.cpp
 )
 
-ladybird_lib(LibTLS tls)
+cryfox_lib(LibTLS tls)
 target_link_libraries(LibTLS PRIVATE LibCore LibCrypto LibFileSystem)
 
 find_package(OpenSSL REQUIRED)

@@ -1,0 +1,4 @@
+declare_args() {
+  # Build the CryFox application using the AppKit UI.
+  enable_appkit = current_os == "mac"
+}

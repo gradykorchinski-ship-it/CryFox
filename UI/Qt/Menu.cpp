@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -14,7 +14,7 @@
 #include <QPointer>
 #include <QWidget>
 
-namespace Ladybird {
+namespace CryFox {
 
 class ActionObserver final : public WebView::Action::Observer {
 public:

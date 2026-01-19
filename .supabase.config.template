@@ -1,0 +1,16 @@
+# CryFox Supabase Configuration
+# 
+# To enable authentication and sync features, create a Supabase project at:
+# https://supabase.com
+#
+# Then fill in the values below with your project credentials
+# (found in Project Settings → API)
+
+# Your Supabase project URL
+SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+
+# Your Supabase anonymous key (safe to use in client applications)
+SUPABASE_ANON_KEY=your_anon_key_here
+
+# Note: Keep this file private and do not commit it to version control
+# This file should be in your .gitignore

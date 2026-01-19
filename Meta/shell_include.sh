@@ -36,29 +36,29 @@ get_top_dir() {
     git rev-parse --show-toplevel
 }
 
-ensure_ladybird_source_dir() {
-    if [ -z "$LADYBIRD_SOURCE_DIR" ] || [ ! -d "$LADYBIRD_SOURCE_DIR" ]; then
-        LADYBIRD_SOURCE_DIR="$(get_top_dir)"
-        export LADYBIRD_SOURCE_DIR
+ensure_cryfox_source_dir() {
+    if [ -z "$CRYFOX_SOURCE_DIR" ] || [ ! -d "$CRYFOX_SOURCE_DIR" ]; then
+        CRYFOX_SOURCE_DIR="$(get_top_dir)"
+        export CRYFOX_SOURCE_DIR
     fi
 }
 
 get_build_dir() {
-    ensure_ladybird_source_dir
+    ensure_cryfox_source_dir
 
     # Note: Keep in sync with buildDir defaults in CMakePresets.json
     case "$1" in
         "Release")
-            BUILD_DIR="${LADYBIRD_SOURCE_DIR}/Build/release"
+            BUILD_DIR="${CRYFOX_SOURCE_DIR}/Build/release"
             ;;
         "Debug")
-            BUILD_DIR="${LADYBIRD_SOURCE_DIR}/Build/debug"
+            BUILD_DIR="${CRYFOX_SOURCE_DIR}/Build/debug"
             ;;
         "Sanitizer")
-            BUILD_DIR="${LADYBIRD_SOURCE_DIR}/Build/sanitizers"
+            BUILD_DIR="${CRYFOX_SOURCE_DIR}/Build/sanitizers"
             ;;
         "Distribution")
-            BUILD_DIR="${LADYBIRD_SOURCE_DIR}/Build/distribution"
+            BUILD_DIR="${CRYFOX_SOURCE_DIR}/Build/distribution"
             ;;
         *)
             echo "Unknown BUILD_PRESET: '$1'" >&2

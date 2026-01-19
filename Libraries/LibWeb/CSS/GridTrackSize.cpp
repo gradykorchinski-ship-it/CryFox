@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022, Martin Falisse <mfalisse@outlook.com>
  * Copyright (c) 2025, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
- * Copyright (c) 2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

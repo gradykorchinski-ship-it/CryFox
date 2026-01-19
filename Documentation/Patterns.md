@@ -3,12 +3,12 @@
 ## Introduction
 
 Over time numerous reoccurring patterns have emerged from or were adopted by
-the Ladybird code base. This document aims to track and describe them, so they
+the CryFox code base. This document aims to track and describe them, so they
 can be propagated further and the code base can be kept consistent. 
 
 ## `TRY(...)` Error Handling
 
-The `TRY(..)` macro is used for error propagation in the Ladybird code base.
+The `TRY(..)` macro is used for error propagation in the CryFox code base.
 The goal being to reduce the amount of boiler plate error code required to
 properly handle and propagate errors throughout the code base. 
 
@@ -73,7 +73,7 @@ ErrorOr<void> insert_one_to_onehundred(Vector<int>& vector)
 
 ## Fallible Constructors
 
-The usual C++ constructors are incompatible with Ladybird's method of handling errors,
+The usual C++ constructors are incompatible with CryFox's method of handling errors,
 as potential errors are passed using the `ErrorOr` return type. As a replacement, classes
 that require fallible operations during their construction define a static function that
 is fallible instead.
@@ -110,18 +110,18 @@ private:
 }
 ```
 
-## The `ladybird_main(..)` program entry point
+## The `cryfox_main(..)` program entry point
 
-Ladybird has moved to a pattern where executables do not expose a normal C
-main function. A `ladybird_main(..)` is exposed instead. The main reasoning
+CryFox has moved to a pattern where executables do not expose a normal C
+main function. A `cryfox_main(..)` is exposed instead. The main reasoning
 is that the `Main::Arguments` struct can provide arguments in a more idiomatic
-way that fits with the Ladybird's internal API surface area. The ErrorOr<int> likewise
+way that fits with the CryFox's internal API surface area. The ErrorOr<int> likewise
 allows the program to propagate errors seamlessly with the `TRY(...)` macro,
 avoiding a significant amount of clunky C style error handling.
 
 These executables are then linked with the `LibMain` library, which will link in
 the normal C `int main(int, char**)` function which will call into the programs
-`ladybird_main(..)` on program startup.
+`cryfox_main(..)` on program startup.
 
 The creation of the pattern was documented in the following video:
 [OS hacking: A better main() for SerenityOS C++ programs](https://www.youtube.com/watch?v=5PciKJW1rUc)
@@ -137,12 +137,12 @@ int main(int argc, char** argv)
 }
 ```
 
-Instead, `ladybird_main(..)` is defined like this:
+Instead, `cryfox_main(..)` is defined like this:
 
 ```cpp
 #include <LibMain/Main.h>
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     return 0;
 }
@@ -151,7 +151,7 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
 ## Intrusive Lists
 
 [Intrusive lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/) are used in some specific cases
-in Ladybird. A data structure is said to be
+in CryFox. A data structure is said to be
 "intrusive" when each element holds the metadata that tracks the
 element's membership in the data structure. In the case of a list, this
 means that every element in an intrusive linked list has a node embedded
@@ -228,7 +228,7 @@ argument to functions.
 See: https://en.cppreference.com/w/cpp/utility/source_location
 
 `AK::SourceLocation` is the implementation of this feature in
-Ladybird's AK. It's become the idiomatic way to capture the location
+CryFox's AK. It's become the idiomatic way to capture the location
 when adding extra debugging instrumentation, without resorting to
 littering the code with preprocessor macros.
 

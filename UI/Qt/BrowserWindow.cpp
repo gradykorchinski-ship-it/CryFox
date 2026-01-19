@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2022-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, Matthew Costa <ucosty@gmail.com>
  * Copyright (c) 2022, Filiph Sandström <filiph.sandstrom@filfatstudios.com>
  * Copyright (c) 2023, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2024-2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024-2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -14,6 +14,7 @@
 #include <UI/Qt/BrowserWindow.h>
 #include <UI/Qt/Icon.h>
 #include <UI/Qt/Menu.h>
+#include <UI/Qt/ModernStyle.h>
 #include <UI/Qt/Settings.h>
 #include <UI/Qt/StringUtils.h>
 #include <UI/Qt/TabBar.h>
@@ -31,14 +32,14 @@
 #include <QWheelEvent>
 #include <QWindow>
 
-namespace Ladybird {
+namespace CryFox {
 
 static QIcon const& app_icon()
 {
     static QIcon icon;
     if (icon.isNull()) {
         QPixmap pixmap;
-        pixmap.load(":/Icons/ladybird.png");
+        pixmap.load(":/Icons/cryfox.png");
         icon = QIcon(pixmap);
     }
     return icon;
@@ -74,6 +75,9 @@ BrowserWindow::BrowserWindow(Vector<URL::URL> const& initial_urls, IsPopupWindow
     auto const& browser_options = WebView::Application::browser_options();
 
     setWindowIcon(app_icon());
+
+    // Apply modern UI stylesheet
+    setStyleSheet(modern_stylesheet());
 
     // Listen for DPI changes
     m_device_pixel_ratio = devicePixelRatio();
@@ -233,7 +237,7 @@ BrowserWindow::BrowserWindow(Vector<URL::URL> const& initial_urls, IsPopupWindow
     QObject::connect(m_tabs_container, &QTabWidget::currentChanged, [this](int index) {
         auto* tab = as<Tab>(m_tabs_container->widget(index));
         if (tab)
-            setWindowTitle(QString("%1 - Ladybird").arg(tab->title()));
+            setWindowTitle(QString("%1 - CryFox").arg(tab->title()));
 
         set_current_tab(tab);
     });
@@ -266,8 +270,52 @@ BrowserWindow::BrowserWindow(Vector<URL::URL> const& initial_urls, IsPopupWindow
 
     m_new_tab_button_toolbar->addAction(m_new_tab_action);
     m_new_tab_button_toolbar->setMovable(false);
-    m_new_tab_button_toolbar->setStyleSheet("QToolBar { background: transparent; }");
-    m_new_tab_button_toolbar->setIconSize(QSize(16, 16));
+    m_new_tab_button_toolbar->setIconSize(QSize(18, 18));
+
+    // Add profile button
+    m_profile_button = new ProfileButton(this);
+    m_profile_panel = new ProfilePanel(this);
+
+    // TODO: Load auth state from settings
+    m_profile_button->set_authenticated(false);
+
+    // Connect profile button to panel
+    QObject::connect(m_profile_button, &ProfileButton::clicked_signal, this, [this]() {
+        // Position panel below profile button
+        QPoint global_pos = m_profile_button->mapToGlobal(m_profile_button->rect().bottomRight());
+        m_profile_panel->move(global_pos - QPoint(m_profile_panel->width(), 0));
+        m_profile_panel->exec();
+    });
+
+    // Handle panel actions
+    QObject::connect(m_profile_panel, &ProfilePanel::sign_in_requested, this, []() {
+        // TODO: Implement sign in
+        qDebug() << "Sign in requested";
+    });
+
+    QObject::connect(m_profile_panel, &ProfilePanel::create_account_requested, this, []() {
+        // TODO: Implement create account
+        qDebug() << "Create account requested";
+    });
+
+    QObject::connect(m_profile_panel, &ProfilePanel::password_manager_requested, this, []() {
+        // TODO: Open password manager
+        qDebug() << "Password manager requested";
+    });
+
+    QObject::connect(m_profile_panel, &ProfilePanel::settings_requested, this, []() {
+        // TODO: Open settings
+        qDebug() << "Settings requested";
+    });
+
+    QObject::connect(m_profile_panel, &ProfilePanel::sign_out_requested, this, [this]() {
+        m_profile_button->set_authenticated(false);
+        m_profile_panel->set_authenticated(false);
+        // TODO: Clear session data
+        qDebug() << "Sign out requested";
+    });
+
+    m_new_tab_button_toolbar->addWidget(m_profile_button);
     m_tabs_container->setCornerWidget(m_new_tab_button_toolbar, Qt::TopRightCorner);
 
     setCentralWidget(m_tabs_container);
@@ -434,7 +482,7 @@ void BrowserWindow::tab_title_changed(int index, QString const& title)
     m_tabs_container->setTabToolTip(index, title);
 
     if (m_tabs_container->currentIndex() == index)
-        setWindowTitle(QString("%1 - Ladybird").arg(title));
+        setWindowTitle(QString("%1 - CryFox").arg(title));
 }
 
 void BrowserWindow::tab_favicon_changed(int index, QIcon const& icon)
@@ -472,7 +520,7 @@ void BrowserWindow::tab_audio_play_state_changed(int index, Web::HTML::AudioPlay
     case Web::HTML::AudioPlayState::Playing:
         auto* button = new TabBarButton(icon_for_page_mute_state(*tab));
         button->setToolTip(tool_tip_for_page_mute_state(*tab));
-        button->setObjectName("LadybirdAudioState");
+        button->setObjectName("CryFoxAudioState");
 
         connect(button, &QPushButton::clicked, this, [this, tab, position]() {
             tab->view().toggle_page_mute_state();
@@ -522,7 +570,7 @@ QString BrowserWindow::tool_tip_for_page_mute_state(Tab& tab) const
 QTabBar::ButtonPosition BrowserWindow::audio_button_position_for_tab(int tab_index) const
 {
     if (auto* button = m_tabs_container->tabBar()->tabButton(tab_index, QTabBar::LeftSide)) {
-        if (button->objectName() != "LadybirdAudioState")
+        if (button->objectName() != "CryFoxAudioState")
             return QTabBar::RightSide;
     }
 

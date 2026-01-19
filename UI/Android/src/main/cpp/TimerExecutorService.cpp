@@ -10,14 +10,14 @@
 #include <jni.h>
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_serenityos_ladybird_TimerExecutorService_00024Timer_nativeRun(JNIEnv*, jobject /* thiz */, jlong, jlong);
+Java_org_serenityos_cryfox_TimerExecutorService_00024Timer_nativeRun(JNIEnv*, jobject /* thiz */, jlong, jlong);
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_serenityos_ladybird_TimerExecutorService_00024Timer_nativeRun(JNIEnv*, jobject /* thiz */, jlong native_data, jlong id)
+Java_org_serenityos_cryfox_TimerExecutorService_00024Timer_nativeRun(JNIEnv*, jobject /* thiz */, jlong native_data, jlong id)
 {
     static Core::EventLoop s_event_loop; // Here to exist for this thread
 
-    auto& event_loop_impl = *reinterpret_cast<Ladybird::ALooperEventLoopImplementation*>(native_data);
+    auto& event_loop_impl = *reinterpret_cast<CryFox::ALooperEventLoopImplementation*>(native_data);
     auto& thread_data = event_loop_impl.thread_data();
 
     if (auto timer_data = thread_data.timers.get(id); timer_data.has_value()) {

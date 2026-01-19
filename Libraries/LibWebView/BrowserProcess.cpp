@@ -27,7 +27,7 @@ private:
 
 ErrorOr<BrowserProcess::ProcessDisposition> BrowserProcess::connect(Vector<ByteString> const& raw_urls, NewWindow new_window)
 {
-    static constexpr auto process_name = "Ladybird"sv;
+    static constexpr auto process_name = "CryFox"sv;
 
     auto [socket_path, pid_path] = TRY(Process::paths_for_process(process_name));
 

@@ -9,13 +9,13 @@
         <key>CFBundlePackageType</key>
         <string>APPL</string>
         <key>CFBundleGetInfoString</key>
-        <string>Ladybird</string>
+        <string>CryFox</string>
         <key>CFBundleSignature</key>
         <string></string>
         <key>CFBundleExecutable</key>
-        <string>Ladybird</string>
+        <string>CryFox</string>
         <key>CFBundleIdentifier</key>
-        <string>org.ladybird.Ladybird</string>
+        <string>org.cryfox.CryFox</string>
         <key>NSPrincipalClass</key>
         <string>NSApplication</string>
         <key>NSHighResolutionCapable</key>

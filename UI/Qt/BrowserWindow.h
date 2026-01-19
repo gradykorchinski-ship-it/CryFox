@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Linus Groh <linusg@serenityos.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -10,6 +10,8 @@
 #include <LibWeb/HTML/ActivateTab.h>
 #include <LibWeb/HTML/AudioPlayState.h>
 #include <LibWebView/Forward.h>
+#include <UI/Qt/ProfileButton.h>
+#include <UI/Qt/ProfilePanel.h>
 #include <UI/Qt/Tab.h>
 
 #include <QIcon>
@@ -19,7 +21,7 @@
 #include <QTabWidget>
 #include <QToolBar>
 
-namespace Ladybird {
+namespace CryFox {
 
 class Tab;
 class WebContentView;
@@ -117,6 +119,9 @@ private:
     QAction* m_new_tab_action { nullptr };
     QAction* m_new_window_action { nullptr };
     QAction* m_find_in_page_action { nullptr };
+
+    ProfileButton* m_profile_button { nullptr };
+    ProfilePanel* m_profile_panel { nullptr };
 
     IsPopupWindow m_is_popup_window { IsPopupWindow::No };
 };

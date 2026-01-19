@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2024-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -17,7 +17,7 @@ class Application : public WebView::Application {
     WEB_VIEW_APPLICATION(Application)
 
 public:
-    explicit Application(Optional<ByteString> ladybird_binary_path);
+    explicit Application(Optional<ByteString> cryfox_binary_path);
     ~Application();
 
     virtual void create_platform_arguments(Core::ArgsParser&) override;

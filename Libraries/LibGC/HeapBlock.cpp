@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2024, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

@@ -7,7 +7,7 @@
 #include "JNIHelpers.h"
 #include <AK/Utf16View.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 jstring JavaEnvironment::jstring_from_ak_string(String const& str)
 {

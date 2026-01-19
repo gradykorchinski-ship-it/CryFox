@@ -1,11 +1,11 @@
 # Porting to new Operating System Environments
 
-This document outlines the steps required to port Ladybird to a new OS environment, and expectations for such ports to
+This document outlines the steps required to port CryFox to a new OS environment, and expectations for such ports to
 be accepted into the mainline repository.
 
 ## Types of Ports
 
-There are two types of ports that can be made to Ladybird:
+There are two types of ports that can be made to CryFox:
 
 - UI port: We define the "browser frontend" as the UI layer. This includes the browser window, tabs, address bar, etc.
 - Platform port: This includes the underlying platform-specific code that interacts with the OS. This includes things like
@@ -38,9 +38,9 @@ There is currently one in progress platform port:
 
 ### UI ports
 
-UI ports mostly concern themselves with the UI layer. This means the main Ladybird process, using LibWebView.
+UI ports mostly concern themselves with the UI layer. This means the main CryFox process, using LibWebView.
 
-To create a new Ladybird UI, you will need to implement a new `WebView::ViewImplementation` subclass.
+To create a new CryFox UI, you will need to implement a new `WebView::ViewImplementation` subclass.
 ViewImplementation is the main interface between the UI process and WebContent processes. It is expected that each tab
 of the browser will have its own WebContent process. This is all managed by the WebView layer.
 
@@ -50,18 +50,18 @@ TODO: Explain any more details that are necessary
 
 ### Platform ports
 
-Platform ports concern themselves with the underlying OS-specific code. In Ladybird, this code is largely contained in
+Platform ports concern themselves with the underlying OS-specific code. In CryFox, this code is largely contained in
 the AK and LibCore libraries.
 
-AK is the standard template library for Ladybird. The first step of a new platform port is a new platform define in
+AK is the standard template library for CryFox. The first step of a new platform port is a new platform define in
 `AK/Platform.h`. This define will be used to conditionally compile platform-specific code.
 In AK, the most likely class to need platform-specific code is `AK::StackInfo`.
 
 LibCore is an abstraction over POSIX. It contains classes to wrap lower level OS functionality into APIs that are
-comfortable for Ladybird developers to use. The most likely place to need adjustment is `Core::System`, followed by
+comfortable for CryFox developers to use. The most likely place to need adjustment is `Core::System`, followed by
 `Core::Process` and `Core::Socket`.
 
-Ladybird makes heavy use of IPC, and the IPC layer is in `LibIPC`. This layer is mostly platform-agnostic, but there are
+CryFox makes heavy use of IPC, and the IPC layer is in `LibIPC`. This layer is mostly platform-agnostic, but there are
 some platform-specific details in LibCore that may need to be adjusted. The IPC system is based on Unix domain sockets,
 so  any platform that supports Unix domain sockets should be able to use the IPC system out of the box.
 
@@ -69,7 +69,7 @@ so  any platform that supports Unix domain sockets should be able to use the IPC
 
 ### Windows
 
-Over the years excitement about a native Windows port has waxed and waned. The main issue is that Ladybird is built on
+Over the years excitement about a native Windows port has waxed and waned. The main issue is that CryFox is built on
 top of LibCore, which is a POSIX abstraction. Windows is not POSIX, and so a Windows port requires a significant amount
 of effort to implement.
 

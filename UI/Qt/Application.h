@@ -13,7 +13,7 @@
 
 #include <QApplication>
 
-namespace Ladybird {
+namespace CryFox {
 
 class Application : public WebView::Application {
     WEB_VIEW_APPLICATION(Application)

@@ -73,7 +73,7 @@ describe("class like constructs can be used inside", () => {
     });
 });
 
-// https://github.com/LadybirdBrowser/ladybird/pull/4226
+// https://github.com/CryFoxBrowser/cryfox/pull/4226
 test("declaring variables", () => {
     class A {
         static {

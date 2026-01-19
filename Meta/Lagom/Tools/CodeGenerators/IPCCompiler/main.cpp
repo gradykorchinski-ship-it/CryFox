@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2020, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -920,7 +920,7 @@ void build(StringBuilder& builder, Vector<Endpoint> const& endpoints)
 
 } // end anonymous namespace
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     StringView ipc_file;
     StringView output_file = "-"sv;

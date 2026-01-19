@@ -52,13 +52,13 @@ struct ApplicationSettingsObserver : public SettingsObserver {
     }
 };
 
-Application::Application(Optional<ByteString> ladybird_binary_path)
+Application::Application(Optional<ByteString> cryfox_binary_path)
     : m_settings(Settings::create({}))
 {
     VERIFY(!s_the);
     s_the = this;
 
-    platform_init(move(ladybird_binary_path));
+    platform_init(move(cryfox_binary_path));
 }
 
 Application::~Application()
@@ -128,12 +128,12 @@ ErrorOr<void> Application::initialize(Main::Arguments const& arguments)
     bool disable_scrollbar_painting = false;
 
     Core::ArgsParser args_parser;
-    args_parser.set_general_help("The Ladybird web browser :^)");
+    args_parser.set_general_help("The CryFox web browser :^)");
     args_parser.add_positional_argument(raw_urls, "URLs to open", "url", Core::ArgsParser::Required::No);
 
     args_parser.add_option(Core::ArgsParser::Option {
         .argument_mode = Core::ArgsParser::OptionArgumentMode::Optional,
-        .help_string = "Run Ladybird without a browser window. Mode may be 'screenshot' (default), 'layout-tree', 'text', or 'manual'.",
+        .help_string = "Run CryFox without a browser window. Mode may be 'screenshot' (default), 'layout-tree', 'text', or 'manual'.",
         .long_name = "headless",
         .value_name = "mode",
         .accept_value = [&](StringView value) {
@@ -363,10 +363,10 @@ ErrorOr<void> Application::launch_services()
     };
 
     if (m_browser_options.disable_sql_database == DisableSQLDatabase::No) {
-        // FIXME: Move this to a generic "Ladybird data directory" helper.
-        auto database_path = ByteString::formatted("{}/Ladybird", Core::StandardPaths::user_data_directory());
+        // FIXME: Move this to a generic "CryFox data directory" helper.
+        auto database_path = ByteString::formatted("{}/CryFox", Core::StandardPaths::user_data_directory());
 
-        m_database = TRY(Database::Database::create(database_path, "Ladybird"sv));
+        m_database = TRY(Database::Database::create(database_path, "CryFox"sv));
         m_cookie_jar = TRY(CookieJar::create(*m_database));
         m_storage_jar = TRY(StorageJar::create(*m_database));
     } else {
@@ -531,7 +531,7 @@ ErrorOr<int> Application::execute()
     RefPtr<Core::Timer> screenshot_timer;
 
     if (m_browser_options.headless_mode.has_value()) {
-        auto theme_path = LexicalPath::join(WebView::s_ladybird_resource_root, "themes"sv, "Default.ini"sv);
+        auto theme_path = LexicalPath::join(WebView::s_cryfox_resource_root, "themes"sv, "Default.ini"sv);
         auto theme = TRY(Gfx::load_system_theme(theme_path.string()));
 
         view = HeadlessWebView::create(move(theme), { m_browser_options.window_width, m_browser_options.window_height });
@@ -772,7 +772,7 @@ void Application::initialize_actions()
             view->select_all();
     });
 
-    m_open_about_page_action = Action::create("About Ladybird"sv, ActionID::OpenAboutPage, [this]() {
+    m_open_about_page_action = Action::create("About CryFox"sv, ActionID::OpenAboutPage, [this]() {
         open_url_in_new_tab(URL::about_version(), Web::HTML::ActivateTab::Yes);
     });
     m_open_settings_page_action = Action::create("Settings"sv, ActionID::OpenSettingsPage, [this]() {

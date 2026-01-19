@@ -47,12 +47,12 @@ else()
     list(APPEND SOURCES LexicalPath.cpp)
 endif()
 
-ladybird_lib(AK ak)
+cryfox_lib(AK ak)
 
 find_package(cpptrace CONFIG)
 find_package(Backtrace)
 
-if(cpptrace_FOUND AND LADYBIRD_ENABLE_CPPTRACE)
+if(cpptrace_FOUND AND CRYFOX_ENABLE_CPPTRACE)
     target_link_libraries(AK PRIVATE cpptrace::cpptrace)
     target_compile_definitions(AK PRIVATE AK_HAS_CPPTRACE=1)
 elseif(Backtrace_FOUND)

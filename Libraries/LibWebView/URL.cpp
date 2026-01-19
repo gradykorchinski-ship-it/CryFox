@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  * Copyright (c) 2023, Cameron Youell <cameronyouell@gmail.com>
  * Copyright (c) 2025, Manuel Zahariev <manuel@duck.com>
  *
@@ -53,6 +53,10 @@ Optional<URL::URL> sanitize_url(StringView location, Optional<SearchEngine> cons
         auto const& domain = host->get<String>();
 
         if (domain.contains('"'))
+            return search_url_or_error();
+
+        // If the domain doesn't contain a dot and hasn't explicitly been provided a scheme, it's likely a search query.
+        if (!domain.contains('.') && https_scheme_was_guessed && domain != "localhost"sv)
             return search_url_or_error();
 
         // https://datatracker.ietf.org/doc/html/rfc2606

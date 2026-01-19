@@ -24,7 +24,7 @@ else()
         System.cpp)
 endif()
 
-ladybird_lib(LibCoreMinimal coreminimal)
+cryfox_lib(LibCoreMinimal coreminimal)
 
 if (WIN32)
     find_path(DIRENT_INCLUDE_DIR dirent.h REQUIRED)
@@ -117,7 +117,7 @@ if (APPLE)
     list(APPEND SOURCES IOSurface.cpp)
 endif()
 
-ladybird_lib(LibCore core)
+cryfox_lib(LibCore core)
 target_link_libraries(LibCore PRIVATE LibUnicode LibURL Threads::Threads)
 target_link_libraries(LibCore PUBLIC LibCoreMinimal)
 

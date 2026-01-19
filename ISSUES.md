@@ -1,7 +1,7 @@
 # Issue-reporting guidelines
 
 Report problems using our detailed [bug-reporting
-form](https://github.com/LadybirdBrowser/ladybird/issues/new?template=bug_report.yml), which helps to ensure that, for us to reproduce and investigate the problem, your bug report includes the information needed — including a reduced test case.
+form](https://github.com/CryFoxBrowser/cryfox/issues/new?template=bug_report.yml), which helps to ensure that, for us to reproduce and investigate the problem, your bug report includes the information needed — including a reduced test case.
 
 ## How you can write a reduced test case
 
@@ -18,14 +18,14 @@ Here’s how you can do that:
 2. If you’re *not* using something like SingleFile, then: To ensure any images,external style sheets, or external scripts that use a relative path will get loaded by your local `REDUCTION.html` document, put a `base` element into the document — like this:
 
    ```html
-   <base href="https://ladybird.org/">
+   <base href="https://cryfox.org/">
    ```
 
     However, if the problem appears to be caused not by anything in the source of the document itself, but instead by something in an external script or external stylesheet, then you’ll also need to create a local copy of the problem script or problem stylesheet.
 
-3. Open/load the `REDUCTION.html` file in Ladybird, and verify that the same problem occurs with it as occurs with the original website/page you copied it from.
+3. Open/load the `REDUCTION.html` file in CryFox, and verify that the same problem occurs with it as occurs with the original website/page you copied it from.
 
-4. **Script-related problems:** Especially if you believe the problem is related to any JavaScript that the document is executing, then temporarily disable scripting by unchecking **Enable Scripting** option in the **Debug** menu in Ladybird, and then reload the `REDUCTION.html` file in Ladybird.
+4. **Script-related problems:** Especially if you believe the problem is related to any JavaScript that the document is executing, then temporarily disable scripting by unchecking **Enable Scripting** option in the **Debug** menu in CryFox, and then reload the `REDUCTION.html` file in CryFox.
 
    * If the problem still happens after you’ve disabled scripting, then you can remove any and all `script` elements from the document, and you can continue on from there.
 
@@ -35,7 +35,7 @@ Here’s how you can do that:
 
    1. [If you’ve not used something like the [SingleFile](https://addons.mozilla.org/en-US/firefox/addon/single-file/) extension for Firefox or Chrome] Add a `style` element in the `REDUCTION.html` file, and then for each external style sheet the document has, paste the contents from that external stylesheet into that `style` element.
 
-   2. Start removing CSS rules from any and all `style` elements in the document, and reload the `REDUCTION.html` file in Ladybird.
+   2. Start removing CSS rules from any and all `style` elements in the document, and reload the `REDUCTION.html` file in CryFox.
 
       * If the problem does not happen any longer after you’ve removed a particular CSS rule, then you may have isolated the cause. Re-add that CSS rule to the document, and continue on from there.
 
@@ -45,7 +45,7 @@ Here’s how you can do that:
 
 6. **HTML-related problems:** Begin removing one *element* at time from the `REDUCTION.html` file, starting with the elements in the document `head`.
 
-7. Reload the `REDUCTION.html` file in Ladybird, and verify whether the problem is still happening.
+7. Reload the `REDUCTION.html` file in CryFox, and verify whether the problem is still happening.
 
    * If the problem does not happen any longer after you’ve removed a particular element, then you may have isolated the cause. Re-add that element to the document, and continue on from there.
 
@@ -69,8 +69,8 @@ That will give you a URL which you can then include in the issue you raise for t
 
 ## Debugging
 
-When investigating a bug, it can be helpful to use the `--enable-idl-tracing` command-line flag when running Ladybird. This will output detailed information about the calls being made to the browser's internal interfaces, which can help pinpoint where a problem is occurring.
+When investigating a bug, it can be helpful to use the `--enable-idl-tracing` command-line flag when running CryFox. This will output detailed information about the calls being made to the browser's internal interfaces, which can help pinpoint where a problem is occurring.
 
 ```bash
-./Meta/ladybird.py run ladybird --enable-idl-tracing
+./Meta/cryfox.py run cryfox --enable-idl-tracing
 ```

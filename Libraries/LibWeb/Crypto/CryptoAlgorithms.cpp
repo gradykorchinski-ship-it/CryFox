@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2024, Andrew Kaster <akaster@serenityos.org>
  * Copyright (c) 2024, stelar7 <dudedbz@gmail.com>
- * Copyright (c) 2024, Jelle Raaijmakers <jelle@ladybird.org>
- * Copyright (c) 2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2024, Jelle Raaijmakers <jelle@cryfox.org>
+ * Copyright (c) 2024, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2024-2025, Altomani Gianluca <altomanigianluca@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause

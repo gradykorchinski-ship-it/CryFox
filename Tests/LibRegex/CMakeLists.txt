@@ -3,5 +3,5 @@ set(TEST_SOURCES
 )
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibRegex LIBS LibRegex)
+    cryfox_test("${source}" LibRegex LIBS LibRegex)
 endforeach()

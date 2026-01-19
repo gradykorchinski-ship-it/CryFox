@@ -242,7 +242,7 @@ static ErrorOr<Options> parse_options(Main::Arguments arguments)
     return options;
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     Options options = TRY(parse_options(arguments));
 

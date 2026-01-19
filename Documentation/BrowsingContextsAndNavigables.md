@@ -4,7 +4,7 @@
 
 ## Introduction: How does code execute, really?
 
-Before we can dive into how LibWeb and Ladybird implement the HTML web page navigation operations,
+Before we can dive into how LibWeb and CryFox implement the HTML web page navigation operations,
 we need to dive into some fundamental specification concepts. Starting with, how does code actually
 execute in a  (possibly virtual) machine? Next we'll look at what that means for the ECMAScript
 Specification (JavaScript), and finally how the ECMAScript code execution model ties into the

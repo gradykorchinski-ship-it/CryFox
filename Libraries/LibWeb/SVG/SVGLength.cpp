@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2022, Tim Flynn <trflynn89@serenityos.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

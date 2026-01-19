@@ -19,5 +19,5 @@ set(SOURCES
     Pattern/Tokenizer.cpp
 )
 
-ladybird_lib(LibURL url)
+cryfox_lib(LibURL url)
 target_link_libraries(LibURL PRIVATE LibUnicode LibTextCodec LibRegex LibCrypto)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2020, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, the SerenityOS developers.
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -10,14 +10,14 @@
 #if defined(AK_OS_WINDOWS)
 // SOCK_STREAM and SOCK_DGRAM are defined with #define. Let's cache our custom definitions before including Windows
 // headers to ensure we defined them correctly.
-static constexpr auto LADYBIRD_SOCK_STREAM = SOCK_STREAM;
-static constexpr auto LADYBIRD_SOCK_DGRAM = SOCK_DGRAM;
+static constexpr auto CRYFOX_SOCK_STREAM = SOCK_STREAM;
+static constexpr auto CRYFOX_SOCK_DGRAM = SOCK_DGRAM;
 
 #    include <AK/Windows.h>
 #    include <ws2tcpip.h>
 
-static_assert(LADYBIRD_SOCK_STREAM == SOCK_STREAM);
-static_assert(LADYBIRD_SOCK_DGRAM == SOCK_DGRAM);
+static_assert(CRYFOX_SOCK_STREAM == SOCK_STREAM);
+static_assert(CRYFOX_SOCK_DGRAM == SOCK_DGRAM);
 static_assert(AF_LOCAL == AF_UNIX);
 #else
 #    include <arpa/inet.h>

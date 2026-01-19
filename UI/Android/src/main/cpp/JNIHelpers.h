@@ -10,7 +10,7 @@
 #include <AK/String.h>
 #include <jni.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 class JavaEnvironment {
 public:

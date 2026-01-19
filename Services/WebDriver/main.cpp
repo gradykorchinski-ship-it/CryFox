@@ -69,7 +69,7 @@ static Vector<ByteString> create_arguments(ByteString const& socket_path, bool h
     return arguments;
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     AK::set_rich_debug_enabled(true);
 
@@ -129,7 +129,7 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
 
         auto launch_browser_callback = [&](ByteString const& socket_path, bool headless) {
             auto arguments = create_arguments(socket_path, headless, force_cpu_painting, debug_process, default_time_zone);
-            return launch_process("Ladybird"sv, arguments.span());
+            return launch_process("CryFox"sv, arguments.span());
         };
 
         auto maybe_client = WebDriver::Client::try_create(maybe_buffered_socket.release_value(), move(launch_browser_callback));

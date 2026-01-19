@@ -725,23 +725,23 @@ TEST_CASE(ECMA262_match)
         { "a$"sv, "a\r\n"sv, true, global_multiline.value() },
         { "^a"sv, "\ra"sv, true, global_multiline.value() },
         { "^(.*?):[ \\t]*([^\\r\\n]*)$"sv, "content-length: 488\r\ncontent-type: application/json; charset=utf-8\r\n"sv, true, global_multiline.value() },
-        // ladybird#968, ?+ should not loop forever. */
+        // cryfox#968, ?+ should not loop forever. */
         { "^\\?((&?category=[0-9]+)?(&?shippable=1)?(&?ad_type=demand)?(&?page=[0-9]+)?(&?locations=(r|d)_[0-9]+)?)+$"sv, "?category=54&shippable=1&baby_age=p,0,1,3"sv, false },
         // optimizer bug, blindly accepting inverted char classes [^x] as atomic rewrite opportunities.
         { "([^\\s]+):\\s*([^;]+);"sv, "font-family: 'Inter';"sv, true },
-        // Optimizer bug, ignoring references that weren't bound in the current or past block, ladybird#2281
+        // Optimizer bug, ignoring references that weren't bound in the current or past block, cryfox#2281
         { "(a)(?=a*\\1)"sv, "aaaa"sv, true, global_multiline.value() },
         // Optimizer bug, wrong Repeat basic block splits.
         { "[ a](b{2})"sv, "abb"sv, true },
         // See above.
         { "^ {0,3}(([\\`\\~])\\2{2,})\\s*([\\*_]*)\\s*([^\\*_\\s]*).*$"sv, ""sv, false },
-        // See above, also ladybird#2931.
+        // See above, also cryfox#2931.
         {
             "^(\\d{4}|[+-]\\d{6})(?:-?(\\d{2})(?:-?(\\d{2}))?)?(?:[ T]?(\\d{2}):?(\\d{2})(?::?(\\d{2})(?:[,.](\\d{1,}))?)?(?:(Z)|([+-])(\\d{2})(?::?(\\d{2}))?)?)?$"sv,
             ""sv,
             false,
         },
-        // Optimizer bug, ignoring an enabled trailing 'invert' when comparing blocks, ladybird#3421.
+        // Optimizer bug, ignoring an enabled trailing 'invert' when comparing blocks, cryfox#3421.
         { "[^]*[^]"sv, "i"sv, true },
         { "xx|...|...."sv, "cd"sv, false },
         // Tests nested lookahead with alternation - verifies proper save/restore stack cleanup
@@ -751,9 +751,9 @@ TEST_CASE(ECMA262_match)
         { "(?!(b))\\1"sv, "a"sv, false },
         // String table merge bug: inverse map should be merged regardless of available direct mappings.
         { "((?<x>a)|(?<x>b))"sv, "aa"sv, false },
-        // Insensitive charclasses should accept upper/lowercase in pattern (lookup table should still be ordered if insensitive lookup is used), ladybird#5399.
+        // Insensitive charclasses should accept upper/lowercase in pattern (lookup table should still be ordered if insensitive lookup is used), cryfox#5399.
         { "[aBc]"sv, "b"sv, true, ECMAScriptFlags::Insensitive },
-        // Optimizer bug: nested 'or' compare ops caused a crash, ladybird#6647.
+        // Optimizer bug: nested 'or' compare ops caused a crash, cryfox#6647.
         { "([[[]]])*0"sv, ""sv, false, ECMAScriptFlags::UnicodeSets },
         { "(([[[]]]{2,})\\s)*"sv, ""sv, true, (ECMAScriptFlags::UnicodeSets | ECMAScriptFlags::Global).value() },
         // Optimizer bug: duplicated rseekto ops output for the same fork.
@@ -894,7 +894,7 @@ TEST_CASE(ECMA262_unicode_match)
         { "[\\ufb05]"sv, "\ufb06"sv, true, combine_flags(ECMAScriptFlags::Unicode, ECMAScriptFlags::Insensitive) },
         { "[\\ufb06]"sv, "\ufb05"sv, true, combine_flags(ECMAScriptFlags::Unicode, ECMAScriptFlags::Insensitive) },
 
-        // https://github.com/LadybirdBrowser/ladybird/issues/5549
+        // https://github.com/CryFoxBrowser/cryfox/issues/5549
         { "[\\ud800-\\udbff][\\udc00-\\udfff]"sv, "😀"sv, true },
         { "[\\ud800-\\udbff][\\udc00-\\udfff]"sv, "😀"sv, false, ECMAScriptFlags::Unicode },
         { "[\\ud800-\\udbff][\\udc00-\\udfff]"sv, "a"sv, false },
@@ -974,7 +974,7 @@ TEST_CASE(ECMA262_unicode_sets_match)
         { "[\\w&&\\d]"sv, "a"sv, false },
         { "[\\w&&\\d]"sv, "4"sv, true },
         { "([^\\:]+?)"sv, "a"sv, true },
-        { "[[a][]]"sv, "a"sv, true }, // ladybird#6647
+        { "[[a][]]"sv, "a"sv, true }, // cryfox#6647
     };
 
     for (auto& test : tests) {
@@ -1205,7 +1205,7 @@ TEST_CASE(optimizer_atomic_groups)
         // (b+)(b+) produces an intermediate block with no matching ops, the optimiser should ignore that block when looking for following matches and correctly detect the overlap between (b+) and (b+).
         // note that the second loop may be rewritten to a ForkReplace, but the first loop should not be rewritten.
         Tuple { "(b+)(b+)"sv, "bbb"sv, true },
-        // Don't treat [\S] as [\s]; see ladybird#2296.
+        // Don't treat [\S] as [\s]; see cryfox#2296.
         Tuple { "([^\\s]+?)\\(([\\s\\S]*)\\)"sv, "a(b)"sv, true },
         // Follow direct jumps in the optimizer instead of assuming they're a noop.
         Tuple { "(|[^]*)\\)"sv, "p)"sv, true },
@@ -1249,7 +1249,7 @@ TEST_CASE(optimizer_alternation)
         Tuple { "^(\\d+|x)"sv, "42"sv, 2u },
         // `Repeat' does not add its insn size to the jump target.
         Tuple { "[0-9]{2}|[0-9]"sv, "92"sv, 2u },
-        // Don't ForkJump to the next instruction, rerunning it would produce the same result. see ladybird#2398.
+        // Don't ForkJump to the next instruction, rerunning it would produce the same result. see cryfox#2398.
         Tuple { "(xxxxxxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxxxxxx)?b"sv, "xxxxxxxxxxxxxxxxxxxxxxx"sv, 0u },
         // Don't take the jump in JumpNonEmpty with nonexistent checkpoints (also don't crash).
         Tuple { "(?!\\d*|[g-ta-r]+|[h-l]|\\S|\\S|\\S){,9}|\\S{7,8}|\\d|(?<wnvdfimiwd>)|[c-mj-tb-o]*|\\s"sv, "rjvogg7pm|li4nmct mjb2|pk7s8e0"sv, 0u },

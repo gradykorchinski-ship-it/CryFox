@@ -17,5 +17,5 @@ else()
         TransportSocketWindows.cpp)
 endif()
 
-ladybird_lib(LibIPC ipc)
+cryfox_lib(LibIPC ipc)
 target_link_libraries(LibIPC PRIVATE LibCore LibURL LibThreading)

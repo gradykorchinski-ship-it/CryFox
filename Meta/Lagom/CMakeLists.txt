@@ -12,10 +12,10 @@ project(
     LANGUAGES C CXX
 )
 
-if (${ENABLE_LAGOM_LADYBIRD} OR $CACHE{ENABLE_LAGOM_LADYBIRD})
+if (${ENABLE_LAGOM_CRYFOX} OR $CACHE{ENABLE_LAGOM_CRYFOX})
     message(FATAL_ERROR
-        "The ENABLE_LAGOM_LADYBIRD option is no longer supported.\n"
-        "Please use the top-level CMakeLists.txt to enable Ladybird builds.\n")
+        "The ENABLE_LAGOM_CRYFOX option is no longer supported.\n"
+        "Please use the top-level CMakeLists.txt to enable CryFox builds.\n")
 endif()
 
 # This is required for CMake (when invoked for a Lagom-only build) to
@@ -35,15 +35,15 @@ if (POLICY CMP0174)
 endif()
 
 get_filename_component(
-    LADYBIRD_PROJECT_ROOT "${PROJECT_SOURCE_DIR}/../.."
+    CRYFOX_PROJECT_ROOT "${PROJECT_SOURCE_DIR}/../.."
     ABSOLUTE CACHE
 )
-set(SerenityOS_SOURCE_DIR "${LADYBIRD_PROJECT_ROOT}" CACHE STRING "")
+set(SerenityOS_SOURCE_DIR "${CRYFOX_PROJECT_ROOT}" CACHE STRING "")
 
-list(APPEND CMAKE_MODULE_PATH "${LADYBIRD_PROJECT_ROOT}/Meta/CMake")
+list(APPEND CMAKE_MODULE_PATH "${CRYFOX_PROJECT_ROOT}/Meta/CMake")
 
-if(NOT COMMAND ladybird_option)
-    macro(ladybird_option)
+if(NOT COMMAND cryfox_option)
+    macro(cryfox_option)
         set(${ARGV})
     endmacro()
 endif()
@@ -58,7 +58,7 @@ endif()
 
 find_package(Threads REQUIRED)
 # FIXME: This global link libraries is required to workaround linker issues (on some systems)
-# from the Ladybird import. See https://github.com/SerenityOS/serenity/issues/16847
+# from the CryFox import. See https://github.com/SerenityOS/serenity/issues/16847
 link_libraries(Threads::Threads)
 
 if (ENABLE_LAGOM_CCACHE)
@@ -153,7 +153,7 @@ set(Lagom_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATADIR}/${package}"
 mark_as_advanced(Lagom_INSTALL_CMAKEDIR)
 
 install(
-    FILES "${LADYBIRD_PROJECT_ROOT}/Meta/CMake/lagom-install-config.cmake"
+    FILES "${CRYFOX_PROJECT_ROOT}/Meta/CMake/lagom-install-config.cmake"
     DESTINATION "${Lagom_INSTALL_CMAKEDIR}"
     RENAME "${package}Config.cmake"
     COMPONENT Lagom_Development
@@ -183,21 +183,21 @@ add_library(NoCoverage INTERFACE)
 install(TARGETS NoCoverage EXPORT LagomTargets)
 
 # AK
-add_ladybird_subdirectory(AK)
+add_cryfox_subdirectory(AK)
 
 # LibCoreMinimal
-add_ladybird_subdirectory(Libraries/LibCore)
+add_cryfox_subdirectory(Libraries/LibCore)
 
 # LibMain
-add_ladybird_subdirectory(Libraries/LibMain)
+add_cryfox_subdirectory(Libraries/LibMain)
 
 # LibFileSystem
 # This is needed even if Lagom is not enabled because it is depended upon by code generators.
-add_ladybird_subdirectory(Libraries/LibFileSystem)
+add_cryfox_subdirectory(Libraries/LibFileSystem)
 
 # LibIDL
 # This is used by the BindingsGenerator so needs to always be built.
-add_ladybird_subdirectory(Libraries/LibIDL)
+add_cryfox_subdirectory(Libraries/LibIDL)
 
 # Code Generators and other host tools
 if (BUILD_LAGOM_TOOLS)
@@ -211,16 +211,16 @@ endif()
 # Lagom Libraries
 # FIXME: Move these calls to the relevant client library CMakeLists
 # Note that the Services themselves are only built if ENABLE_GUI_TARGETS, from top level.
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/RequestServer/RequestClient.ipc Services/RequestServer/RequestClientEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/RequestServer/RequestServer.ipc Services/RequestServer/RequestServerEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebContentServer.ipc Services/WebContent/WebContentServerEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebContentClient.ipc Services/WebContent/WebContentClientEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebDriverClient.ipc Services/WebContent/WebDriverClientEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebDriverServer.ipc Services/WebContent/WebDriverServerEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebUIClient.ipc Services/WebContent/WebUIClientEndpoint.h)
-compile_ipc(${LADYBIRD_PROJECT_ROOT}/Services/WebContent/WebUIServer.ipc Services/WebContent/WebUIServerEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/RequestServer/RequestClient.ipc Services/RequestServer/RequestClientEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/RequestServer/RequestServer.ipc Services/RequestServer/RequestServerEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebContentServer.ipc Services/WebContent/WebContentServerEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebContentClient.ipc Services/WebContent/WebContentClientEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebDriverClient.ipc Services/WebContent/WebDriverClientEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebDriverServer.ipc Services/WebContent/WebDriverServerEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebUIClient.ipc Services/WebContent/WebUIClientEndpoint.h)
+compile_ipc(${CRYFOX_PROJECT_ROOT}/Services/WebContent/WebUIServer.ipc Services/WebContent/WebUIServerEndpoint.h)
 
-add_ladybird_subdirectory(Libraries)
+add_cryfox_subdirectory(Libraries)
 
 if (ENABLE_FUZZERS)
     add_subdirectory(Fuzzers)
@@ -232,10 +232,10 @@ if (ENABLE_FUZZERS OR ENABLE_COMPILER_EXPLORER_BUILD OR ANDROID OR IOS)
 endif()
 
 # Lagom Utilities
-add_ladybird_subdirectory(Utilities)
+add_cryfox_subdirectory(Utilities)
 
 # Tests
 include(CTest)
 if (BUILD_TESTING)
-    add_ladybird_subdirectory(Tests)
+    add_cryfox_subdirectory(Tests)
 endif()

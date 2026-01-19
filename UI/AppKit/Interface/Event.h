@@ -12,7 +12,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 Web::MouseEvent ns_event_to_mouse_event(Web::MouseEvent::Type, NSEvent*, NSView*, Web::UIEvents::MouseButton);
 

@@ -135,9 +135,9 @@ class TestHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         key = f"{method} {self.path}"
 
         is_revalidation_request = "If-Modified-Since" in self.headers
-        send_not_modified = is_revalidation_request and "X-Ladybird-Respond-With-Not-Modified" in self.headers
+        send_not_modified = is_revalidation_request and "X-CryFox-Respond-With-Not-Modified" in self.headers
 
-        send_incomplete_response = "X-Ladybird-Respond-With-Incomplete-Response" in self.headers
+        send_incomplete_response = "X-CryFox-Respond-With-Incomplete-Response" in self.headers
 
         if key in echo_store:
             echo = echo_store[key]

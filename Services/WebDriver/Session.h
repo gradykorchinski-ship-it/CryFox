@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022, Florent Castelli <florent.castelli@gmail.com>
  * Copyright (c) 2022, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2022-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2022-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -91,7 +91,7 @@ private:
     ErrorOr<NonnullRefPtr<Core::LocalServer>> create_server(NonnullRefPtr<ServerPromise> promise);
 
     NonnullRefPtr<Client> m_client;
-    Web::WebDriver::LadybirdOptions m_options;
+    Web::WebDriver::CryFoxOptions m_options;
 
     String m_session_id;
     Web::WebDriver::SessionFlags m_session_flags { Web::WebDriver::SessionFlags::Default };

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2021, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2021, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021, sin-ack <sin-ack@protonmail.com>
  * Copyright (c) 2025, stasoid <stasoid@yahoo.com>
  * Copyright (c) 2025, ayeteadoe <ayeteadoe@gmail.com>

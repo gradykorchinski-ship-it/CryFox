@@ -11,5 +11,5 @@ set(TEST_SOURCES
 )
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibGfx LIBS LibGfx)
+    cryfox_test("${source}" LibGfx LIBS LibGfx)
 endforeach()

@@ -133,7 +133,7 @@ vcpkg_download_distfile(WK_ANGLE_CMAKE_WEBKITCOMPILERFLAGS
 )
 
 if (VCPKG_TARGET_IS_BSD)
-    # Ladybird: Remove -Wl,--no-undefined as it breaks the build on OpenBSD
+    # CryFox: Remove -Wl,--no-undefined as it breaks the build on OpenBSD
     file(READ "${WK_ANGLE_CMAKE_WEBKITCOMPILERFLAGS}" _wk_compilerflags_content)
     string(REPLACE "-Wl,--no-undefined" "" _wk_compilerflags_content "${_wk_compilerflags_content}")
     file(WRITE "${WK_ANGLE_CMAKE_WEBKITCOMPILERFLAGS}" "${_wk_compilerflags_content}")

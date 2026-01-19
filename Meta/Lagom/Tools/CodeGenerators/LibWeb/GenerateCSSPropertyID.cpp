@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2018-2020, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2021-2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2018-2020, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2021-2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -26,7 +26,7 @@ static bool is_legacy_alias(JsonObject const& property)
     return property.has_string("legacy-alias-for"sv);
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     StringView generated_header_path;
     StringView generated_implementation_path;

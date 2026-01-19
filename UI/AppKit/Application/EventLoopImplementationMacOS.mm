@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -22,7 +22,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 struct ThreadData;
 static thread_local OwnPtr<ThreadData> s_this_thread_data;

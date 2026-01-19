@@ -6,7 +6,7 @@ plugins {
 }
 
 var buildDir = layout.buildDirectory.get()
-var cacheDir = System.getenv("LADYBIRD_CACHE_DIR") ?: "$buildDir/caches"
+var cacheDir = System.getenv("CRYFOX_CACHE_DIR") ?: "$buildDir/caches"
 var sourceDir = layout.projectDirectory.dir("../../").toString()
 
 task<Exec>("buildLagomTools") {
@@ -21,13 +21,13 @@ tasks.named("preBuild").dependsOn("buildLagomTools")
 tasks.named("prepareKotlinBuildScriptModel").dependsOn("buildLagomTools")
 
 android {
-    namespace = "org.serenityos.ladybird"
+    namespace = "org.serenityos.cryfox"
     compileSdk = 35
     // FIXME: Replace the NDK version to a stable one (this is r29 beta 2)
     ndkVersion = "29.0.13599879"
 
     defaultConfig {
-        applicationId = "org.serenityos.ladybird"
+        applicationId = "org.serenityos.cryfox"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -40,7 +40,7 @@ android {
                 arguments += listOf(
                     "-DLagomTools_DIR=$buildDir/lagom-tools-install/share/LagomTools",
                     "-DANDROID_STL=c++_shared",
-                    "-DLADYBIRD_CACHE_DIR=$cacheDir",
+                    "-DCRYFOX_CACHE_DIR=$cacheDir",
                     "-DVCPKG_ROOT=$sourceDir/Build/vcpkg",
                     "-DVCPKG_TARGET_ANDROID=ON"
                 )

@@ -47,4 +47,4 @@ case $2 in
         exit 1
 esac
 
-sed -i '' "s/\(^[  ]*CompilationDatabase:\).*$/\1 Build\/ladybird${build_type}/" "$clangd_file_path"
+sed -i '' "s/\(^[  ]*CompilationDatabase:\).*$/\1 Build\/cryfox${build_type}/" "$clangd_file_path"

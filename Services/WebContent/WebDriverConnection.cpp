@@ -1,9 +1,9 @@
 /*
  * Copyright (c) 2022, Florent Castelli <florent.castelli@gmail.com>
- * Copyright (c) 2022-2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2022-2025, Sam Atkins <sam@cryfox.org>
  * Copyright (c) 2022, Tobias Christiansen <tobyase@serenityos.org>
  * Copyright (c) 2022, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2022-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2022-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

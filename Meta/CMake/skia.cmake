@@ -25,7 +25,7 @@ else()
     find_package(PkgConfig)
 
     # Get skia version from vcpkg.json
-    file(READ ${LADYBIRD_SOURCE_DIR}/vcpkg.json VCPKG_DOT_JSON)
+    file(READ ${CRYFOX_SOURCE_DIR}/vcpkg.json VCPKG_DOT_JSON)
     string(JSON VCPKG_OVERRIDES_LENGTH LENGTH ${VCPKG_DOT_JSON} overrides)
     MATH(EXPR VCPKG_OVERRIDES_END_RANGE "${VCPKG_OVERRIDES_LENGTH}-1")
     foreach(IDX RANGE ${VCPKG_OVERRIDES_END_RANGE})

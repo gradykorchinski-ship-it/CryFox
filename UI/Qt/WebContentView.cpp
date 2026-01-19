@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2022-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2024-2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024-2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -43,7 +43,7 @@
 #include <QTimer>
 #include <QToolTip>
 
-namespace Ladybird {
+namespace CryFox {
 
 bool is_using_dark_system_theme(QWidget&);
 

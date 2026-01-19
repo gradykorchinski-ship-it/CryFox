@@ -2,7 +2,7 @@
  * Copyright (c) 2024, Shannon Booth <shannon@serenityos.org>
  * Copyright (c) 2024, Jamie Mansfield <jmansfield@cadixdev.org>
  * Copyright (c) 2024-2025, stelar7 <dudedbz@gmail.com>
- * Copyright (c) 2025, Luke Wilde <luke@ladybird.org>
+ * Copyright (c) 2025, Luke Wilde <luke@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

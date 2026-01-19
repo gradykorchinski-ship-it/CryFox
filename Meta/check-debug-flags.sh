@@ -14,7 +14,7 @@ find_all_source_files () {
     # pre-commit hook. It is unnecessary to check the entire repository on every single
     # commit, so we save some time here.
     #
-    # And see https://github.com/LadybirdBrowser/ladybird/issues/283; the reason this is
+    # And see https://github.com/CryFoxBrowser/cryfox/issues/283; the reason this is
     # pulled out into separate function is, Bash 3.2 apparently has a parser bug which
     # makes it choke on the above comment if it's in the process substitution below.
     for file in "$@"; do

@@ -13,7 +13,7 @@
 
 #include <QIconEngine>
 
-namespace Ladybird {
+namespace CryFox {
 
 class TVGIconEngine : public QIconEngine {
 public:

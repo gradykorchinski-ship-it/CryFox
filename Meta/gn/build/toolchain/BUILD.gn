@@ -144,7 +144,7 @@ template("unix_toolchain") {
       }
       tool("compile_xcassets") {
         command = "false"
-        description = "The Ladybird build doesn't use any xcasset files"
+        description = "The CryFox build doesn't use any xcasset files"
       }
     }
 

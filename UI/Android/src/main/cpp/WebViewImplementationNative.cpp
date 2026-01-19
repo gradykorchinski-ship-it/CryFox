@@ -15,7 +15,7 @@
 #include <android/bitmap.h>
 #include <jni.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 static Gfx::BitmapFormat to_gfx_bitmap_format(i32 f)
 {

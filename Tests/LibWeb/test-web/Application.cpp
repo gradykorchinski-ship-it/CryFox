@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2024-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -13,13 +13,13 @@
 
 namespace TestWeb {
 
-Application::Application(Optional<ByteString> ladybird_binary_path)
-    : WebView::Application(move(ladybird_binary_path))
+Application::Application(Optional<ByteString> cryfox_binary_path)
+    : WebView::Application(move(cryfox_binary_path))
     , test_concurrency(Core::System::hardware_concurrency())
     , python_executable_path("python3")
 {
-    if (auto ladybird_source_dir = Core::Environment::get("LADYBIRD_SOURCE_DIR"sv); ladybird_source_dir.has_value())
-        test_root_path = LexicalPath::join(*ladybird_source_dir, "Tests"sv, "LibWeb"sv).string();
+    if (auto cryfox_source_dir = Core::Environment::get("CRYFOX_SOURCE_DIR"sv); cryfox_source_dir.has_value())
+        test_root_path = LexicalPath::join(*cryfox_source_dir, "Tests"sv, "LibWeb"sv).string();
 }
 
 Application::~Application()

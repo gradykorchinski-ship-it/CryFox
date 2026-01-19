@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -53,7 +53,7 @@ bool font_tech_is_supported(FontTech const font_tech)
 #endif
     case FontTech::Variations:
         // avar, cvar, fvar, gvar, HVAR, MVAR, STAT, and VVAR, supported by HarfBuzz
-        // FIXME: This does not actually seem to work and causes issues with the font weight on https://ladybird.org
+        // FIXME: This does not actually seem to work and causes issues with the font weight on https://cryfox.org
         return false;
     case FontTech::ColorColrv0:
     case FontTech::ColorColrv1:

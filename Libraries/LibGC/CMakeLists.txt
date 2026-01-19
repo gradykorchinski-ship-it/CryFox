@@ -13,7 +13,7 @@ set(SOURCES
     WeakContainer.cpp
 )
 
-ladybird_lib(LibGC gc EXPLICIT_SYMBOL_EXPORT)
+cryfox_lib(LibGC gc EXPLICIT_SYMBOL_EXPORT)
 target_link_libraries(LibGC PRIVATE LibCore)
 
 if (ENABLE_SWIFT)

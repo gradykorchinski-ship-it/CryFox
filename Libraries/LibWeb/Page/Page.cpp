@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, Sam Atkins <atkinssj@serenityos.org>
- * Copyright (c) 2024-2025, Tim Ledbetter <tim.ledbetter@ladybird.org>
+ * Copyright (c) 2024-2025, Tim Ledbetter <tim.ledbetter@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -113,7 +113,7 @@ CSSPixelRect Page::web_exposed_screen_area() const
     //    - The area of the output device, in CSS pixels.
     //    - The area of the viewport, in CSS pixels.
     // NB: This is the area of the output device, but in device pixels.
-    // See: https://github.com/LadybirdBrowser/ladybird/pull/4084
+    // See: https://github.com/CryFoxBrowser/cryfox/pull/4084
     auto device_pixel_rect = m_client->screen_rect();
     return {
         device_pixel_rect.x().value(),

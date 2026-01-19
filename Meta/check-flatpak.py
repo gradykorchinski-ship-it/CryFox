@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2025, The Ladybird contributors
+# Copyright (c) 2025, The CryFox contributors
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
@@ -16,8 +16,8 @@ VCPKG = "vcpkg.json"
 VCPKG_OVERLAYS_PORTS = "Meta/CMake/vcpkg/overlay-ports/*"
 VCPKG_URL = "https://github.com/microsoft/vcpkg.git"
 VCPKG_REPO = "Build/vcpkg"
-FLATPAK_MANIFEST = "Meta/CMake/flatpak/org.ladybird.Ladybird.json"
-SELF = "Ladybird"
+FLATPAK_MANIFEST = "Meta/CMake/flatpak/org.cryfox.CryFox.json"
+SELF = "CryFox"
 
 # List of build tools that are not provided by the Flatpak SDK and therefore in the manifest
 # For a vcpkg build these are installed on the host system

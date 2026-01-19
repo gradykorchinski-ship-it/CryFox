@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023, Lucas Chollet <lucas.chollet@serenityos.org>
- * Copyright (c) 2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2024, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

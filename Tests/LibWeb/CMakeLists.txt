@@ -15,7 +15,7 @@ set(TEST_SOURCES
 )
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibWeb LIBS LibWeb)
+    cryfox_test("${source}" LibWeb LIBS LibWeb)
 endforeach()
 
 target_link_libraries(TestContentFilter PRIVATE LibURL)

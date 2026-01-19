@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023, Tim Flynn <trflynn89@serenityos.org>
- * Copyright (c) 2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -9,7 +9,7 @@
 
 #import <Utilities/Conversions.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 String ns_string_to_string(NSString* string)
 {
@@ -147,8 +147,8 @@ Gfx::IntPoint compute_origin_relative_to_window(NSWindow* window, Gfx::IntPoint 
 {
     // The origin of the NSWindow is its bottom-left corner, relative to the bottom-left of the screen. We must convert
     // window positions sent to/from WebContent between this origin and the window's and screen's top-left corners.
-    auto screen_frame = Ladybird::ns_rect_to_gfx_rect([[window screen] frame]);
-    auto window_frame = Ladybird::ns_rect_to_gfx_rect([window frame]);
+    auto screen_frame = CryFox::ns_rect_to_gfx_rect([[window screen] frame]);
+    auto window_frame = CryFox::ns_rect_to_gfx_rect([window frame]);
 
     position.set_y(screen_frame.height() - window_frame.height() - position.y());
     return position;

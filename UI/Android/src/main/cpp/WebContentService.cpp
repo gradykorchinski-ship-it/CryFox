@@ -5,7 +5,7 @@
  */
 
 #include "WebContentService.h"
-#include "LadybirdServiceBase.h"
+#include "CryFoxServiceBase.h"
 #include <AK/LexicalPath.h>
 #include <LibCore/ArgsParser.h>
 #include <LibCore/EventLoop.h>
@@ -105,7 +105,7 @@ ErrorOr<NonnullRefPtr<Client>> bind_service(void (*bind_method)(int))
 
 static ErrorOr<void> load_content_filters()
 {
-    auto file_or_error = Core::File::open(ByteString::formatted("{}/res/ladybird/default-config/BrowserContentFilters.txt", WebView::s_ladybird_resource_root), Core::File::OpenMode::Read);
+    auto file_or_error = Core::File::open(ByteString::formatted("{}/res/cryfox/default-config/BrowserContentFilters.txt", WebView::s_cryfox_resource_root), Core::File::OpenMode::Read);
     if (file_or_error.is_error())
         return file_or_error.release_error();
 
@@ -132,7 +132,7 @@ static ErrorOr<void> load_content_filters()
 
 static ErrorOr<void> load_autoplay_allowlist()
 {
-    auto file_or_error = Core::File::open(TRY(String::formatted("{}/res/ladybird/default-config/BrowserAutoplayAllowlist.txt", WebView::s_ladybird_resource_root)), Core::File::OpenMode::Read);
+    auto file_or_error = Core::File::open(TRY(String::formatted("{}/res/cryfox/default-config/BrowserAutoplayAllowlist.txt", WebView::s_cryfox_resource_root)), Core::File::OpenMode::Read);
     if (file_or_error.is_error())
         return file_or_error.release_error();
 

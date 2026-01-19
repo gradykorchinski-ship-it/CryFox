@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Copyright (c) 2024, pheonixfirewingz <luke.a.shore@proton.me>
-# Copyright (c) 2024-2026, Tim Flynn <trflynn89@ladybird.org>
+# Copyright (c) 2024-2026, Tim Flynn <trflynn89@cryfox.org>
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
@@ -10,8 +10,8 @@ import pathlib
 import subprocess
 import sys
 
-LADYBIRD_SOURCE_DIR = pathlib.Path(__file__).resolve().parent.parent
-sys.path.append(str(LADYBIRD_SOURCE_DIR))
+CRYFOX_SOURCE_DIR = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(CRYFOX_SOURCE_DIR))
 
 from Meta.host_platform import HostSystem  # noqa: E402
 from Meta.host_platform import Platform  # noqa: E402
@@ -20,13 +20,13 @@ from Meta.host_platform import Platform  # noqa: E402
 def build_vcpkg():
     platform = Platform()
 
-    with open(LADYBIRD_SOURCE_DIR / "vcpkg.json", "r") as vcpkg_json_file:
+    with open(CRYFOX_SOURCE_DIR / "vcpkg.json", "r") as vcpkg_json_file:
         vcpkg_json = json.load(vcpkg_json_file)
 
     git_repo = "https://github.com/microsoft/vcpkg.git"
     git_rev = vcpkg_json["builtin-baseline"]
 
-    build_dir = LADYBIRD_SOURCE_DIR / "Build"
+    build_dir = CRYFOX_SOURCE_DIR / "Build"
     build_dir.mkdir(parents=True, exist_ok=True)
     vcpkg_checkout = build_dir / "vcpkg"
 

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020-2021, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2022, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2020-2021, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2022, Jelle Raaijmakers <jelle@cryfox.org>
  * Copyright (c) 2023, Sam Atkins <atkinssj@serenityos.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause

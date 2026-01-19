@@ -1,11 +1,13 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, Matthew Costa <ucosty@gmail.com>
  * Copyright (c) 2024, Jamie Mansfield <jmansfield@cadixdev.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+#include <LibBrowser/HistoryManager.h>
+#include <LibCore/Resource.h>
 #include <LibURL/URL.h>
 #include <LibWeb/HTML/SelectedFile.h>
 #include <LibWebView/Application.h>
@@ -27,7 +29,7 @@
 #include <QMimeDatabase>
 #include <QResizeEvent>
 
-namespace Ladybird {
+namespace CryFox {
 
 static QIcon default_favicon()
 {
@@ -145,6 +147,10 @@ Tab::Tab(BrowserWindow* window, RefPtr<WebView::WebContentClient> parent_client,
         m_location_edit->set_url(url);
     };
 
+    view().on_load_finish = [this](auto const& url) {
+        (void)Browser::HistoryManager::the().add_visit(url, ak_string_from_qstring(m_title));
+    };
+
     QObject::connect(m_location_edit, &QLineEdit::returnPressed, this, &Tab::location_edit_return_pressed);
 
     view().on_title_change = [this](auto const& title) {
@@ -165,7 +171,7 @@ Tab::Tab(BrowserWindow* window, RefPtr<WebView::WebContentClient> parent_client,
     };
 
     view().on_request_alert = [this](auto const& message) {
-        m_dialog = new QMessageBox(QMessageBox::Icon::Warning, "Ladybird", qstring_from_ak_string(message), QMessageBox::StandardButton::Ok, &view());
+        m_dialog = new QMessageBox(QMessageBox::Icon::Warning, "CryFox", qstring_from_ak_string(message), QMessageBox::StandardButton::Ok, &view());
 
         QObject::connect(m_dialog, &QDialog::finished, this, [this]() {
             view().alert_closed();
@@ -176,7 +182,7 @@ Tab::Tab(BrowserWindow* window, RefPtr<WebView::WebContentClient> parent_client,
     };
 
     view().on_request_confirm = [this](auto const& message) {
-        m_dialog = new QMessageBox(QMessageBox::Icon::Question, "Ladybird", qstring_from_ak_string(message), QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel, &view());
+        m_dialog = new QMessageBox(QMessageBox::Icon::Question, "CryFox", qstring_from_ak_string(message), QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel, &view());
 
         QObject::connect(m_dialog, &QDialog::finished, this, [this](auto result) {
             view().confirm_closed(result == QMessageBox::StandardButton::Ok || result == QDialog::Accepted);
@@ -190,7 +196,7 @@ Tab::Tab(BrowserWindow* window, RefPtr<WebView::WebContentClient> parent_client,
         m_dialog = new QInputDialog(&view());
 
         auto& dialog = static_cast<QInputDialog&>(*m_dialog);
-        dialog.setWindowTitle("Ladybird");
+        dialog.setWindowTitle("CryFox");
         dialog.setLabelText(qstring_from_ak_string(message));
         dialog.setTextValue(qstring_from_ak_string(default_));
 
@@ -227,7 +233,7 @@ Tab::Tab(BrowserWindow* window, RefPtr<WebView::WebContentClient> parent_client,
         m_dialog = new QColorDialog(QColor(current_color.red(), current_color.green(), current_color.blue()), &view());
 
         auto& dialog = static_cast<QColorDialog&>(*m_dialog);
-        dialog.setWindowTitle("Ladybird");
+        dialog.setWindowTitle("CryFox");
         dialog.setOption(QColorDialog::ShowAlphaChannel, false);
         QObject::connect(&dialog, &QColorDialog::currentColorChanged, this, [this](QColor const& color) {
             view().color_picker_update(Color(color.red(), color.green(), color.blue()), Web::HTML::ColorPickerUpdateState::Update);
@@ -426,6 +432,22 @@ void Tab::focus_location_editor()
 
 void Tab::navigate(URL::URL const& url)
 {
+    if (url.scheme() == "about"sv && url.serialize_path() == "newtab"sv) {
+        auto history_json = Browser::HistoryManager::the().get_most_visited_json().value_or("[]"_string);
+        auto template_resource = Core::Resource::load_from_uri("resource://cryfox/about-pages/newtab.html"sv);
+        if (!template_resource.is_error()) {
+            auto html_buffer = template_resource.value()->data();
+            auto html_string_or_error = String::from_utf8(StringView { html_buffer.data(), html_buffer.size() });
+            if (!html_string_or_error.is_error()) {
+                auto html = html_string_or_error.release_value();
+                auto result = html.replace("var historyData = [];"sv, MUST(String::formatted("var historyData = {};", history_json)), ReplaceMode::FirstOnly);
+                if (!result.is_error()) {
+                    load_html(result.release_value());
+                    return;
+                }
+            }
+        }
+    }
     view().load(url);
 }
 

@@ -3,7 +3,7 @@ set(SOURCES
     Thread.cpp
 )
 
-ladybird_lib(LibThreading threading)
+cryfox_lib(LibThreading threading)
 target_link_libraries(LibThreading PRIVATE LibCore)
 
 if (WIN32)

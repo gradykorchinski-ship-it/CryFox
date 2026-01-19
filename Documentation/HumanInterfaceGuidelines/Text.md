@@ -1,8 +1,8 @@
-# Guidelines for user interface text in Ladybird
+# Guidelines for user interface text in CryFox
 
 ## Capitalization
 
-Ladybird employs two capitalization styles:
+CryFox employs two capitalization styles:
 
 - Book title capitalization
 - Sentence-style capitalization

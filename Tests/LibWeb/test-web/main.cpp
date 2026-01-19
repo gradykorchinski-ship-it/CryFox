@@ -1,9 +1,9 @@
 /*
  * Copyright (c) 2022, Dex♪ <dexes.ttp@gmail.com>
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
- * Copyright (c) 2023, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2023-2024, Sam Atkins <sam@ladybird.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
+ * Copyright (c) 2023, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2023-2024, Sam Atkins <sam@cryfox.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -1490,10 +1490,10 @@ static void handle_signal(int signal)
 
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
-#if defined(LADYBIRD_BINARY_PATH)
-    auto app = TRY(TestWeb::Application::create(arguments, LADYBIRD_BINARY_PATH));
+#if defined(CRYFOX_BINARY_PATH)
+    auto app = TRY(TestWeb::Application::create(arguments, CRYFOX_BINARY_PATH));
 #else
     auto app = TRY(TestWeb::Application::create(arguments, OptionalNone {}));
 #endif
@@ -1501,7 +1501,7 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
     Core::EventLoop::register_signal(SIGINT, TestWeb::handle_signal);
     Core::EventLoop::register_signal(SIGTERM, TestWeb::handle_signal);
 
-    auto theme_path = LexicalPath::join(WebView::s_ladybird_resource_root, "themes"sv, "Default.ini"sv);
+    auto theme_path = LexicalPath::join(WebView::s_cryfox_resource_root, "themes"sv, "Default.ini"sv);
     auto theme = TRY(Gfx::load_system_theme(theme_path.string()));
 
     auto const& browser_options = TestWeb::Application::browser_options();

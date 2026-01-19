@@ -4,4 +4,4 @@ set(SOURCES
     Language.cpp
 )
 
-ladybird_lib(LibSyntax syntax)
+cryfox_lib(LibSyntax syntax)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  * Copyright (c) 2025, Lucien Fiorini <lucienfiorini@gmail.com>
  * Copyright (c) 2026, Shannon Booth <shannon@serenityos.org>
  *

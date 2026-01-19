@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2024, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -34,7 +34,7 @@ ConnectionFromClient::ConnectionFromClient(NonnullOwnPtr<IPC::Transport> transpo
 {
     s_connections.set(client_id(), *this);
 
-    m_alt_svc_cache_path = ByteString::formatted("{}/Ladybird/alt-svc-cache.txt", Core::StandardPaths::cache_directory());
+    m_alt_svc_cache_path = ByteString::formatted("{}/CryFox/alt-svc-cache.txt", Core::StandardPaths::cache_directory());
 
     m_curl_multi = curl_multi_init();
 

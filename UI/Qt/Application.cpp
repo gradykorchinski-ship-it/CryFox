@@ -24,7 +24,7 @@
 #    include <QAbstractNativeEventFilter>
 #endif
 
-namespace Ladybird {
+namespace CryFox {
 
 #if defined(AK_OS_WINDOWS)
 class NativeWindowsTimeChangeEventFilter : public QAbstractNativeEventFilter {
@@ -51,9 +51,9 @@ private:
 
 #endif
 
-class LadybirdQApplication : public QApplication {
+class CryFoxQApplication : public QApplication {
 public:
-    explicit LadybirdQApplication(Main::Arguments& arguments)
+    explicit CryFoxQApplication(Main::Arguments& arguments)
         : QApplication(arguments.argc, arguments.argv)
     {
     }
@@ -103,7 +103,7 @@ NonnullOwnPtr<Core::EventLoop> Application::create_platform_event_loop()
 {
     if (!browser_options().headless_mode.has_value()) {
         Core::EventLoopManager::install(*new EventLoopManagerQt);
-        m_application = make<LadybirdQApplication>(arguments());
+        m_application = make<CryFoxQApplication>(arguments());
     }
 
     auto event_loop = WebView::Application::create_platform_event_loop();
@@ -158,7 +158,7 @@ void Application::display_download_confirmation_dialog(StringView download_name,
     auto message = MUST(String::formatted("{} saved to: {}", download_name, path));
 
     QMessageBox dialog(active_tab());
-    dialog.setWindowTitle("Ladybird");
+    dialog.setWindowTitle("CryFox");
     dialog.setIcon(QMessageBox::Information);
     dialog.setText(qstring_from_ak_string(message));
     dialog.addButton(QMessageBox::Ok);
@@ -172,7 +172,7 @@ void Application::display_download_confirmation_dialog(StringView download_name,
 
 void Application::display_error_dialog(StringView error_message) const
 {
-    QMessageBox::warning(active_tab(), "Ladybird", qstring_from_ak_string(error_message));
+    QMessageBox::warning(active_tab(), "CryFox", qstring_from_ak_string(error_message));
 }
 
 Utf16String Application::clipboard_text() const

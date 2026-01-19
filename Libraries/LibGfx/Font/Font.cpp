@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2023, MacDue <macdue@dueutil.tech>
  * Copyright (c) 2025, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
- * Copyright (c) 2025, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2025, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

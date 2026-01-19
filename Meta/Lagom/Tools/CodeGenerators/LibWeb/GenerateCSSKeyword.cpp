@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2022-2024, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2020, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2022-2024, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -14,7 +14,7 @@
 ErrorOr<void> generate_header_file(JsonArray& keyword_data, Core::File& file);
 ErrorOr<void> generate_implementation_file(JsonArray& keyword_data, Core::File& file);
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     StringView generated_header_path;
     StringView generated_implementation_path;

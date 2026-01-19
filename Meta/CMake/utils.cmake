@@ -1,26 +1,26 @@
 
 include(${CMAKE_CURRENT_LIST_DIR}/code_generators.cmake)
 
-function(ladybird_generated_sources target_name)
+function(cryfox_generated_sources target_name)
     if(DEFINED GENERATED_SOURCES)
         set_source_files_properties(${GENERATED_SOURCES} PROPERTIES GENERATED 1)
         foreach(generated ${GENERATED_SOURCES})
             get_filename_component(generated_name ${generated} NAME)
             add_dependencies(${target_name} generate_${generated_name})
-            add_dependencies(ladybird_codegen_accumulator generate_${generated_name})
+            add_dependencies(cryfox_codegen_accumulator generate_${generated_name})
         endforeach()
     endif()
 endfunction()
 
-function(ladybird_testjs_test test_src sub_dir)
-    cmake_parse_arguments(PARSE_ARGV 2 LADYBIRD_TEST "" "CUSTOM_MAIN" "LIBS")
-    if ("${LADYBIRD_TEST_CUSTOM_MAIN}" STREQUAL "")
-        set(LADYBIRD_TEST_CUSTOM_MAIN "$<TARGET_OBJECTS:JavaScriptTestRunnerMain>")
+function(cryfox_testjs_test test_src sub_dir)
+    cmake_parse_arguments(PARSE_ARGV 2 CRYFOX_TEST "" "CUSTOM_MAIN" "LIBS")
+    if ("${CRYFOX_TEST_CUSTOM_MAIN}" STREQUAL "")
+        set(CRYFOX_TEST_CUSTOM_MAIN "$<TARGET_OBJECTS:JavaScriptTestRunnerMain>")
     endif()
-    list(APPEND LADYBIRD_TEST_LIBS LibJS LibCore LibFileSystem)
-    ladybird_test(${test_src} ${sub_dir}
-        CUSTOM_MAIN "${LADYBIRD_TEST_CUSTOM_MAIN}"
-        LIBS ${LADYBIRD_TEST_LIBS})
+    list(APPEND CRYFOX_TEST_LIBS LibJS LibCore LibFileSystem)
+    cryfox_test(${test_src} ${sub_dir}
+        CUSTOM_MAIN "${CRYFOX_TEST_CUSTOM_MAIN}"
+        LIBS ${CRYFOX_TEST_LIBS})
 endfunction()
 
 function(remove_path_if_version_changed version version_file cache_path)
@@ -73,7 +73,7 @@ function(invoke_generator_impl name generator primary_source header implementati
 
     add_custom_target("generate_${name}" DEPENDS
         "${header}" "${implementation}" ${extra_outputs})
-    add_dependencies(ladybird_codegen_accumulator "generate_${name}")
+    add_dependencies(cryfox_codegen_accumulator "generate_${name}")
     list(APPEND CURRENT_LIB_GENERATED "${name}")
     set(CURRENT_LIB_GENERATED ${CURRENT_LIB_GENERATED} PARENT_SCOPE)
 endfunction()
@@ -103,7 +103,7 @@ function(invoke_py_generator name script primary_source header implementation)
 
     invoke_generator_impl(
         ${name}
-        "${LADYBIRD_PROJECT_ROOT}/Meta/${script}"
+        "${CRYFOX_PROJECT_ROOT}/Meta/${script}"
         ${primary_source}
         ${header}
         ${implementation}
@@ -129,8 +129,8 @@ function(invoke_idl_generator cpp_name idl_name generator primary_source header 
 
     add_custom_target("generate_${cpp_name}" DEPENDS "${header}" "${implementation}" "${idl}")
     add_custom_target("generate_${idl_name}" DEPENDS "generate_${cpp_name}")
-    add_dependencies(ladybird_codegen_accumulator "generate_${cpp_name}")
-    add_dependencies(ladybird_codegen_accumulator "generate_${idl_name}")
+    add_dependencies(cryfox_codegen_accumulator "generate_${cpp_name}")
+    add_dependencies(cryfox_codegen_accumulator "generate_${idl_name}")
     list(APPEND CURRENT_LIB_GENERATED "${name}")
     set(CURRENT_LIB_GENERATED ${CURRENT_LIB_GENERATED} PARENT_SCOPE)
 endfunction()

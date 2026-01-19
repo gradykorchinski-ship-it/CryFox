@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <script src="../include.js"></script>
 <div contenteditable="true" id="d1">foobar</div>
-<div contenteditable="true" id="d2"><a href="https://ladybird.dev">ladybird</a></div>
+<div contenteditable="true" id="d2"><a href="https://cryfox.dev">cryfox</a></div>
 <script>
     test(() => {
         const range = document.createRange();
@@ -11,14 +11,14 @@
         const div1 = document.querySelector('#d1');
         range.setStart(div1.childNodes[0], 3);
         range.setEnd(div1.childNodes[0], 6);
-        document.execCommand('createLink', false, 'https://ladybird.org');
+        document.execCommand('createLink', false, 'https://cryfox.org');
         println(`d1 contents: "${div1.innerHTML}"`);
 
-        // Change d2's 'ladybird' href
+        // Change d2's 'cryfox' href
         const div2 = document.querySelector('#d2');
         range.setStart(div2.childNodes[0].childNodes[0], 4);
         range.setEnd(div2.childNodes[0].childNodes[0], 5);
-        document.execCommand('createLink', false, 'https://ladybird.org');
+        document.execCommand('createLink', false, 'https://cryfox.org');
         println(`d2 contents: "${div2.innerHTML}"`);
     });
 </script>

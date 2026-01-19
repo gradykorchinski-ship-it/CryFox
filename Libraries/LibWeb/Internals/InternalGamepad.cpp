@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Luke Wilde <luke@ladybird.org>
+ * Copyright (c) 2025, Luke Wilde <luke@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -45,7 +45,7 @@ static constexpr Array<i32, 2> TRIGGERS {
     SDL_GAMEPAD_AXIS_RIGHT_TRIGGER,
 };
 
-static constexpr char const* VIRTUAL_GAMEPAD_NAME = "Ladybird Virtual Gamepad";
+static constexpr char const* VIRTUAL_GAMEPAD_NAME = "CryFox Virtual Gamepad";
 
 static SDLCALL bool rumble(void* user_data, u16 low_frequency_rumble, u16 high_frequency_rumble)
 {

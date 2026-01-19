@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, Luke Wilde <luke@ladybird.org>
+ * Copyright (c) 2024, Luke Wilde <luke@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -14,7 +14,7 @@ ErrorOr<void> generate_header_file(JsonObject& properties, Core::File& file);
 ErrorOr<void> generate_implementation_file(JsonObject& properties, Core::File& file);
 ErrorOr<void> generate_idl_file(JsonObject& properties, Core::File& file);
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     StringView generated_header_path;
     StringView generated_implementation_path;

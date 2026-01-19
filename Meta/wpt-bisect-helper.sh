@@ -17,11 +17,11 @@ shift
 
 WPT_SCRIPT_PATH=${WPT_SCRIPT_PATH:-"$(dirname "$0")/WPT.sh"}
 
-pushd "${LADYBIRD_SOURCE_DIR}" > /dev/null || exit 255
+pushd "${CRYFOX_SOURCE_DIR}" > /dev/null || exit 255
     trap "exit 255" INT TERM
-    if ! ./Meta/ladybird.py rebuild WebDriver; then
+    if ! ./Meta/cryfox.py rebuild WebDriver; then
         # When going back over many commits rebuilds may be flaky. Let's try again before skipping this commit.
-        if ! ./Meta/ladybird.py rebuild WebDriver; then
+        if ! ./Meta/cryfox.py rebuild WebDriver; then
             echo "Build failed twice in a row, skipping this commit."
             exit 125
         fi

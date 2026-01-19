@@ -1,22 +1,22 @@
 include(cmake/ResourceFiles.cmake)
 
-function(create_ladybird_bundle target_name)
+function(create_cryfox_bundle target_name)
     set_target_properties(${target_name} PROPERTIES
-        OUTPUT_NAME "Ladybird"
-        MACOSX_BUNDLE_GUI_IDENTIFIER org.ladybird.Ladybird
+        OUTPUT_NAME "CryFox"
+        MACOSX_BUNDLE_GUI_IDENTIFIER org.cryfox.CryFox
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
         MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-        MACOSX_BUNDLE_INFO_PLIST "${LADYBIRD_SOURCE_DIR}/UI/Info.plist"
+        MACOSX_BUNDLE_INFO_PLIST "${CRYFOX_SOURCE_DIR}/UI/Info.plist"
         MACOSX_BUNDLE TRUE
         WIN32_EXECUTABLE TRUE
-        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER org.ladybird.Ladybird
+        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER org.cryfox.CryFox
     )
 
     if (APPLE)
         set(bundle_dir "$<TARGET_BUNDLE_DIR:${target_name}>")
         add_custom_command(TARGET ${target_name} POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E make_directory "${bundle_dir}/Contents/Resources"
-            COMMAND "iconutil" --convert icns "${LADYBIRD_SOURCE_DIR}/UI/Icons/macos/app_icon.iconset" --output "${bundle_dir}/Contents/Resources/app_icon.icns"
+            COMMAND "iconutil" --convert icns "${CRYFOX_SOURCE_DIR}/UI/Icons/macos/app_icon.iconset" --output "${bundle_dir}/Contents/Resources/app_icon.icns"
         )
 
         # Note: This symlink is removed in the install commands
@@ -27,11 +27,11 @@ function(create_ladybird_bundle target_name)
 
         if (NOT CMAKE_BUILD_TYPE MATCHES "Release|RelWithDebInfo" AND "arm64" IN_LIST CMAKE_OSX_ARCHITECTURES)
             add_custom_command(TARGET ${target_name} POST_BUILD
-                COMMAND codesign -s - -v -f --entitlements "${LADYBIRD_SOURCE_DIR}/Meta/debug.plist" "${bundle_dir}"
+                COMMAND codesign -s - -v -f --entitlements "${CRYFOX_SOURCE_DIR}/Meta/debug.plist" "${bundle_dir}"
             )
         else()
             add_custom_target(apply-debug-entitlements
-                COMMAND codesign -s - -v -f --entitlements "${LADYBIRD_SOURCE_DIR}/Meta/debug.plist" "${bundle_dir}"
+                COMMAND codesign -s - -v -f --entitlements "${CRYFOX_SOURCE_DIR}/Meta/debug.plist" "${bundle_dir}"
                 USES_TERMINAL
             )
         endif()
@@ -58,65 +58,65 @@ else()
     return()
 endif()
 
-if (NOT TARGET ladybird)
-    message(FATAL_ERROR "UI Framework selection must declare a ladybird target")
+if (NOT TARGET cryfox)
+    message(FATAL_ERROR "UI Framework selection must declare a cryfox target")
 endif()
 
-if (TARGET ladybird_impl)
-    set(LADYBIRD_TARGET ladybird_impl PUBLIC)
+if (TARGET cryfox_impl)
+    set(CRYFOX_TARGET cryfox_impl PUBLIC)
 else()
-    set(LADYBIRD_TARGET ladybird PRIVATE)
+    set(CRYFOX_TARGET cryfox PRIVATE)
 endif()
 
-set(LADYBIRD_LIBS AK LibCore LibFileSystem LibGfx LibImageDecoderClient LibIPC LibJS LibMain LibWeb LibWebView LibRequests LibURL)
-target_link_libraries(${LADYBIRD_TARGET} PRIVATE ${LADYBIRD_LIBS})
-target_link_libraries(${LADYBIRD_TARGET} PRIVATE OpenSSL::Crypto OpenSSL::SSL)
+set(CRYFOX_LIBS AK LibAuth LibBrowser LibCore LibFileSystem LibGfx LibImageDecoderClient LibIPC LibJS LibMain LibWeb LibWebView LibRequests LibURL)
+target_link_libraries(${CRYFOX_TARGET} PRIVATE ${CRYFOX_LIBS})
+target_link_libraries(${CRYFOX_TARGET} PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 
-target_include_directories(${LADYBIRD_TARGET} ${CMAKE_CURRENT_BINARY_DIR})
-target_include_directories(${LADYBIRD_TARGET} ${LADYBIRD_SOURCE_DIR})
-target_include_directories(${LADYBIRD_TARGET} ${LADYBIRD_SOURCE_DIR}/Services/)
+target_include_directories(${CRYFOX_TARGET} ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(${CRYFOX_TARGET} ${CRYFOX_SOURCE_DIR})
+target_include_directories(${CRYFOX_TARGET} ${CRYFOX_SOURCE_DIR}/Services/)
 
 if(WIN32)
-    target_link_libraries(${LADYBIRD_TARGET} LibDevTools)
+    target_link_libraries(${CRYFOX_TARGET} LibDevTools)
 endif()
 
 function(set_helper_process_properties)
     set(targets ${ARGV})
     if (APPLE OR WIN32)
         # Store helper processes in the same bundle directory as the main application
-        set_target_properties(${targets} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:ladybird>")
+        set_target_properties(${targets} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:cryfox>")
     else()
         set_target_properties(${targets} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${IN_BUILD_PREFIX}${CMAKE_INSTALL_LIBEXECDIR}")
     endif()
 endfunction()
 
 add_custom_target(run
-    COMMAND "${CMAKE_COMMAND}" -E env "LADYBIRD_SOURCE_DIR=${LADYBIRD_SOURCE_DIR}" "$<TARGET_FILE:ladybird>" $ENV{LAGOM_ARGS}
+    COMMAND "${CMAKE_COMMAND}" -E env "CRYFOX_SOURCE_DIR=${CRYFOX_SOURCE_DIR}" "$<TARGET_FILE:cryfox>" $ENV{LAGOM_ARGS}
     USES_TERMINAL
     VERBATIM
 )
 
 if (APPLE)
-    add_custom_target(debug-ladybird
-        COMMAND "${CMAKE_COMMAND}" -E env "LADYBIRD_SOURCE_DIR=${LADYBIRD_SOURCE_DIR}" lldb "$<TARGET_BUNDLE_DIR:ladybird>"
+    add_custom_target(debug-cryfox
+        COMMAND "${CMAKE_COMMAND}" -E env "CRYFOX_SOURCE_DIR=${CRYFOX_SOURCE_DIR}" lldb "$<TARGET_BUNDLE_DIR:cryfox>"
         USES_TERMINAL
     )
 else()
-    add_custom_target(debug-ladybird
-        COMMAND "${CMAKE_COMMAND}" -E env "LADYBIRD_SOURCE_DIR=${LADYBIRD_SOURCE_DIR}" gdb "$<TARGET_FILE:ladybird>"
+    add_custom_target(debug-cryfox
+        COMMAND "${CMAKE_COMMAND}" -E env "CRYFOX_SOURCE_DIR=${CRYFOX_SOURCE_DIR}" gdb "$<TARGET_FILE:cryfox>"
         USES_TERMINAL
     )
 endif()
 
-set(ladybird_helper_processes ImageDecoder RequestServer WebContent WebWorker)
+set(cryfox_helper_processes ImageDecoder RequestServer WebContent WebWorker)
 
-add_dependencies(ladybird ${ladybird_helper_processes})
+add_dependencies(cryfox ${cryfox_helper_processes})
 # FIXME: Increase support for building targets on Windows
 if (NOT WIN32)
-    add_dependencies(WebDriver ladybird)
+    add_dependencies(WebDriver cryfox)
 endif()
 
-set_helper_process_properties(${ladybird_helper_processes})
+set_helper_process_properties(${cryfox_helper_processes})
 if (APPLE)
     set_helper_process_properties(WebDriver)
 endif()

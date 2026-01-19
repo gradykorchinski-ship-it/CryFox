@@ -17,7 +17,7 @@ if (LINUX)
 endif()
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibCore)
+    cryfox_test("${source}" LibCore)
 endforeach()
 
 target_link_libraries(TestLibCorePromise PRIVATE LibThreading)

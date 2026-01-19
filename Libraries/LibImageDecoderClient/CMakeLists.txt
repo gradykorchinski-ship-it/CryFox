@@ -12,5 +12,5 @@ set(GENERATED_SOURCES
     ../../Services/ImageDecoder/ImageDecoderServerEndpoint.h
 )
 
-ladybird_lib(LibImageDecoderClient imagedecoderclient)
+cryfox_lib(LibImageDecoderClient imagedecoderclient)
 target_link_libraries(LibImageDecoderClient PRIVATE LibCore LibIPC LibGfx)

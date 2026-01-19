@@ -10,5 +10,5 @@ if(SERENITYOS)
     list(APPEND SOURCES C/Regex.cpp)
 endif()
 
-ladybird_lib(LibRegex regex EXPLICIT_SYMBOL_EXPORT)
+cryfox_lib(LibRegex regex EXPLICIT_SYMBOL_EXPORT)
 target_link_libraries(LibRegex PRIVATE LibUnicode)

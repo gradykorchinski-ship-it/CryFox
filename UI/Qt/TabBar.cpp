@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024, Tim Flynn <trflynn89@serenityos.org>
  * Copyright (c) 2024, Jamie Mansfield <jmansfield@cadixdev.org>
- * Copyright (c) 2024, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -17,7 +17,7 @@
 #include <QStyleOption>
 #include <QStylePainter>
 
-namespace Ladybird {
+namespace CryFox {
 
 TabBar::TabBar(QWidget* parent)
     : QTabBar(parent)

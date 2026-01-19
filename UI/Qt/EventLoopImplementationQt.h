@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022-2023, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -14,7 +14,7 @@ class QEvent;
 class QEventLoop;
 class QSocketNotifier;
 
-namespace Ladybird {
+namespace CryFox {
 
 class EventLoopImplementationQt;
 class EventLoopImplementationQtEventTarget;

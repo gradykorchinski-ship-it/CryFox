@@ -33,7 +33,7 @@ ErrorOr<String> load_error_page(URL::URL const& url, StringView error_message)
 {
     // Generate HTML error page from error template file
     // FIXME: Use an actual templating engine (our own one when it's built, preferably with a way to check these usages at compile time)
-    auto template_file = TRY(Core::Resource::load_from_uri("resource://ladybird/templates/error.html"sv));
+    auto template_file = TRY(Core::Resource::load_from_uri("resource://cryfox/templates/error.html"sv));
     StringBuilder builder;
     SourceGenerator generator { builder, '%', '%' };
     generator.set("failed_url", escape_html_entities(url.to_byte_string()));
@@ -73,7 +73,7 @@ ErrorOr<String> load_file_directory_page(URL::URL const& url)
 
     // Generate HTML directory page from directory template file
     // FIXME: Use an actual templating engine (our own one when it's built, preferably with a way to check these usages at compile time)
-    auto template_file = TRY(Core::Resource::load_from_uri("resource://ladybird/templates/directory.html"sv));
+    auto template_file = TRY(Core::Resource::load_from_uri("resource://cryfox/templates/directory.html"sv));
     StringBuilder builder;
     SourceGenerator generator { builder, '%', '%' };
     generator.set("path", escape_html_entities(lexical_path.string()));
@@ -87,7 +87,7 @@ ErrorOr<String> load_about_version_page()
 {
     // Generate HTML about version page from template file
     // FIXME: Use an actual templating engine (our own one when it's built, preferably with a way to check these usages at compile time)
-    auto template_file = TRY(Core::Resource::load_from_uri("resource://ladybird/templates/version.html"sv));
+    auto template_file = TRY(Core::Resource::load_from_uri("resource://cryfox/templates/version.html"sv));
     StringBuilder builder;
     SourceGenerator generator { builder, '%', '%' };
     generator.set("browser_name", BROWSER_NAME);

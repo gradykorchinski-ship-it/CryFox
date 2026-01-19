@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2023, Ali Mohammad Pur <mpfard@serenityos.org>
- * Copyright (c) 2024, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2025, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2025, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

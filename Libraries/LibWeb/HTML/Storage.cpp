@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Luke Wilde <lukew@serenityos.org>
  * Copyright (c) 2024-2025, Shannon Booth <shannon@serenityos.org>
  *

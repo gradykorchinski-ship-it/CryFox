@@ -1,16 +1,16 @@
-# Ladybird
+# CryFox
 
-[Ladybird](https://ladybird.org) is a truly independent web browser, using a novel engine based on web standards.
+[CryFox](https://cryfox.org) is a truly independent web browser, using a novel engine based on web standards.
 
 > [!IMPORTANT]
-> Ladybird is in a pre-alpha state, and only suitable for use by developers
+> CryFox is in a pre-alpha state, and only suitable for use by developers
 >
 
 ## Features
 
 We aim to build a complete, usable browser for the modern web.
 
-Ladybird uses a multi-process architecture with a main UI process, several WebContent renderer processes,
+CryFox uses a multi-process architecture with a main UI process, several WebContent renderer processes,
 an ImageDecoder process, and a RequestServer process.
 
 Image decoding and network connections are done out of process to be more robust against malicious content.
@@ -31,9 +31,9 @@ At the moment, many core library support components are inherited from SerenityO
 
 ## How do I build and run this?
 
-See [build instructions](Documentation/BuildInstructionsLadybird.md) for information on how to build Ladybird.
+See [build instructions](Documentation/BuildInstructionsCryFox.md) for information on how to build CryFox.
 
-Ladybird runs on Linux, macOS, Windows (with WSL2), and many other \*Nixes.
+CryFox runs on Linux, macOS, Windows (with WSL2), and many other \*Nixes.
 
 ## How do I read the documentation?
 
@@ -43,7 +43,7 @@ Code-related documentation can be found in the [documentation](Documentation/) f
 
 Join [our Discord server](https://discord.gg/nvfjVJ4Svh) to participate in development discussion.
 
-Please read [Getting started contributing](Documentation/GettingStartedContributing.md) if you plan to contribute to Ladybird for the first time.
+Please read [Getting started contributing](Documentation/GettingStartedContributing.md) if you plan to contribute to CryFox for the first time.
 
 Before opening an issue, please see the [issue policy](CONTRIBUTING.md#issue-policy) and the [detailed issue-reporting guidelines](ISSUES.md).
 
@@ -51,4 +51,4 @@ The full contribution guidelines can be found in [`CONTRIBUTING.md`](CONTRIBUTIN
 
 ## License
 
-Ladybird is licensed under a 2-clause BSD license.
+CryFox is licensed under a 2-clause BSD license.

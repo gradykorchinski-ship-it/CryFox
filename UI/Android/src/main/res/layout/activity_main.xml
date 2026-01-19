@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".LadybirdActivity">
+    tools:context=".CryFoxActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -38,10 +38,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <org.serenityos.ladybird.WebView
+        <org.serenityos.cryfox.WebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".LadybirdActivity" />
+            tools:context=".CryFoxActivity" />
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

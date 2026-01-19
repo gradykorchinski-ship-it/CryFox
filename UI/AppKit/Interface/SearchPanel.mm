@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <Interface/LadybirdWebViewBridge.h>
+#include <Interface/CryFoxWebViewBridge.h>
 
-#import <Interface/LadybirdWebView.h>
+#import <Interface/CryFoxWebView.h>
 #import <Interface/SearchPanel.h>
 #import <Interface/Tab.h>
 #import <Utilities/Conversions.h>
@@ -113,7 +113,7 @@ static constexpr CGFloat const SEARCH_FIELD_WIDTH = 300;
 - (void)useSelectionForFind:(id)sender
 {
     auto selected_text = [[[self tab] web_view] view].selected_text();
-    auto* query = Ladybird::string_to_ns_string(selected_text);
+    auto* query = CryFox::string_to_ns_string(selected_text);
 
     [self setPasteBoardContents:query];
 

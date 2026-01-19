@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Linus Groh <linusg@serenityos.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -25,7 +25,7 @@
 class QKeyEvent;
 class QSinglePointEvent;
 
-namespace Ladybird {
+namespace CryFox {
 
 struct WebContentViewInitialState {
     double maximum_frames_per_second { 60.0 };

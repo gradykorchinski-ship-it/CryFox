@@ -486,7 +486,7 @@ static void do_run_tests(XML::Document& document)
     }
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     StringView filename;
     bool run_tests { false };

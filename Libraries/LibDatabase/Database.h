@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2022-2025, Tim Flynn <trflynn89@ladybird.org>
- * Copyright (c) 2023, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2022-2025, Tim Flynn <trflynn89@cryfox.org>
+ * Copyright (c) 2023, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

@@ -149,13 +149,13 @@ int main(int argc, char** argv)
     if (!specified_test_root.is_empty()) {
         test_root = ByteString { specified_test_root };
     } else {
-        auto ladybird_source_dir = Core::Environment::get("LADYBIRD_SOURCE_DIR"sv);
-        if (!ladybird_source_dir.has_value()) {
-            warnln("No test root given, {} requires the LADYBIRD_SOURCE_DIR environment variable to be set", g_program_name);
+        auto cryfox_source_dir = Core::Environment::get("CRYFOX_SOURCE_DIR"sv);
+        if (!cryfox_source_dir.has_value()) {
+            warnln("No test root given, {} requires the CRYFOX_SOURCE_DIR environment variable to be set", g_program_name);
             return 1;
         }
-        test_root = LexicalPath::join(*ladybird_source_dir, g_test_root_fragment).string();
-        common_path = LexicalPath::join(*ladybird_source_dir, "Libraries"sv, "LibJS"sv, "Tests"sv, "test-common.js"sv).string();
+        test_root = LexicalPath::join(*cryfox_source_dir, g_test_root_fragment).string();
+        common_path = LexicalPath::join(*cryfox_source_dir, "Libraries"sv, "LibJS"sv, "Tests"sv, "test-common.js"sv).string();
     }
     if (!FileSystem::is_directory(test_root)) {
         warnln("Test root is not a directory: {}", test_root);
@@ -163,12 +163,12 @@ int main(int argc, char** argv)
     }
 
     if (common_path.is_empty()) {
-        auto ladybird_source_dir = Core::Environment::get("LADYBIRD_SOURCE_DIR"sv);
-        if (!ladybird_source_dir.has_value()) {
-            warnln("No test root given, {} requires the LADYBIRD_SOURCE_DIR environment variable to be set", g_program_name);
+        auto cryfox_source_dir = Core::Environment::get("CRYFOX_SOURCE_DIR"sv);
+        if (!cryfox_source_dir.has_value()) {
+            warnln("No test root given, {} requires the CRYFOX_SOURCE_DIR environment variable to be set", g_program_name);
             return 1;
         }
-        common_path = LexicalPath::join(*ladybird_source_dir, "Libraries"sv, "LibJS"sv, "Tests"sv, "test-common.js"sv).string();
+        common_path = LexicalPath::join(*cryfox_source_dir, "Libraries"sv, "LibJS"sv, "Tests"sv, "test-common.js"sv).string();
     }
 
     auto test_root_or_error = FileSystem::real_path(test_root);

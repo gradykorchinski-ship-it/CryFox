@@ -4,5 +4,5 @@ set(SOURCES
     Types.cpp
 )
 
-ladybird_lib(LibIDL idl)
+cryfox_lib(LibIDL idl)
 target_link_libraries(LibIDL PRIVATE LibCoreMinimal LibFileSystem)

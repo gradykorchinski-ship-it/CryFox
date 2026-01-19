@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2020-2023, Linus Groh <linusg@serenityos.org>
  * Copyright (c) 2020-2022, Ali Mohammad Pur <mpfard@serenityos.org>
  * Copyright (c) 2025, Ryszard Goc <ryszardgoc@gmail.com>
@@ -35,7 +35,7 @@
 #    include <LibLine/Editor.h>
 #endif
 
-// FIXME: https://github.com/LadybirdBrowser/ladybird/issues/2412
+// FIXME: https://github.com/CryFoxBrowser/cryfox/issues/2412
 //    We should be able to destroy the VM on process exit.
 NeverDestroyed<RefPtr<JS::VM>> g_vm_storage;
 JS::VM* g_vm;
@@ -807,7 +807,7 @@ static ErrorOr<int> run_repl(bool gc_on_every_allocation, bool syntax_highlight)
 
 #endif
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     bool gc_on_every_allocation = false;
     bool disable_syntax_highlight = false;

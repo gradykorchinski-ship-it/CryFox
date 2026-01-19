@@ -1,0 +1,210 @@
+-- Using LLD to link Lagom.
+-- Determined host VCPKG_TARGET_TRIPLET: x64-linux-dynamic
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-linux-dynamic...
+Compiler found: /usr/bin/c++
+The following packages are already installed:
+  * egl-registry:x64-linux-dynamic@2025-05-27
+  * opengl-registry:x64-linux-dynamic@2025-10-23
+  * vcpkg-cmake:x64-linux-dynamic@2024-04-23
+  * vcpkg-cmake-config:x64-linux-dynamic@2024-05-23
+  * vcpkg-get-python-packages:x64-linux-dynamic@2025-04-05
+    zlib:x64-linux-dynamic@1.3.1
+The following packages will be built and installed:
+  * abseil:x64-linux-dynamic@20250814.1
+    angle:x64-linux-dynamic@chromium_7258 -- /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/angle
+  * brotli:x64-linux-dynamic@1.2.0
+  * bzip2[core,tool]:x64-linux-dynamic@1.0.8#6
+    cpptrace:x64-linux-dynamic@1.0.2 -- /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/cpptrace
+    curl[brotli,core,http2,http3,non-http,openssl,ssl,websockets,zstd]:x64-linux-dynamic@8.16.0
+  * dav1d:x64-linux-dynamic@1.5.1
+    dbus:x64-linux-dynamic@1.16.2#2
+  * dirent:x64-linux-dynamic@1.26
+  * expat:x64-linux-dynamic@2.7.3
+    fast-float:x64-linux-dynamic@8.1.0
+    ffmpeg[avcodec,avdevice,avfilter,avformat,core,dav1d,openh264,opus,swresample,swscale,theora,vorbis,vpx,webp,zlib]:x64-linux-dynamic@7.1.1#5
+    fontconfig:x64-linux-dynamic@2.15.0#4
+  * freetype[brotli,bzip2,core,png,zlib]:x64-linux-dynamic@2.13.3
+  * giflib:x64-linux-dynamic@5.2.2#2
+  * gperf:x64-linux-dynamic@3.3
+    harfbuzz[core,freetype,icu]:x64-linux-dynamic@10.2.0
+  * highway:x64-linux-dynamic@1.3.0
+    icu[core,tools]:x64-linux-dynamic@78.1#1
+  * lcms:x64-linux-dynamic@2.18
+    libavif[core,dav1d]:x64-linux-dynamic@1.3.0#1
+  * libdwarf:x64-linux-dynamic@2.2.0
+  * libiconv:x64-linux-dynamic@1.18#3
+    libjpeg-turbo:x64-linux-dynamic@3.1.1
+    libjxl:x64-linux-dynamic@0.11.1#3
+  * liblzma:x64-linux-dynamic@5.8.2
+  * libogg:x64-linux-dynamic@1.3.6#1
+    libpng[apng,core]:x64-linux-dynamic@1.6.50
+    libproxy:x64-linux-dynamic@0.4.18#3
+  * libtheora:x64-linux-dynamic@1.2.0
+    libtommath:x64-linux-dynamic@1.3.0#2 -- /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/libtommath
+  * libuuid:x64-linux-dynamic@1.0.3#16
+  * libvorbis:x64-linux-dynamic@1.3.7#4
+  * libvpx:x64-linux-dynamic@1.15.2#3
+    libwebp[anim,core,img2webp,libwebpmux,mux,nearlossless,simd]:x64-linux-dynamic@1.6.0#1
+    libxml2[core,iconv,zlib]:x64-linux-dynamic@2.13.8#1
+  * libyuv:x64-linux-dynamic@1916
+  * nghttp2:x64-linux-dynamic@1.68.0
+  * nghttp3:x64-linux-dynamic@1.14.0
+  * ngtcp2[core,openssl]:x64-linux-dynamic@1.19.0
+  * openh264:x64-linux-dynamic@2.6.0#4
+    openssl:x64-linux-dynamic@3.5.3
+  * opus:x64-linux-dynamic@1.5.2#1
+  * pkgconf:x64-linux-dynamic@2.5.1#4
+  * pthread:x64-linux-dynamic@3.0.0#2
+  * pthreads:x64-linux-dynamic@3.0.0#14
+    sdl3:x64-linux-dynamic@3.2.28
+    simdjson[core,deprecated,exceptions,threads,utf8-validation]:x64-linux-dynamic@4.2.4
+    simdutf:x64-linux-dynamic@7.4.0
+    skia[core,fontconfig,freetype,harfbuzz,icu,vulkan]:x64-linux-dynamic@144
+    sqlite3[core,json1]:x64-linux-dynamic@3.50.4
+    tiff[core,jpeg,lzma,zip,zstd]:x64-linux-dynamic@4.7.1
+  * vcpkg-cmake-get-vars:x64-linux-dynamic@2025-05-29
+  * vcpkg-gn:x64-linux-dynamic@2025-08-05
+  * vcpkg-make:x64-linux-dynamic@2026-01-01
+  * vcpkg-pkgconfig-get-modules:x64-linux-dynamic@2024-04-03
+  * vcpkg-tool-gn:x64-linux-dynamic@2025-08-05#1
+  * vcpkg-tool-meson:x64-linux-dynamic@1.9.0#3
+    vulkan:x64-linux-dynamic@2023-12-17 -- /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/vulkan
+    vulkan-headers:x64-linux-dynamic@1.4.328.0
+  * vulkan-memory-allocator:x64-linux-dynamic@3.3.0
+    woff2:x64-linux-dynamic@1.0.2#5
+  * zstd:x64-linux-dynamic@1.5.7
+Additional packages (*) will be modified to complete this operation.
+Restored 0 package(s) from /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/presets/../../../Build/caches/vcpkg-binary-cache in 149 us. Use --debug to see more details.
+Installing 1/63 angle:x64-linux-dynamic@chromium_7258...
+Building angle:x64-linux-dynamic@chromium_7258...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/angle: info: installing overlay port from here
+CMake Warning at /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/angle/portfile.cmake:2 (message):
+  Building with a gcc version less than 6.1 is not supported.
+Call Stack (most recent call first):
+  scripts/ports.cmake:206 (include)
+
+
+CMake Warning at /home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/angle/portfile.cmake:3 (message):
+  angle currently requires the following libraries from the system package
+  manager:
+
+      mesa-common-dev
+
+
+
+  These can be installed on Ubuntu systems via apt-get install
+  mesa-common-dev.
+Call Stack (most recent call first):
+  scripts/ports.cmake:206 (include)
+
+
+-- Using cached google-angle-79ac1a8cd767a32cce6401203e20c4bd4ca4d539.tar.gz
+-- Cleaning sources at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/angle/src/bd4ca4d539-caeb5ad129.clean. Use --editable to skip cleaning for the packages you specify.
+-- Extracting source /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/downloads/google-angle-79ac1a8cd767a32cce6401203e20c4bd4ca4d539.tar.gz
+-- Applying patch 001-fix-builder-error.patch
+-- Applying patch 002-bsd-support.patch
+-- Using source at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/angle/src/bd4ca4d539-caeb5ad129.clean
+-- Using cached gni-to-cmake.py
+-- Setting up python virtual environment...
+-- Installing python packages: ply
+-- Setting up python virtual environment... finished.
+Trying to download include_CMakeLists.txt using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/a7ddf3c6df7565e232f87ec651cc4fd84240b8866609e23e3e6e41d22532fd34c70e0f3b06120fd3d6d930ca29c1d0d470d4c8cb7003a66f8c1a840a42f32949
+Download successful! Asset cache hit, did not try authoritative source https://github.com/WebKit/WebKit/raw/0742522b24152262b04913242cb0b3c48de92ba0/Source/ThirdParty/ANGLE/include/CMakeLists.txt
+Trying to download WebKitCompilerFlags.cmake using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/8b281ffcf9209c845a5fdae48a4e05f08ca677c37a7fb00d9270de81bd103160d26e091724ce8df8d428ad604900b5202b221fed5bafffd4bf00025718ef9d8e
+Download successful! Asset cache hit, did not try authoritative source https://github.com/WebKit/WebKit/raw/0742522b24152262b04913242cb0b3c48de92ba0/Source/cmake/WebKitCompilerFlags.cmake
+Trying to download DetectSSE2.cmake using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/219a4c8591ee31d11eb3d1e4803cc3c9d4573984bb25ecac6f2c76e6a3dab598c00b0157d0f94b18016de6786e49d8b29a161693a5ce23d761c8fe6a798c1bca
+Download successful! Asset cache hit, did not try authoritative source https://github.com/WebKit/WebKit/raw/0742522b24152262b04913242cb0b3c48de92ba0/Source/cmake/DetectSSE2.cmake
+Trying to download WebKitMacros.cmake using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/565175443d5d1b8119af504164bf93840e8c786fc479e45feb98ca542351b91d2ea00265d7f8dfa6960975de81802bc43b2a2af2c90fc44bda1ae46d96c89247
+Download successful! Asset cache hit, did not try authoritative source https://github.com/WebKit/WebKit/raw/0742522b24152262b04913242cb0b3c48de92ba0/Source/cmake/WebKitMacros.cmake
+-- Fetching https://chromium.googlesource.com/chromium/src/third_party/zlib 4028ebf8710ee39d2286cb0f847f9b95c59f84d8...
+-- Extracting source /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/downloads/angle-4028ebf8710ee39d2286cb0f847f9b95c59f84d8.tar.gz
+-- Using source at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/angle/src/95c59f84d8-f551c7e138.clean
+-- Configuring x64-linux-dynamic
+-- Building x64-linux-dynamic-rel
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/angle_x64-linux-dynamic/share/angle/copyright
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/angle_x64-linux-dynamic/share/angle/usage
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/angle_x64-linux-dynamic/lib/liblibEGL_angle.so' (From '' -> To '$ORIGIN')
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/angle_x64-linux-dynamic/lib/liblibGLESv2_angle.so' (From '' -> To '$ORIGIN')
+-- Performing post-build validation
+Starting submission of angle:x64-linux-dynamic@chromium_7258 to 1 binary cache(s) in the background
+Elapsed time to handle angle:x64-linux-dynamic: 1.4 min
+angle:x64-linux-dynamic package ABI: 3d62498f118337edefbc44c667def02abd6b439aa8919835b33cb2bad5b4905d
+Installing 2/63 zstd:x64-linux-dynamic@1.5.7...
+Building zstd:x64-linux-dynamic@1.5.7...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+Trying to download facebook-zstd-v1.5.7.tar.gz using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/26e441267305f6e58080460f96ab98645219a90d290a533410b1b0b1d2f870721c95f8384e342ee647c5e968385a5b7e30c2d04340c37f59b3e6d86762c3260c
+Download successful! Asset cache hit, did not try authoritative source https://github.com/facebook/zstd/archive/v1.5.7.tar.gz
+-- Extracting source /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/downloads/facebook-zstd-v1.5.7.tar.gz
+-- Applying patch no-static-suffix.patch
+-- Applying patch fix-emscripten-and-clang-cl.patch
+-- Applying patch fix-windows-rc-compile.patch
+-- Using source at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/zstd/src/v1.5.7-bb6cae2b2e.clean
+-- Configuring x64-linux-dynamic
+-- Building x64-linux-dynamic-rel
+-- Fixing pkgconfig file: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/zstd_x64-linux-dynamic/lib/pkgconfig/libzstd.pc
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/zstd_x64-linux-dynamic/share/zstd/usage
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/zstd_x64-linux-dynamic/lib/libzstd.so.1.5.7' (From '' -> To '$ORIGIN')
+-- Performing post-build validation
+Starting submission of zstd:x64-linux-dynamic@1.5.7 to 1 binary cache(s) in the background
+Elapsed time to handle zstd:x64-linux-dynamic: 13 s
+zstd:x64-linux-dynamic package ABI: b2824ceb0a34be260a1fe6f2ef0b384267e7c575f055b69abdaa70ab1fc72b4a
+Completed submission of angle:x64-linux-dynamic@chromium_7258 to 1 binary cache(s) in 678 ms
+Installing 3/63 libdwarf:x64-linux-dynamic@2.2.0...
+Building libdwarf:x64-linux-dynamic@2.2.0...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+Trying to download davea42-libdwarf-code-v2.2.0.tar.gz using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/9fbf58e04e49816cb1f8e34362dd7c784476422896a88042bebd09778fad4a37cbf3f4c060f491b8d55bec610be37137b24a4910498499d3fcecf9da4aa78254
+Download successful! Asset cache hit, did not try authoritative source https://github.com/davea42/libdwarf-code/archive/v2.2.0.tar.gz
+-- Extracting source /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/downloads/davea42-libdwarf-code-v2.2.0.tar.gz
+-- Applying patch include-dir.diff
+-- Applying patch dependencies.diff
+-- Applying patch msvc-runtime.diff
+-- Applying patch dwarfdump-conf.diff
+-- Using source at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/libdwarf/src/v2.2.0-09ec7aafd8.clean
+-- Configuring x64-linux-dynamic
+-- Building x64-linux-dynamic-rel
+-- Fixing pkgconfig file: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/libdwarf_x64-linux-dynamic/lib/pkgconfig/libdwarf.pc
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/libdwarf_x64-linux-dynamic/lib/libdwarf.so.2.2.0' (From '' -> To '$ORIGIN')
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/libdwarf_x64-linux-dynamic/tools/libdwarf/dwarfdump' (From '' -> To '$ORIGIN:$ORIGIN/../../lib')
+-- Performing post-build validation
+Starting submission of libdwarf:x64-linux-dynamic@2.2.0 to 1 binary cache(s) in the background
+Elapsed time to handle libdwarf:x64-linux-dynamic: 6 s
+libdwarf:x64-linux-dynamic package ABI: 16f2a8f74a12318e91f82d701048e9e2f44af4f107566eea1bfd7c036f4a70ac
+Completed submission of zstd:x64-linux-dynamic@1.5.7 to 1 binary cache(s) in 56.9 ms
+Installing 4/63 cpptrace:x64-linux-dynamic@1.0.2...
+Building cpptrace:x64-linux-dynamic@1.0.2...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/overlay-ports/cpptrace: info: installing overlay port from here
+Trying to download jeremy-rifkin-cpptrace-v1.0.2.tar.gz using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/4ae394fb3c21149bf2441a754eebe639e6a5534927426b6507806c7bee0b1c982e047c972904d472f1c660adb5be3881e7e3a6eddd18e4e9d376ae3855d50a7c
+Download successful! Asset cache hit, did not try authoritative source https://github.com/jeremy-rifkin/cpptrace/archive/v1.0.2.tar.gz
+-- Extracting source /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/downloads/jeremy-rifkin-cpptrace-v1.0.2.tar.gz
+-- Applying patch delay.patch
+-- Using source at /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/buildtrees/cpptrace/src/v1.0.2-a08607d048.clean
+-- Configuring x64-linux-dynamic
+-- Building x64-linux-dynamic-rel
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/cpptrace_x64-linux-dynamic/share/cpptrace/usage
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/cpptrace_x64-linux-dynamic/share/cpptrace/copyright
+-- Adjusted RPATH of '/home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/cpptrace_x64-linux-dynamic/lib/libcpptrace.so.1.0.2' (From '' -> To '$ORIGIN')
+-- Performing post-build validation
+Starting submission of cpptrace:x64-linux-dynamic@1.0.2 to 1 binary cache(s) in the background
+Elapsed time to handle cpptrace:x64-linux-dynamic: 8.1 s
+cpptrace:x64-linux-dynamic package ABI: f10d2e25d32c995d66b81768ff4bac7baacf8e7f9612a58ea6f9b692f18886e8
+Completed submission of libdwarf:x64-linux-dynamic@2.2.0 to 1 binary cache(s) in 66.6 ms
+Installing 5/63 vcpkg-cmake-get-vars:x64-linux-dynamic@2025-05-29...
+Building vcpkg-cmake-get-vars:x64-linux-dynamic@2025-05-29...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/vcpkg_cmake_get_vars.cmake
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/cmake_get_vars
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/cmake_get_vars/CMakeLists.txt
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/cmake-get-vars.cmake.in
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/vcpkg-port-config.cmake
+-- Installing: /home/stormz/Desktop/CryFoxBird/CryFox/Build/vcpkg/packages/vcpkg-cmake-get-vars_x64-linux-dynamic/share/vcpkg-cmake-get-vars/copyright
+-- Performing post-build validation
+Starting submission of vcpkg-cmake-get-vars:x64-linux-dynamic@2025-05-29 to 1 binary cache(s) in the background
+Elapsed time to handle vcpkg-cmake-get-vars:x64-linux-dynamic: 20.3 ms
+vcpkg-cmake-get-vars:x64-linux-dynamic package ABI: 812616e74b0604bf9a91108e3c91a9ceb2c49063ca83c7483732fd5fbb9fe8fe
+Installing 6/63 openssl:x64-linux-dynamic@3.5.3...
+Building openssl:x64-linux-dynamic@3.5.3...
+/home/stormz/Desktop/CryFoxBird/CryFox/Meta/CMake/vcpkg/release-triplets/x64-linux-dynamic.cmake: info: loaded overlay triplet from here
+Trying to download openssl-openssl-openssl-3.5.3.tar.gz using asset cache https://vcpkg-cache.app.ladybird.org/ladybird/source-assets/c4a7de05a970729638b9689960819c6050a1c36a5ca111a65b0e23efd2dd540036d68393fd45a401f788caec030bbad5ac5bdbc6f4f13df47ef48aee0ab48a8b

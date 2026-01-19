@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <script src="../include.js"></script>
-<div contenteditable="true" id="d1"><a href="https://ladybird.dev">ladybird</a></div>
-<div contenteditable="true" id="d2">lady<a href="https://ladybird.dev">bird</a></div>
+<div contenteditable="true" id="d1"><a href="https://cryfox.dev">cryfox</a></div>
+<div contenteditable="true" id="d2">lady<a href="https://cryfox.dev">bird</a></div>
 <script>
     test(() => {
         const range = document.createRange();
         getSelection().addRange(range);
 
-        // Unlink d1's ladybird
+        // Unlink d1's cryfox
         const div1 = document.querySelector('#d1');
         range.setStart(div1.childNodes[0].childNodes[0], 0);
         range.setEnd(div1.childNodes[0].childNodes[0], 8);

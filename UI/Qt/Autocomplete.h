@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023, Cameron Youell <cameronyouell@gmail.com>
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -15,7 +15,7 @@
 #include <QListView>
 #include <QStringListModel>
 
-namespace Ladybird {
+namespace CryFox {
 
 class Autocomplete final : public QCompleter {
     Q_OBJECT

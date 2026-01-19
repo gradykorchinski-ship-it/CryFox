@@ -1,6 +1,6 @@
-# gn build for Ladybird
+# gn build for CryFox
 
-Warning! The GN build is experimental and best-effort. It might not work, and if you use it you're expected to feel comfortable to unbreak it if necessary. Ladybird's official build system is CMake, if in doubt use that. If you add files, you're expected to update the CMake build but you don't need to update GN build files. Reviewers should not ask authors to update GN build files. Keeping the GN build files up-to-date is on the people who use the GN build.
+Warning! The GN build is experimental and best-effort. It might not work, and if you use it you're expected to feel comfortable to unbreak it if necessary. CryFox's official build system is CMake, if in doubt use that. If you add files, you're expected to update the CMake build but you don't need to update GN build files. Reviewers should not ask authors to update GN build files. Keeping the GN build files up-to-date is on the people who use the GN build.
 
 GN is a metabuild system. It always creates ninja files, but it can create some IDE projects (MSVC, Xcode, ...) which then shell out to ninja for the actual build.
 
@@ -38,9 +38,9 @@ If you modify `args.gn` outside of `gn args`, be sure to run `gn gen` again to r
 
 # Typical gn args
 
-On macOS, the default args should work out of the box. For compiling Ladybird there won't be any tailoring needed if you have Qt6 installed via homebrew and the Xcode tools installed.
+On macOS, the default args should work out of the box. For compiling CryFox there won't be any tailoring needed if you have Qt6 installed via homebrew and the Xcode tools installed.
 
-On Ubuntu, it's likely that the default ``cc`` and ``c++`` will not be able to compile the project. For compiling Ladybird, a typical ``args.gn`` might look like the below:
+On Ubuntu, it's likely that the default ``cc`` and ``c++`` will not be able to compile the project. For compiling CryFox, a typical ``args.gn`` might look like the below:
 
 args.gn
 ```gn
@@ -60,17 +60,17 @@ As with any gn project, ``gn args <build dir> --list`` is your best friend.
 # Running binaries from the GN build
 
 Targets in the gn build are prefixed by the directory they are declared in. For example, to build the default target
-in the Ladybird/ directory and LibWeb, you would run:
+in the CryFox/ directory and LibWeb, you would run:
 
 ```shell
-ninja -C out Ladybird
+ninja -C out CryFox
 ninja -C out Userland/Libraries/LibWeb
 ```
 
 Binaries are placed in the `out/bin` directory, and can be run from there.
 
 ```shell
-./out/bin/Ladybird
+./out/bin/CryFox
 # or on macOS
-open -W --stdout $(tty) --stderr $(tty) ./out/bin/Ladybird.app --args https://ladybird.dev
+open -W --stdout $(tty) --stderr $(tty) ./out/bin/CryFox.app --args https://cryfox.dev
 ```

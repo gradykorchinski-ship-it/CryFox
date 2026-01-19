@@ -42,4 +42,4 @@ Testing preempting a rumble effect
 newDualRumbleResult: 'complete', preemptedResult: 'preempted'
 Received dual rumble effects: [{"lowFrequencyRumble":32767,"highFrequencyRumble":32767},{"lowFrequencyRumble":0,"highFrequencyRumble":0},{"lowFrequencyRumble":6553,"highFrequencyRumble":6553},{"lowFrequencyRumble":65535,"highFrequencyRumble":65535},{"lowFrequencyRumble":0,"highFrequencyRumble":0}]
 Received trigger rumble effects: [{"leftRumble":32767,"rightRumble":32767},{"leftRumble":0,"rightRumble":0}]
-Received gamepaddisconnected event for 'Ladybird Virtual Gamepad' at index 0
+Received gamepaddisconnected event for 'CryFox Virtual Gamepad' at index 0

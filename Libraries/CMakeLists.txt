@@ -1,5 +1,7 @@
 add_subdirectory(LibCompress)
 add_subdirectory(LibCrypto)
+add_subdirectory(LibAuth)
+add_subdirectory(LibBrowser)
 add_subdirectory(LibDatabase)
 add_subdirectory(LibDiff)
 add_subdirectory(LibDNS)

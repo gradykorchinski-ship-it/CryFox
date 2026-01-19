@@ -73,7 +73,7 @@ static xmlNodePtr mirror_node(xmlDocPtr doc, DOM::Node const& node)
         xml_cdata->_private = bit_cast<void*>(&node);
         return xml_cdata;
     }
-    case DOM::NodeType::ENTITY_REFERENCE_NODE: // Does not seem to be used at all in ladybird
+    case DOM::NodeType::ENTITY_REFERENCE_NODE: // Does not seem to be used at all in cryfox
     case DOM::NodeType::ENTITY_NODE:           // Entity nodes are unused in libxml2
     {
         return nullptr;

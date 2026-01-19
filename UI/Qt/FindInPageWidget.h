@@ -15,7 +15,7 @@
 #include <QPushButton>
 #include <QWidget>
 
-namespace Ladybird {
+namespace CryFox {
 
 class Tab;
 class WebContentView;

@@ -11,5 +11,5 @@ set(SOURCES
     Method.cpp
 )
 
-ladybird_lib(LibHTTP http)
+cryfox_lib(LibHTTP http)
 target_link_libraries(LibHTTP PRIVATE LibCompress LibCore LibCrypto LibDatabase LibFileSystem LibIPC LibRegex LibTextCodec LibTLS LibURL)

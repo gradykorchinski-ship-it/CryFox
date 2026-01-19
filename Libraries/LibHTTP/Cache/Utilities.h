@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -16,10 +16,10 @@
 
 namespace HTTP {
 
-constexpr inline auto TEST_CACHE_ENABLED_HEADER = "X-Ladybird-Enable-Disk-Cache"sv;
-constexpr inline auto TEST_CACHE_STATUS_HEADER = "X-Ladybird-Disk-Cache-Status"sv;
-constexpr inline auto TEST_CACHE_REVALIDATION_STATUS_HEADER = "X-Ladybird-Revalidation-Status"sv;
-constexpr inline auto TEST_CACHE_REQUEST_TIME_OFFSET = "X-Ladybird-Request-Time-Offset"sv;
+constexpr inline auto TEST_CACHE_ENABLED_HEADER = "X-CryFox-Enable-Disk-Cache"sv;
+constexpr inline auto TEST_CACHE_STATUS_HEADER = "X-CryFox-Disk-Cache-Status"sv;
+constexpr inline auto TEST_CACHE_REVALIDATION_STATUS_HEADER = "X-CryFox-Revalidation-Status"sv;
+constexpr inline auto TEST_CACHE_REQUEST_TIME_OFFSET = "X-CryFox-Request-Time-Offset"sv;
 
 String serialize_url_for_cache_storage(URL::URL const&);
 u64 create_cache_key(StringView url, StringView method);

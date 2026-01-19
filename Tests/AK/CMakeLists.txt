@@ -93,7 +93,7 @@ else()
 endif()
 
 foreach(source IN LISTS AK_TEST_SOURCES)
-    ladybird_test("${source}" AK)
+    cryfox_test("${source}" AK)
 endforeach()
 
 if (WIN32)
@@ -102,11 +102,11 @@ if (WIN32)
 endif()
 
 if (CXX_COMPILER_SUPPORTS_BLOCKS)
-    ladybird_test(TestFunction.mm AK NAME TestFunction)
+    cryfox_test(TestFunction.mm AK NAME TestFunction)
     target_link_libraries(TestFunction PRIVATE ${BLOCKS_REQUIRED_LIBRARIES})
 endif()
 if (CXX_COMPILER_SUPPORTS_OBJC_ARC)
-    ladybird_test(TestFunction.mm AK NAME TestFunctionArc)
+    cryfox_test(TestFunction.mm AK NAME TestFunctionArc)
     target_compile_options(TestFunctionArc PRIVATE -fobjc-arc)
     target_link_libraries(TestFunction PRIVATE ${BLOCKS_REQUIRED_LIBRARIES})
 endif()
@@ -116,7 +116,7 @@ target_link_libraries(TestUtf16String PRIVATE LibUnicode)
 
 if (ENABLE_SWIFT)
 
-    # FIXME: Convert to use swift-testing after resolving https://github.com/LadybirdBrowser/ladybird/issues/1201
+    # FIXME: Convert to use swift-testing after resolving https://github.com/CryFoxBrowser/cryfox/issues/1201
     add_executable(TestAKBindings TestAKBindings.swift)
     target_link_libraries(TestAKBindings PRIVATE AK)
     target_compile_options(TestAKBindings PRIVATE -parse-as-library)

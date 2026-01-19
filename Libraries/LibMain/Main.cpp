@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2021, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < argc; ++i)
         arguments.unchecked_append({ argv[i], strlen(argv[i]) });
 
-    auto result = ladybird_main({
+    auto result = cryfox_main({
         .argc = argc,
         .argv = argv,
         .strings = arguments.span(),

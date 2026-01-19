@@ -16,7 +16,7 @@ static ErrorOr<VkInstance> create_instance(uint32_t api_version)
 
     VkApplicationInfo app_info {};
     app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    app_info.pApplicationName = "Ladybird";
+    app_info.pApplicationName = "CryFox";
     app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
     app_info.pEngineName = nullptr;
     app_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);

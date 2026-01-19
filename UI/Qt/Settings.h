@@ -15,7 +15,7 @@
 #include <QSettings>
 #include <QSize>
 
-namespace Ladybird {
+namespace CryFox {
 
 class Settings : public QObject {
     Q_OBJECT

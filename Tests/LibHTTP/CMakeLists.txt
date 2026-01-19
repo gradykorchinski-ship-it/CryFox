@@ -3,5 +3,5 @@ set(TEST_SOURCES
 )
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibWeb LIBS LibHTTP)
+    cryfox_test("${source}" LibWeb LIBS LibHTTP)
 endforeach()

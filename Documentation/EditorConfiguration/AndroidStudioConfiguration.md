@@ -1,6 +1,6 @@
 ## Android Studio Project Configuration
 
-The Android port of Ladybird has straightforward integration with the Android Studio IDE.
+The Android port of CryFox has straightforward integration with the Android Studio IDE.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Ensure that your system has the following tools available:
 
 ## Opening the project
 
-After opening the ``ladybird`` directory in Android Studio (NOT the UI/Android directory!)
+After opening the ``cryfox`` directory in Android Studio (NOT the UI/Android directory!)
 there should be a pop-up in the bottom left indicating that an Android Gradle project was detected
 in ``UI/Android``.
 

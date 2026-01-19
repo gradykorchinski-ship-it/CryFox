@@ -7,9 +7,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=/dev/null
 . "${DIR}/shell_include.sh"
 
-ensure_ladybird_source_dir
+ensure_cryfox_source_dir
 
-WPT_SOURCE_DIR=${WPT_SOURCE_DIR:-"${LADYBIRD_SOURCE_DIR}/Tests/LibWeb/WPT/wpt"}
+WPT_SOURCE_DIR=${WPT_SOURCE_DIR:-"${CRYFOX_SOURCE_DIR}/Tests/LibWeb/WPT/wpt"}
 WPT_REPOSITORY_URL=${WPT_REPOSITORY_URL:-"https://github.com/web-platform-tests/wpt.git"}
 
 BUILD_PRESET=${BUILD_PRESET:-Release}
@@ -42,14 +42,14 @@ sudo_and_ask() {
 
 default_binary_path() {
     if [ "$(uname -s)" = "Darwin" ]; then
-        echo "${BUILD_DIR}/bin/Ladybird.app/Contents/MacOS"
+        echo "${BUILD_DIR}/bin/CryFox.app/Contents/MacOS"
     else
         echo "${BUILD_DIR}/bin"
     fi
 }
 
-ladybird_git_hash() {
-    pushd "${LADYBIRD_SOURCE_DIR}" > /dev/null
+cryfox_git_hash() {
+    pushd "${CRYFOX_SOURCE_DIR}" > /dev/null
         git rev-parse --short HEAD
     popd > /dev/null
 }
@@ -73,7 +73,7 @@ ensure_run_dir() {
     echo "$runpath/merged"
 }
 
-LADYBIRD_BINARY=${LADYBIRD_BINARY:-"$(default_binary_path)/Ladybird"}
+CRYFOX_BINARY=${CRYFOX_BINARY:-"$(default_binary_path)/CryFox"}
 WEBDRIVER_BINARY=${WEBDRIVER_BINARY:-"$(default_binary_path)/WebDriver"}
 TEST_WEB_BINARY=${TEST_WEB_BINARY:-"${BUILD_DIR}/bin/test-web"}
 WPT_PROCESSES=${WPT_PROCESSES:-$(get_number_of_processing_units)}
@@ -81,7 +81,7 @@ WPT_CERTIFICATES=(
     "tools/certs/cacert.pem"
 )
 WPT_ARGS=(
-    "--binary=${LADYBIRD_BINARY}"
+    "--binary=${CRYFOX_BINARY}"
     "--webdriver-binary=${WEBDRIVER_BINARY}"
     "--install-webdriver"
     "--webdriver-arg=--force-cpu-painting"
@@ -124,7 +124,7 @@ print_help() {
       --show-window
           Disable headless mode
       --debug-process PROC_NAME
-          Enable debugging for the PROC_NAME ladybird process
+          Enable debugging for the PROC_NAME cryfox process
       --parallel-instances N
           Enable running in chunked mode with N parallel instances
               N=0 to auto-enable if possible
@@ -154,9 +154,9 @@ print_help() {
       $NAME compare --log results.log expectations.log css/CSS2
           Run the Web Platform Tests in the 'css/CSS2' directory, comparing the results to the expectations in expectations.log; output the results to results.log.
       $NAME import html/dom/aria-attribute-reflection.html
-          Import the test from https://wpt.live/html/dom/aria-attribute-reflection.html into the Ladybird test suite.
+          Import the test from https://wpt.live/html/dom/aria-attribute-reflection.html into the CryFox test suite.
       $NAME import --force html/dom/aria-attribute-reflection.html
-          Import the test from https://wpt.live/html/dom/aria-attribute-reflection.html into the Ladybird test suite, redownloading any files that already exist.
+          Import the test from https://wpt.live/html/dom/aria-attribute-reflection.html into the CryFox test suite, redownloading any files that already exist.
       $NAME list-tests css/CSS2 dom
           Show a list of all tests in the 'css/CSS2' and 'dom' directories.
 EOF
@@ -244,8 +244,8 @@ ensure_wpt_repository() {
     popd > /dev/null
 }
 
-build_ladybird_and_webdriver() {
-    "${LADYBIRD_SOURCE_DIR}"/Meta/ladybird.py build WebDriver
+build_cryfox_and_webdriver() {
+    "${CRYFOX_SOURCE_DIR}"/Meta/cryfox.py build WebDriver
 }
 
 update_wpt() {
@@ -476,7 +476,7 @@ run_wpt_chunked() {
     fi
 
     if [ "$procs" -le 1 ]; then
-        command=(./wpt run -f --browser-version="1.0-$(ladybird_git_hash)" --processes="${WPT_PROCESSES}" "$@")
+        command=(./wpt run -f --browser-version="1.0-$(cryfox_git_hash)" --processes="${WPT_PROCESSES}" "$@")
         echo "${command[@]}"
         "${command[@]}"
         return
@@ -486,7 +486,7 @@ run_wpt_chunked() {
 
     echo "Preparing the venv setup..."
     base_venv="${BUILD_DIR}/wpt-prep/_venv"
-    ./wpt --venv "$base_venv" run "${WPT_ARGS[@]}" ladybird THIS_TEST_CANNOT_POSSIBLY_EXIST || true
+    ./wpt --venv "$base_venv" run "${WPT_ARGS[@]}" cryfox THIS_TEST_CANNOT_POSSIBLY_EXIST || true
 
     echo "Launching $procs chunked instances (concurrency=$concurrency each)"
     local logs=()
@@ -510,7 +510,7 @@ run_wpt_chunked() {
             --total-chunks="$procs" \
             --chunk-type=hash \
             -f \
-            --browser-version="1.0-$(ladybird_git_hash)"
+            --browser-version="1.0-$(cryfox_git_hash)"
             --processes="$concurrency" \
             "$@")
         echo "[INSTANCE $i / ns wptns$i] ${command[*]}"
@@ -555,13 +555,13 @@ execute_wpt() {
             WPT_ARGS+=( "--webdriver-arg=--certificate=${certificate_path}" )
         done
         construct_test_list "${@}"
-        run_wpt_chunked "$procs" "${WPT_ARGS[@]}" "${WPT_LOG_ARGS[@]}" ladybird "${TEST_LIST[@]}"
+        run_wpt_chunked "$procs" "${WPT_ARGS[@]}" "${WPT_LOG_ARGS[@]}" cryfox "${TEST_LIST[@]}"
     popd > /dev/null
 }
 
 run_wpt() {
     ensure_wpt_repository
-    build_ladybird_and_webdriver
+    build_cryfox_and_webdriver
     update_hosts_file_if_needed
     execute_wpt "${@}"
 }
@@ -596,7 +596,7 @@ bisect_wpt()
 
     local bad="$1"; shift
     local good="$1"; shift
-    # Commits from before ladybird.py was added don't currently work with this script
+    # Commits from before cryfox.py was added don't currently work with this script
     OLDEST_COMMIT_ALLOWED="061a7f766ce"
 
     if ! git rev-parse --verify "${bad}" >/dev/null 2>&1; then
@@ -610,7 +610,7 @@ bisect_wpt()
     fi
 
     if ! git merge-base --is-ancestor ${OLDEST_COMMIT_ALLOWED} "${good}"; then
-        echo "Commits older than ${OLDEST_COMMIT_ALLOWED} aren't allowed (because ladybird.py is required)."
+        echo "Commits older than ${OLDEST_COMMIT_ALLOWED} aren't allowed (because cryfox.py is required)."
         exit 1
     fi
 
@@ -627,7 +627,7 @@ bisect_wpt()
     ensure_wpt_repository
     construct_test_list "${@}"
 
-    pushd "${LADYBIRD_SOURCE_DIR}" > /dev/null
+    pushd "${CRYFOX_SOURCE_DIR}" > /dev/null
       local temp_file_directory_base
       temp_file_directory_base="$(mktemp -p "${TMPDIR}" -d "wpt-bisect-helper-XXXXXX")"
       mkdir "${temp_file_directory_base}/Meta"
@@ -654,7 +654,7 @@ bisect_wpt()
           "wpt-bisect-helper.sh"
       )
       for file in "${required_build_files[@]}"; do
-          cp "${LADYBIRD_SOURCE_DIR}/Meta/${file}" "${temp_file_directory_base}/Meta/${file}"
+          cp "${CRYFOX_SOURCE_DIR}/Meta/${file}" "${temp_file_directory_base}/Meta/${file}"
       done
       cp "$0" "${temp_file_directory_base}/Meta/WPT.sh"
 
@@ -673,7 +673,7 @@ list_tests_wpt()
     construct_test_list "${@}"
 
     pushd "${WPT_SOURCE_DIR}" > /dev/null
-        ./wpt run --list-tests ladybird "${TEST_LIST[@]}"
+        ./wpt run --list-tests cryfox "${TEST_LIST[@]}"
     popd > /dev/null
 }
 
@@ -720,8 +720,8 @@ import_wpt()
         TESTS+=("$test_file")
     done < <(printf "%s\n" "${RAW_TESTS[@]}" | sort -u)
 
-    pushd "${LADYBIRD_SOURCE_DIR}" > /dev/null
-        ./Meta/ladybird.py build test-web
+    pushd "${CRYFOX_SOURCE_DIR}" > /dev/null
+        ./Meta/cryfox.py build test-web
         trap 'exit 1' EXIT INT TERM
         for path in "${TESTS[@]}"; do
             echo "Importing test from ${path}"
@@ -738,10 +738,10 @@ compare_wpt() {
     ensure_wpt_repository
     METADATA_DIR=$(mktemp -d)
     pushd "${WPT_SOURCE_DIR}" > /dev/null
-        ./wpt update-expectations --product ladybird --full --metadata="${METADATA_DIR}" "${INPUT_LOG_NAME}"
+        ./wpt update-expectations --product cryfox --full --metadata="${METADATA_DIR}" "${INPUT_LOG_NAME}"
     popd > /dev/null
     WPT_ARGS+=( "--metadata=${METADATA_DIR}" )
-    build_ladybird_and_webdriver
+    build_cryfox_and_webdriver
     update_hosts_file_if_needed
     execute_wpt "${@}"
     rm -rf "${METADATA_DIR}"

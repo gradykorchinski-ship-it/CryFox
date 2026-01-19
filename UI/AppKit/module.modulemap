@@ -1,14 +1,14 @@
-module Ladybird [system] {
+module CryFox [system] {
     requires cplusplus
     requires objc_arc
 
     explicit module WebView {
-        header "Interface/LadybirdWebView.h"
+        header "Interface/CryFoxWebView.h"
         export *
     }
 
     explicit module WebViewWindow {
-        header "Interface/LadybirdWebViewWindow.h"
+        header "Interface/CryFoxWebViewWindow.h"
         export *
     }
 

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2018-2025, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2025, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022-2023, Sam Atkins <atkinssj@serenityos.org>
  * Copyright (c) 2022, MacDue <macdue@dueutil.tech>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  * Copyright (c) 2025, Aziz B. Yesilyurt <abyesilyurt@gmail.com>
  * Copyright (c) 2025, Manuel Zahariev <manuel@duck.com>
  *
@@ -303,7 +303,7 @@ void TreeBuilder::create_pseudo_element_if_needed(DOM::Element& element, CSS::Ps
     // For ::marker with content 'normal', create the marker pseudo-element from a ListItemMarkerBox
     // FIXME: This + ListItemBox + ListItemMarkerBox will disappear once ::marker pseudo-elements with 'normal' content
     //        are rendered using the special list-item counter.
-    //        See: https://github.com/LadybirdBrowser/ladybird/issues/4782
+    //        See: https://github.com/CryFoxBrowser/cryfox/issues/4782
     if (pseudo_element == CSS::PseudoElement::Marker && pseudo_element_content.type == CSS::ContentData::Type::Normal)
         if (auto* list_box = as_if<ListItemBox>(*element.layout_node())) {
 

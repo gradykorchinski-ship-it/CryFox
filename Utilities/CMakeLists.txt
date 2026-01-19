@@ -76,8 +76,8 @@ if (NOT CMAKE_SKIP_INSTALL_RULES)
         set(CPACK_SYSTEM_NAME "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
     endif()
 
-    set(CPACK_ARCHIVE_JS_FILE_NAME "ladybird-js-${CPACK_SYSTEM_NAME}")
-    set(CPACK_ARCHIVE_WASM_FILE_NAME "ladybird-wasm-${CPACK_SYSTEM_NAME}")
+    set(CPACK_ARCHIVE_JS_FILE_NAME "cryfox-js-${CPACK_SYSTEM_NAME}")
+    set(CPACK_ARCHIVE_WASM_FILE_NAME "cryfox-wasm-${CPACK_SYSTEM_NAME}")
 
     include(CPack)
 endif()

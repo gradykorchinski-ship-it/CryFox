@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2025, Luke Wilde <luke@ladybird.org>
+ * Copyright (c) 2021-2025, Luke Wilde <luke@cryfox.org>
  * Copyright (c) 2022, Linus Groh <linusg@serenityos.org>
  * Copyright (c) 2022, networkException <networkexception@serenityos.org>
  * Copyright (c) 2024, Shannon Booth <shannon@serenityos.org>

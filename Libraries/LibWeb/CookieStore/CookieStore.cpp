@@ -632,7 +632,7 @@ static bool delete_a_cookie(PageClient& client, URL::URL const& url, String name
 
     // 4. If name’s length is 0, then set value to any non-empty implementation-defined string.
     if (name.is_empty())
-        value = "ladybird"_string;
+        value = "cryfox"_string;
 
     // 5. Return the results of running set a cookie with url, name, value, expires, domain, path, "strict", and partitioned.
     return set_a_cookie(client, url, move(name), move(value), expires, move(domain), move(path), Bindings::CookieSameSite::Strict, partitioned);

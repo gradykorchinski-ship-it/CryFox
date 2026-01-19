@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -17,7 +17,7 @@
 
 namespace WebContent {
 
-static auto LADYBIRD_PROPERTY = JS::PropertyKey { "ladybird"_utf16_fly_string };
+static auto CRYFOX_PROPERTY = JS::PropertyKey { "cryfox"_utf16_fly_string };
 static auto WEB_UI_LOADED_EVENT = "WebUILoaded"_fly_string;
 static auto WEB_UI_MESSAGE_EVENT = "WebUIMessage"_fly_string;
 
@@ -34,7 +34,7 @@ WebUIConnection::WebUIConnection(NonnullOwnPtr<IPC::Transport> transport, Web::D
     , m_document(document)
 {
     auto& realm = m_document->realm();
-    m_document->window()->define_direct_property(LADYBIRD_PROPERTY, realm.create<Web::Internals::WebUI>(realm), JS::default_attributes);
+    m_document->window()->define_direct_property(CRYFOX_PROPERTY, realm.create<Web::Internals::WebUI>(realm), JS::default_attributes);
 
     Web::HTML::queue_a_task(Web::HTML::Task::Source::Unspecified, nullptr, m_document, GC::create_function(realm.heap(), [&document = *m_document]() {
         document.dispatch_event(Web::DOM::Event::create(document.realm(), WEB_UI_LOADED_EVENT));
@@ -46,7 +46,7 @@ WebUIConnection::~WebUIConnection()
     if (!m_document->window())
         return;
 
-    (void)m_document->window()->internal_delete(LADYBIRD_PROPERTY);
+    (void)m_document->window()->internal_delete(CRYFOX_PROPERTY);
 }
 
 void WebUIConnection::visit_edges(JS::Cell::Visitor& visitor)

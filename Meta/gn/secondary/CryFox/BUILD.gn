@@ -1,0 +1,552 @@
+import("//CryFox/compile_qt_resource_file.gni")
+import("//CryFox/enable_appkit.gni")
+import("//CryFox/enable_qt.gni")
+import("//CryFox/link_qt.gni")
+import("//CryFox/moc_qt_objects.gni")
+
+group("CryFox") {
+  if (current_os == "mac") {
+    deps = [ ":CryFox.app" ]
+  } else {
+    deps = [ ":cryfox_executable" ]
+  }
+}
+
+moc_qt_objects("generate_moc") {
+  sources = [
+    "Qt/Application.h",
+    "Qt/AutoComplete.h",
+    "Qt/BrowserWindow.h",
+    "Qt/EventLoopImplementationQtEventTarget.h",
+    "Qt/FindInPageWidget.h",
+    "Qt/InspectorWidget.h",
+    "Qt/LocationEdit.h",
+    "Qt/Settings.h",
+    "Qt/SettingsDialog.h",
+    "Qt/Tab.h",
+    "Qt/TabBar.h",
+    "Qt/TaskManagerWindow.h",
+    "Qt/WebContentView.h",
+  ]
+}
+
+compile_qt_resource_file("compile_resource_file") {
+  sources = [ "Qt/cryfox.qrc" ]
+}
+
+link_qt("cryfox_qt_components") {
+  qt_components = [
+    "Core",
+    "Gui",
+    "Widgets",
+  ]
+}
+
+config("cryfox_config") {
+  include_dirs = [
+    "//Userland",
+    "//Userland/Applications",
+    "//Userland/Services",
+  ]
+}
+
+cryfox_helper_processes = [
+  "ImageDecoder",
+  "RequestServer",
+  "WebContent",
+  "WebWorker",
+]
+
+executable("cryfox_executable") {
+  configs += [ ":cryfox_config" ]
+  data_deps = cryfox_helper_processes
+  deps = [
+    "//AK",
+    "//Userland/Libraries/LibCore",
+    "//Userland/Libraries/LibFileSystem",
+    "//Userland/Libraries/LibGfx",
+    "//Userland/Libraries/LibIPC",
+    "//Userland/Libraries/LibImageDecoderClient",
+    "//Userland/Libraries/LibJS",
+    "//Userland/Libraries/LibMain",
+    "//Userland/Libraries/LibRequests",
+    "//Userland/Libraries/LibURL",
+    "//Userland/Libraries/LibWeb",
+    "//Userland/Libraries/LibWebView",
+  ]
+  sources = [
+    "HelperProcess.cpp",
+    "Utilities.cpp",
+  ]
+
+  if (enable_qt) {
+    configs += [ ":cryfox_qt_components" ]
+
+    sources += [
+      "Qt/Application.cpp",
+      "Qt/AutoComplete.cpp",
+      "Qt/BrowserWindow.cpp",
+      "Qt/EventLoopImplementationQt.cpp",
+      "Qt/EventLoopImplementationQtEventTarget.cpp",
+      "Qt/FindInPageWidget.cpp",
+      "Qt/Icon.cpp",
+      "Qt/InspectorWidget.cpp",
+      "Qt/LocationEdit.cpp",
+      "Qt/Settings.cpp",
+      "Qt/SettingsDialog.cpp",
+      "Qt/StringUtils.cpp",
+      "Qt/TVGIconEngine.cpp",
+      "Qt/Tab.cpp",
+      "Qt/TabBar.cpp",
+      "Qt/TaskManagerWindow.cpp",
+      "Qt/WebContentView.cpp",
+      "Qt/main.cpp",
+    ]
+
+    sources += get_target_outputs(":generate_moc") +
+               get_target_outputs(":compile_resource_file")
+
+    deps += [
+      ":compile_resource_file",
+      ":generate_moc",
+    ]
+  } else if (enable_appkit) {
+    sources += [
+      "AppKit/Application/Application.mm",
+      "AppKit/Application/ApplicationDelegate.mm",
+      "AppKit/Application/EventLoopImplementation.mm",
+      "AppKit/UI/Event.mm",
+      "AppKit/UI/Inspector.mm",
+      "AppKit/UI/InspectorController.mm",
+      "AppKit/UI/CryFoxWebView.mm",
+      "AppKit/UI/CryFoxWebViewBridge.cpp",
+      "AppKit/UI/Palette.mm",
+      "AppKit/UI/SearchPanel.mm",
+      "AppKit/UI/Tab.mm",
+      "AppKit/UI/TabController.mm",
+      "AppKit/UI/TaskManager.mm",
+      "AppKit/UI/TaskManagerController.mm",
+      "AppKit/Utilities/Conversions.mm",
+      "AppKit/main.mm",
+    ]
+
+    deps += [ "//Userland/Libraries/LibUnicode" ]
+
+    cflags_objcc = [
+      "-fobjc-arc",
+      "-Wno-deprecated-anon-enum-enum-conversion",  # Required for CGImageCreate
+    ]
+
+    include_dirs = [
+      "AppKit",
+      "//Userland",
+    ]
+
+    frameworks = [
+      "Cocoa.framework",
+      "UniformTypeIdentifiers.framework",
+    ]
+  }
+
+  if (current_os == "mac") {
+    sources += [ "MachPortServer.cpp" ]
+    deps += [ "//Userland/Libraries/LibThreading" ]
+  } else {
+    data_deps += [
+      ":cryfox_copy_about_pages",
+      ":cryfox_copy_config_resources",
+      ":cryfox_copy_fonts",
+      ":cryfox_copy_icons_128x128",
+      ":cryfox_copy_icons_16x16",
+      ":cryfox_copy_icons_32x32",
+      ":cryfox_copy_icons_48x48",
+      ":cryfox_copy_icons_browser",
+      ":cryfox_copy_themes",
+      ":cryfox_copy_web_resources",
+      ":cryfox_copy_web_templates",
+    ]
+  }
+
+  output_name = "CryFox"
+}
+
+executable("headless-browser") {
+  include_dirs = [ "//Userland/Services" ]
+  configs += [ ":cryfox_config" ]
+  deps = [
+    "//AK",
+    "//Userland/Libraries/LibCore",
+    "//Userland/Libraries/LibCrypto",
+    "//Userland/Libraries/LibDiff",
+    "//Userland/Libraries/LibFileSystem",
+    "//Userland/Libraries/LibGfx",
+    "//Userland/Libraries/LibHTTP",
+    "//Userland/Libraries/LibIPC",
+    "//Userland/Libraries/LibImageDecoderClient",
+    "//Userland/Libraries/LibJS",
+    "//Userland/Libraries/LibMain",
+    "//Userland/Libraries/LibRequests",
+    "//Userland/Libraries/LibTLS",
+    "//Userland/Libraries/LibURL",
+    "//Userland/Libraries/LibWeb",
+    "//Userland/Libraries/LibWebSocket",
+    "//Userland/Libraries/LibWebView",
+  ]
+  data_deps = cryfox_helper_processes
+  sources = [
+    "//Userland/Utilities/headless-browser.cpp",
+    "HelperProcess.cpp",
+    "Utilities.cpp",
+  ]
+}
+
+fonts = [
+  "//Base/res/fonts/SerenitySans-Regular.ttf",
+  "//Base/res/fonts/NotoEmoji.ttf",
+]
+
+icons_16x16 = [
+  "//Base/res/icons/16x16/app-system-monitor.png",
+  "//Base/res/icons/16x16/audio-volume-high.png",
+  "//Base/res/icons/16x16/audio-volume-muted.png",
+  "//Base/res/icons/16x16/close-tab.png",
+  "//Base/res/icons/16x16/edit-copy.png",
+  "//Base/res/icons/16x16/filetype-css.png",
+  "//Base/res/icons/16x16/filetype-folder-open.png",
+  "//Base/res/icons/16x16/filetype-html.png",
+  "//Base/res/icons/16x16/filetype-image.png",
+  "//Base/res/icons/16x16/filetype-sound.png",
+  "//Base/res/icons/16x16/filetype-video.png",
+  "//Base/res/icons/16x16/find.png",
+  "//Base/res/icons/16x16/go-forward.png",
+  "//Base/res/icons/16x16/history.png",
+  "//Base/res/icons/16x16/layers.png",
+  "//Base/res/icons/16x16/layout.png",
+  "//Base/res/icons/16x16/network.png",
+  "//Base/res/icons/16x16/new-tab.png",
+  "//Base/res/icons/16x16/open-parent-directory.png",
+  "//Base/res/icons/16x16/paste.png",
+  "//Base/res/icons/16x16/pause.png",
+  "//Base/res/icons/16x16/play.png",
+  "//Base/res/icons/16x16/select-all.png",
+  "//Base/res/icons/16x16/settings.png",
+  "//Base/res/icons/16x16/spoof.png",
+  "//Base/res/icons/16x16/trash-can.png",
+  "//Base/res/icons/16x16/zoom-in.png",
+  "//Base/res/icons/16x16/zoom-out.png",
+  "//Base/res/icons/16x16/zoom-reset.png",
+]
+
+icons_32x32 = [
+  "//Base/res/icons/32x32/app-system-monitor.png",
+  "//Base/res/icons/32x32/filetype-folder.png",
+  "//Base/res/icons/32x32/filetype-unknown.png",
+]
+
+icons_48x48 = [ "//Base/res/icons/48x48/app-browser.png" ]
+
+icons_128x128 = [
+  "//Base/res/icons/128x128/app-browser.png",
+  "//Base/res/icons/128x128/app-browser-dark.png",
+]
+
+icons_browser = [
+  "//Base/res/icons/browser/clear-cache.png",
+  "//Base/res/icons/browser/cookie.png",
+  "//Base/res/icons/browser/dom-tree.png",
+  "//Base/res/icons/browser/local-storage.png",
+]
+
+themes = [
+  "//Base/res/themes/Default.ini",
+  "//Base/res/themes/Dark.ini",
+]
+
+web_resources = [
+  "//Base/res/cryfox/inspector.css",
+  "//Base/res/cryfox/inspector.html",
+  "//Base/res/cryfox/inspector.js",
+]
+
+about_pages = [
+  "//Base/res/cryfox/about-pages/about.html",
+  "//Base/res/cryfox/about-pages/newtab.html",
+]
+
+web_templates = [
+  "//Base/res/cryfox/templates/directory.html",
+  "//Base/res/cryfox/templates/error.html",
+  "//Base/res/cryfox/templates/version.html",
+]
+
+config_resources =
+    [ "//Base/res/cryfox/default-config/BrowserContentFilters.txt" ]
+
+if (current_os != "mac") {
+  copy("cryfox_copy_fonts") {
+    sources = fonts
+    outputs = [ "$root_out_dir/share/Lagom/fonts/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_icons_16x16") {
+    sources = icons_16x16
+    outputs = [ "$root_out_dir/share/Lagom/icons/16x16/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_icons_32x32") {
+    sources = icons_32x32
+    outputs = [ "$root_out_dir/share/Lagom/icons/32x32/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_icons_48x48") {
+    sources = icons_48x48
+    outputs = [ "$root_out_dir/share/Lagom/icons/48x48/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_icons_128x128") {
+    sources = icons_128x128
+    outputs = [ "$root_out_dir/share/Lagom/icons/128x128/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_icons_browser") {
+    sources = icons_browser
+    outputs = [ "$root_out_dir/share/Lagom/icons/browser/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_themes") {
+    sources = themes
+    outputs = [ "$root_out_dir/share/Lagom/themes/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_web_resources") {
+    sources = web_resources
+    outputs = [ "$root_out_dir/share/Lagom/cryfox/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_about_pages") {
+    sources = about_pages
+    outputs = [
+      "$root_out_dir/share/Lagom/cryfox/about-pages/{{source_file_part}}",
+    ]
+  }
+
+  copy("cryfox_copy_web_templates") {
+    sources = web_templates
+    outputs =
+        [ "$root_out_dir/share/Lagom/cryfox/templates/{{source_file_part}}" ]
+  }
+
+  copy("cryfox_copy_config_resources") {
+    sources = config_resources
+    outputs = [
+      "$root_out_dir/share/Lagom/cryfox/default-config/{{source_file_part}}",
+    ]
+  }
+} else {
+  # macOS bundle steps
+  bundle_data("cryfox_bundle_info_plist") {
+    sources = [ "Info.plist" ]
+    outputs = [ "{{bundle_contents_dir}}/Info.plist" ]
+  }
+
+  bundle_data("cryfox_bundle_executables") {
+    public_deps = [
+      ":headless-browser",
+      ":cryfox_executable",
+      "ImageDecoder",
+      "RequestServer",
+      "WebContent",
+      "WebDriver",
+      "WebWorker",
+    ]
+    sources = [
+      "$root_out_dir/bin/CryFox",
+      "$root_out_dir/bin/WebDriver",
+      "$root_out_dir/bin/headless-browser",
+      "$root_out_dir/libexec/ImageDecoder",
+      "$root_out_dir/libexec/RequestServer",
+      "$root_out_dir/libexec/WebContent",
+      "$root_out_dir/libexec/WebWorker",
+    ]
+    outputs = [ "{{bundle_executable_dir}}/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_bundle_libs") {
+    public_deps = [
+      "//AK",
+      "//Userland/Libraries/LibCompress",
+      "//Userland/Libraries/LibCore",
+      "//Userland/Libraries/LibCrypto",
+      "//Userland/Libraries/LibDiff",
+      "//Userland/Libraries/LibFileSystem",
+      "//Userland/Libraries/LibGfx",
+      "//Userland/Libraries/LibHTTP",
+      "//Userland/Libraries/LibIDL",
+      "//Userland/Libraries/LibIPC",
+      "//Userland/Libraries/LibImageDecoderClient",
+      "//Userland/Libraries/LibJS",
+      "//Userland/Libraries/LibLine",
+      "//Userland/Libraries/LibMedia",
+      "//Userland/Libraries/LibRegex",
+      "//Userland/Libraries/LibRequests",
+      "//Userland/Libraries/LibSyntax",
+      "//Userland/Libraries/LibTLS",
+      "//Userland/Libraries/LibTextCodec",
+      "//Userland/Libraries/LibThreading",
+      "//Userland/Libraries/LibURL",
+      "//Userland/Libraries/LibWasm",
+      "//Userland/Libraries/LibWeb",
+      "//Userland/Libraries/LibWebSocket",
+      "//Userland/Libraries/LibWebView",
+      "//Userland/Libraries/LibXML",
+    ]
+    sources = [
+      "$root_out_dir/lib/liblagom-ak.dylib",
+      "$root_out_dir/lib/liblagom-compress.dylib",
+      "$root_out_dir/lib/liblagom-core-minimal.dylib",
+      "$root_out_dir/lib/liblagom-core.dylib",
+      "$root_out_dir/lib/liblagom-crypto.dylib",
+      "$root_out_dir/lib/liblagom-diff.dylib",
+      "$root_out_dir/lib/liblagom-filesystem.dylib",
+      "$root_out_dir/lib/liblagom-gfx.dylib",
+      "$root_out_dir/lib/liblagom-http.dylib",
+      "$root_out_dir/lib/liblagom-idl.dylib",
+      "$root_out_dir/lib/liblagom-imagedecoderclient.dylib",
+      "$root_out_dir/lib/liblagom-ipc.dylib",
+      "$root_out_dir/lib/liblagom-js.dylib",
+      "$root_out_dir/lib/liblagom-line.dylib",
+      "$root_out_dir/lib/liblagom-media.dylib",
+      "$root_out_dir/lib/liblagom-regex.dylib",
+      "$root_out_dir/lib/liblagom-requests.dylib",
+      "$root_out_dir/lib/liblagom-syntax.dylib",
+      "$root_out_dir/lib/liblagom-textcodec.dylib",
+      "$root_out_dir/lib/liblagom-threading.dylib",
+      "$root_out_dir/lib/liblagom-tls.dylib",
+      "$root_out_dir/lib/liblagom-url.dylib",
+      "$root_out_dir/lib/liblagom-wasm.dylib",
+      "$root_out_dir/lib/liblagom-web.dylib",
+      "$root_out_dir/lib/liblagom-websocket.dylib",
+      "$root_out_dir/lib/liblagom-webview.dylib",
+      "$root_out_dir/lib/liblagom-xml.dylib",
+    ]
+    outputs = [ "{{bundle_contents_dir}}/lib/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_fonts") {
+    sources = fonts
+    outputs = [ "{{bundle_resources_dir}}/fonts/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_icons_16x16") {
+    sources = icons_16x16
+    outputs = [ "{{bundle_resources_dir}}/icons/16x16/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_icons_32x32") {
+    sources = icons_32x32
+    outputs = [ "{{bundle_resources_dir}}/icons/32x32/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_icons_48x48") {
+    sources = icons_48x48
+    outputs = [ "{{bundle_resources_dir}}/icons/48x48/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_icons_128x128") {
+    sources = icons_128x128
+    outputs = [ "{{bundle_resources_dir}}/icons/128x128/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_icons_browser") {
+    sources = icons_browser
+    outputs = [ "{{bundle_resources_dir}}/icons/browser/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_themes") {
+    sources = themes
+    outputs = [ "{{bundle_resources_dir}}/themes/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_web_resources") {
+    sources = web_resources
+    outputs = [ "{{bundle_resources_dir}}/cryfox/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_about_pages") {
+    sources = about_pages
+    outputs =
+        [ "{{bundle_resources_dir}}/cryfox/about-pages/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_web_templates") {
+    sources = web_templates
+    outputs =
+        [ "{{bundle_resources_dir}}/cryfox/templates/{{source_file_part}}" ]
+  }
+
+  bundle_data("cryfox_config_resources") {
+    sources = config_resources
+    outputs = [
+      "{{bundle_resources_dir}}/cryfox/default-config/{{source_file_part}}",
+    ]
+  }
+
+  action("cryfox_create_icon") {
+    script = "//Meta/gn/build/invoke_process_with_args.py"
+    icon_path = "//CryFox/Icons/macos/app_icon.iconset"
+    sources = [
+      "$icon_path/icon_128x128.png",
+      "$icon_path/icon_128x128@2x.png",
+      "$icon_path/icon_16x16.png",
+      "$icon_path/icon_16x16@2x.png",
+      "$icon_path/icon_256x256.png",
+      "$icon_path/icon_256x256@2x.png",
+      "$icon_path/icon_32x32.png",
+      "$icon_path/icon_32x32@2x.png",
+      "$icon_path/icon_512x512.png",
+      "$icon_path/icon_512x512@2x.png",
+    ]
+    outputs = [ "$target_gen_dir/app_icon.icns" ]
+    args = [
+      "iconutil",
+      "--convert",
+      "icns",
+      rebase_path(icon_path, root_build_dir),
+      "--output",
+      rebase_path(outputs[0], root_build_dir),
+    ]
+  }
+
+  bundle_data("cryfox_icon") {
+    public_deps = [ ":cryfox_create_icon" ]
+    sources = get_target_outputs(public_deps[0])
+    outputs = [ "{{bundle_resources_dir}}/{{source_file_part}}" ]
+  }
+
+  create_bundle("CryFox.app") {
+    product_type = "com.apple.product-type.application"
+
+    bundle_root_dir = "$root_build_dir/$target_name"
+    bundle_contents_dir = "$bundle_root_dir/Contents"
+    bundle_resources_dir = "$bundle_contents_dir/Resources"
+    bundle_executable_dir = "$bundle_contents_dir/MacOS"
+
+    deps = [
+      ":cryfox_about_pages",
+      ":cryfox_bundle_executables",
+      ":cryfox_bundle_info_plist",
+      ":cryfox_bundle_libs",
+      ":cryfox_config_resources",
+      ":cryfox_fonts",
+      ":cryfox_icon",
+      ":cryfox_icons_128x128",
+      ":cryfox_icons_16x16",
+      ":cryfox_icons_32x32",
+      ":cryfox_icons_48x48",
+      ":cryfox_icons_browser",
+      ":cryfox_themes",
+      ":cryfox_web_resources",
+      ":cryfox_web_templates",
+    ]
+  }
+}

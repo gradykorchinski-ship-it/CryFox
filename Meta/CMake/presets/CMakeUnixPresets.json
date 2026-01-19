@@ -62,6 +62,32 @@
         "unix_base",
         "Swift_Release_base"
       ]
+    },
+    {
+      "name": "Performance",
+      "inherits": [
+        "unix_base",
+        "Release_base"
+      ],
+      "displayName": "Performance Build",
+      "description": "Optimized for the current machine's CPU",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O3 -march=native",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O3 -march=native"
+      }
+    },
+    {
+      "name": "Legacy",
+      "inherits": [
+        "unix_base",
+        "Release_base"
+      ],
+      "displayName": "Legacy Build",
+      "description": "Compatible with older x86-64 CPUs (v2)",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -march=x86-64-v2",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O2 -march=x86-64-v2"
+      }
     }
   ],
   "buildPresets": [

@@ -2,7 +2,7 @@ set(FONTS
     NotoEmoji.ttf
     SerenitySans-Regular.ttf
 )
-list(TRANSFORM FONTS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/fonts/")
+list(TRANSFORM FONTS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/fonts/")
 
 set(16x16_ICONS
     app-system-monitor.png
@@ -55,17 +55,17 @@ set(BROWSER_ICONS
     dom-tree.png
     local-storage.png
 )
-list(TRANSFORM 16x16_ICONS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/icons/16x16/")
-list(TRANSFORM 32x32_ICONS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/icons/32x32/")
-list(TRANSFORM 48x48_ICONS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/icons/48x48/")
-list(TRANSFORM 128x128_ICONS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/icons/128x128/")
-list(TRANSFORM BROWSER_ICONS PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/icons/browser/")
+list(TRANSFORM 16x16_ICONS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/icons/16x16/")
+list(TRANSFORM 32x32_ICONS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/icons/32x32/")
+list(TRANSFORM 48x48_ICONS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/icons/48x48/")
+list(TRANSFORM 128x128_ICONS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/icons/128x128/")
+list(TRANSFORM BROWSER_ICONS PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/icons/browser/")
 
 set(INTERNAL_RESOURCES
-    ladybird.css
+    cryfox.css
     utils.js
 )
-list(TRANSFORM INTERNAL_RESOURCES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/ladybird/")
+list(TRANSFORM INTERNAL_RESOURCES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/cryfox/")
 
 set(ABOUT_PAGES
     about.html
@@ -73,7 +73,7 @@ set(ABOUT_PAGES
     processes.html
     settings.html
 )
-list(TRANSFORM ABOUT_PAGES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/ladybird/about-pages/")
+list(TRANSFORM ABOUT_PAGES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/cryfox/about-pages/")
 
 set(ABOUT_SETTINGS_RESOURCES
     default-zoom-level.js
@@ -84,25 +84,25 @@ set(ABOUT_SETTINGS_RESOURCES
     privacy.js
     search.js
 )
-list(TRANSFORM ABOUT_SETTINGS_RESOURCES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/ladybird/about-pages/settings/")
+list(TRANSFORM ABOUT_SETTINGS_RESOURCES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/cryfox/about-pages/settings/")
 
 set(WEB_TEMPLATES
     directory.html
     error.html
     version.html
 )
-list(TRANSFORM WEB_TEMPLATES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/ladybird/templates/")
+list(TRANSFORM WEB_TEMPLATES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/cryfox/templates/")
 
 set(THEMES
     Default.ini
     Dark.ini
 )
-list(TRANSFORM THEMES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/themes/")
+list(TRANSFORM THEMES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/themes/")
 
 set(CONFIG_RESOURCES
     BrowserContentFilters.txt
 )
-list(TRANSFORM CONFIG_RESOURCES PREPEND "${LADYBIRD_SOURCE_DIR}/Base/res/ladybird/default-config/")
+list(TRANSFORM CONFIG_RESOURCES PREPEND "${CRYFOX_SOURCE_DIR}/Base/res/cryfox/default-config/")
 
 function(copy_resource_set subdir)
     cmake_parse_arguments(PARSE_ARGV 1 "COPY" "" "TARGET;DESTINATION" "RESOURCES")
@@ -132,7 +132,7 @@ function(copy_resource_set subdir)
             set(target_name "${target_name}_")
         endwhile()
         add_custom_target(${target_name} DEPENDS ${outputs})
-        add_dependencies(ladybird_codegen_accumulator ${target_name})
+        add_dependencies(cryfox_codegen_accumulator ${target_name})
         add_dependencies("${COPY_TARGET}_build_resource_files" ${target_name})
     endif()
 endfunction()
@@ -168,30 +168,30 @@ function(copy_resources_to_build base_directory bundle_target)
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
-    copy_resource_set(ladybird RESOURCES ${INTERNAL_RESOURCES}
+    copy_resource_set(cryfox RESOURCES ${INTERNAL_RESOURCES}
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
-    copy_resource_set(ladybird/about-pages RESOURCES ${ABOUT_PAGES}
+    copy_resource_set(cryfox/about-pages RESOURCES ${ABOUT_PAGES}
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
-    copy_resource_set(ladybird/about-pages/settings RESOURCES ${ABOUT_SETTINGS_RESOURCES}
+    copy_resource_set(cryfox/about-pages/settings RESOURCES ${ABOUT_SETTINGS_RESOURCES}
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
-    copy_resource_set(ladybird/templates RESOURCES ${WEB_TEMPLATES}
+    copy_resource_set(cryfox/templates RESOURCES ${WEB_TEMPLATES}
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
-    copy_resource_set(ladybird/default-config RESOURCES ${CONFIG_RESOURCES}
+    copy_resource_set(cryfox/default-config RESOURCES ${CONFIG_RESOURCES}
         DESTINATION ${base_directory} TARGET ${bundle_target}
     )
 
     add_dependencies(${bundle_target} "${bundle_target}_build_resource_files")
 endfunction()
 
-function(install_ladybird_resources destination component)
+function(install_cryfox_resources destination component)
     install(FILES ${FONTS} DESTINATION "${destination}/fonts" COMPONENT ${component})
     install(FILES ${16x16_ICONS} DESTINATION "${destination}/icons/16x16" COMPONENT ${component})
     install(FILES ${32x32_ICONS} DESTINATION "${destination}/icons/32x32" COMPONENT ${component})
@@ -199,9 +199,9 @@ function(install_ladybird_resources destination component)
     install(FILES ${128x128_ICONS} DESTINATION "${destination}/icons/128x128" COMPONENT ${component})
     install(FILES ${BROWSER_ICONS} DESTINATION "${destination}/icons/browser" COMPONENT ${component})
     install(FILES ${THEMES} DESTINATION "${destination}/themes" COMPONENT ${component})
-    install(FILES ${INTERNAL_RESOURCES} DESTINATION "${destination}/ladybird" COMPONENT ${component})
-    install(FILES ${ABOUT_PAGES} DESTINATION "${destination}/ladybird/about-pages" COMPONENT ${component})
-    install(FILES ${ABOUT_SETTINGS_RESOURCES} DESTINATION "${destination}/ladybird/about-pages/settings" COMPONENT ${component})
-    install(FILES ${WEB_TEMPLATES} DESTINATION "${destination}/ladybird/templates" COMPONENT ${component})
-    install(FILES ${CONFIG_RESOURCES} DESTINATION "${destination}/ladybird/default-config" COMPONENT ${component})
+    install(FILES ${INTERNAL_RESOURCES} DESTINATION "${destination}/cryfox" COMPONENT ${component})
+    install(FILES ${ABOUT_PAGES} DESTINATION "${destination}/cryfox/about-pages" COMPONENT ${component})
+    install(FILES ${ABOUT_SETTINGS_RESOURCES} DESTINATION "${destination}/cryfox/about-pages/settings" COMPONENT ${component})
+    install(FILES ${WEB_TEMPLATES} DESTINATION "${destination}/cryfox/templates" COMPONENT ${component})
+    install(FILES ${CONFIG_RESOURCES} DESTINATION "${destination}/cryfox/default-config" COMPONENT ${component})
 endfunction()

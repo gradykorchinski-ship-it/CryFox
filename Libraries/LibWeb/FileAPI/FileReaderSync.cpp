@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Tim Ledbetter <tim.ledbetter@ladybird.org>
+ * Copyright (c) 2025, Tim Ledbetter <tim.ledbetter@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022-2023, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -26,7 +26,7 @@
 #include <QThread>
 #include <QTimer>
 
-namespace Ladybird {
+namespace CryFox {
 
 struct ThreadData;
 static thread_local OwnPtr<ThreadData> s_this_thread_data;

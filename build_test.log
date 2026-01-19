@@ -1,0 +1,3 @@
+usage: cryfox.py [-h]
+                 {build,test,run,debug,profile,install,vcpkg,clean,rebuild,addr2line} ...
+cryfox.py: error: unrecognized arguments: --args -DONLY_CONFIGURE=ON

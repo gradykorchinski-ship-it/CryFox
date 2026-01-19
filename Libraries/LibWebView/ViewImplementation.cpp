@@ -607,7 +607,7 @@ void ViewImplementation::handle_web_content_process_crash(LoadErrorPage load_err
 
     if (!headless_mode) {
         dbgln("\033[31;1mWebContent process crashed!\033[0m Last page loaded: {}", m_url);
-        dbgln("Consider raising an issue at https://github.com/LadybirdBrowser/ladybird/issues/new/choose");
+        dbgln("Consider raising an issue at https://github.com/CryFoxBrowser/cryfox/issues/new/choose");
     }
 
     ++m_crash_count;
@@ -652,7 +652,7 @@ void ViewImplementation::handle_web_content_process_crash(LoadErrorPage load_err
         builder.append("<path class=\"b\" d=\"M11.75.75h-9c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-13l-5-5z\"/>"sv);
         builder.append("<path class=\"b\" d=\"M10.75.75v4c0 1.1.9 2 2 2h4M4.75 9.75l2 2M10.75 9.75l2 2M12.75 9.75l-2 2M6.75 9.75l-2 2M5.75 16.75c1-2.67 5-2.67 6 0\"/></svg>"sv);
         auto escaped_url = escape_html_entities(m_url.to_byte_string());
-        builder.append("<h1>Ladybird flew off-course!</h1>"sv);
+        builder.append("<h1>CryFox flew off-course!</h1>"sv);
         builder.appendff("<p>The web page <a href=\"{}\">{}</a> has crashed.<br><br>You can reload the page to try again.</p>", escaped_url, escaped_url);
         builder.append("</body></html>"sv);
         load_html(builder.to_byte_string());

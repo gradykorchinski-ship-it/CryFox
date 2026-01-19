@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2024-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -39,7 +39,7 @@ TEST_CASE(current_time_zone)
         EXPECT_EQ(Unicode::current_time_zone(), "America/Los_Angeles"sv);
     }
     {
-        TimeZoneGuard guard { "ladybird"sv };
+        TimeZoneGuard guard { "cryfox"sv };
         EXPECT_EQ(Unicode::current_time_zone(), guard.time_zone());
     }
 }

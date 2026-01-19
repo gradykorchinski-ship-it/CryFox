@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -17,7 +17,7 @@
 #    include <QStyleHints>
 #endif
 
-namespace Ladybird {
+namespace CryFox {
 
 // FIXME: Find a place to put this declaration (and other helper functions).
 bool is_using_dark_system_theme(QWidget&);
@@ -39,16 +39,16 @@ bool is_using_dark_system_theme(QWidget& widget)
 
 }
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     AK::set_rich_debug_enabled(true);
 
-    auto app = TRY(Ladybird::Application::create(arguments));
+    auto app = TRY(CryFox::Application::create(arguments));
     WebView::BrowserProcess browser_process;
 
-    WebView::copy_default_config_files(Ladybird::Settings::the()->directory());
+    WebView::copy_default_config_files(CryFox::Settings::the()->directory());
 
-    if (auto const& browser_options = Ladybird::Application::browser_options(); !browser_options.headless_mode.has_value()) {
+    if (auto const& browser_options = CryFox::Application::browser_options(); !browser_options.headless_mode.has_value()) {
         if (browser_options.force_new_process == WebView::ForceNewProcess::No) {
             auto disposition = TRY(browser_process.connect(browser_options.raw_urls, browser_options.new_window));
 
@@ -78,15 +78,15 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
         };
 
         auto& window = app->new_window(browser_options.urls);
-        window.setWindowTitle("Ladybird");
+        window.setWindowTitle("CryFox");
 
-        if (Ladybird::Settings::the()->is_maximized()) {
+        if (CryFox::Settings::the()->is_maximized()) {
             window.showMaximized();
         } else {
-            auto last_position = Ladybird::Settings::the()->last_position();
+            auto last_position = CryFox::Settings::the()->last_position();
             if (last_position.has_value())
                 window.move(last_position.value());
-            window.resize(Ladybird::Settings::the()->last_size());
+            window.resize(CryFox::Settings::the()->last_size());
         }
 
         window.show();

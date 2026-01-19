@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Linus Groh <linusg@serenityos.org>
- * Copyright (c) 2024, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024, Sam Atkins <sam@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -177,7 +177,7 @@ ByteString StandardPaths::config_directory()
 ByteString StandardPaths::user_data_directory()
 {
 #ifdef AK_OS_WINDOWS
-    return ByteString::formatted("{}/Ladybird"sv, getenv("LOCALAPPDATA"));
+    return ByteString::formatted("{}/CryFox"sv, getenv("LOCALAPPDATA"));
 #endif
     if (auto data_directory = get_environment_if_not_empty("XDG_DATA_HOME"sv); data_directory.has_value())
         return LexicalPath::canonicalized_path(*data_directory);

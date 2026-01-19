@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2022, Luke Wilde <lukew@serenityos.org>
- * Copyright (c) 2024, Andrew Kaster <andrew@ladybird.org>
+ * Copyright (c) 2024, Andrew Kaster <andrew@cryfox.org>
  * Copyright (c) 2023, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -10,7 +10,7 @@
 #include <LibWebView/ViewImplementation.h>
 
 #import <Application/ApplicationDelegate.h>
-#import <Interface/LadybirdWebView.h>
+#import <Interface/CryFoxWebView.h>
 #import <Interface/SearchPanel.h>
 #import <Interface/Tab.h>
 #import <Interface/TabController.h>
@@ -23,7 +23,7 @@
 static constexpr CGFloat const WINDOW_WIDTH = 1000;
 static constexpr CGFloat const WINDOW_HEIGHT = 800;
 
-@interface Tab () <LadybirdWebViewObserver>
+@interface Tab () <CryFoxWebViewObserver>
 
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSImage* favicon;
@@ -43,7 +43,7 @@ static constexpr CGFloat const WINDOW_HEIGHT = 800;
 
     dispatch_once(&token, ^{
         auto default_favicon_path = MUST(Core::Resource::load_from_uri("resource://icons/48x48/app-browser.png"sv));
-        auto* ns_default_favicon_path = Ladybird::string_to_ns_string(default_favicon_path->filesystem_path());
+        auto* ns_default_favicon_path = CryFox::string_to_ns_string(default_favicon_path->filesystem_path());
 
         default_favicon = [[NSImage alloc] initWithContentsOfFile:ns_default_favicon_path];
     });
@@ -53,18 +53,18 @@ static constexpr CGFloat const WINDOW_HEIGHT = 800;
 
 - (instancetype)init
 {
-    auto* web_view = [[LadybirdWebView alloc] init:self];
+    auto* web_view = [[CryFoxWebView alloc] init:self];
     return [self initWithWebView:web_view];
 }
 
 - (instancetype)initAsChild:(Tab*)parent
                   pageIndex:(u64)page_index
 {
-    auto* web_view = [[LadybirdWebView alloc] initAsChild:self parent:[parent web_view] pageIndex:page_index];
+    auto* web_view = [[CryFoxWebView alloc] initAsChild:self parent:[parent web_view] pageIndex:page_index];
     return [self initWithWebView:web_view];
 }
 
-- (instancetype)initWithWebView:(LadybirdWebView*)web_view
+- (instancetype)initWithWebView:(CryFoxWebView*)web_view
 {
     auto screen_rect = [[NSScreen mainScreen] frame];
     auto position_x = (NSWidth(screen_rect) - WINDOW_WIDTH) / 2;
@@ -216,7 +216,7 @@ static constexpr CGFloat const WINDOW_HEIGHT = 800;
     VERIFY_NOT_REACHED();
 }
 
-#pragma mark - LadybirdWebViewObserver
+#pragma mark - CryFoxWebViewObserver
 
 - (String const&)onCreateNewTab:(Optional<URL::URL> const&)url
                     activateTab:(Web::HTML::ActivateTab)activate_tab
@@ -248,7 +248,7 @@ static constexpr CGFloat const WINDOW_HEIGHT = 800;
 
 - (void)onLoadStart:(URL::URL const&)url isRedirect:(BOOL)is_redirect
 {
-    self.title = Ladybird::string_to_ns_string(url.serialize());
+    self.title = CryFox::string_to_ns_string(url.serialize());
     self.favicon = [Tab defaultFavicon];
     [self updateTabTitleAndFavicon];
 
@@ -266,13 +266,13 @@ static constexpr CGFloat const WINDOW_HEIGHT = 800;
 
 - (void)onTitleChange:(Utf16String const&)title
 {
-    self.title = Ladybird::utf16_string_to_ns_string(title);
+    self.title = CryFox::utf16_string_to_ns_string(title);
     [self updateTabTitleAndFavicon];
 }
 
 - (void)onFaviconChange:(Gfx::Bitmap const&)bitmap
 {
-    auto* favicon = Ladybird::gfx_bitmap_to_ns_image(bitmap);
+    auto* favicon = CryFox::gfx_bitmap_to_ns_image(bitmap);
     [favicon setResizingMode:NSImageResizingModeStretch];
     self.favicon = favicon;
     [self updateTabTitleAndFavicon];

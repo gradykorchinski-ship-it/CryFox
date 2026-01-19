@@ -29,7 +29,7 @@ describe("normal behavior", () => {
         testNumberingSystems(new Intl.Locale("ar", { numberingSystem: "bali" }), ["bali"]);
 
         // Invalid numberingSystems also take precedence.
-        testNumberingSystems(new Intl.Locale("en-u-nu-ladybird"), ["ladybird"]);
-        testNumberingSystems(new Intl.Locale("en", { numberingSystem: "ladybird" }), ["ladybird"]);
+        testNumberingSystems(new Intl.Locale("en-u-nu-cryfox"), ["cryfox"]);
+        testNumberingSystems(new Intl.Locale("en", { numberingSystem: "cryfox" }), ["cryfox"]);
     });
 });

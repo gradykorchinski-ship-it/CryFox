@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026, Shannon Booth <shannon@ladybird.org>
+ * Copyright (c) 2026, Shannon Booth <shannon@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

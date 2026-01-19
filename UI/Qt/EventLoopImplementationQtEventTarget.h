@@ -9,7 +9,7 @@
 #include <QEvent>
 #include <QObject>
 
-namespace Ladybird {
+namespace CryFox {
 
 class EventLoopImplementationQtEventTarget final : public QObject {
     Q_OBJECT

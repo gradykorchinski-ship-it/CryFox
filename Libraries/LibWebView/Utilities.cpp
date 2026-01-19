@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Andrew Kaster <akaster@serenityos.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -22,14 +22,14 @@
 namespace WebView {
 
 // This is expected to be set from the build scripts, if a packager desires
-#if defined(LADYBIRD_LIBEXECDIR)
-static constexpr auto libexec_path = STRINGIFY(LADYBIRD_LIBEXECDIR);
+#if defined(CRYFOX_LIBEXECDIR)
+static constexpr auto libexec_path = STRINGIFY(CRYFOX_LIBEXECDIR);
 #else
 static constexpr auto libexec_path = "libexec"sv;
 #endif
 
-ByteString s_ladybird_resource_root;
-static Optional<ByteString> s_ladybird_binary_path;
+ByteString s_cryfox_resource_root;
+static Optional<ByteString> s_cryfox_binary_path;
 
 Optional<ByteString> s_mach_server_name;
 
@@ -47,8 +47,8 @@ void set_mach_server_name(ByteString name)
 
 static ErrorOr<ByteString> application_directory()
 {
-    if (s_ladybird_binary_path.has_value())
-        return *s_ladybird_binary_path;
+    if (s_cryfox_binary_path.has_value())
+        return *s_cryfox_binary_path;
 
     auto current_executable_path = TRY(Core::System::current_executable_path());
     return LexicalPath::dirname(current_executable_path);
@@ -66,11 +66,11 @@ static LexicalPath find_prefix(LexicalPath const& application_directory)
     return application_directory.parent();
 }
 
-void platform_init(Optional<ByteString> ladybird_binary_path)
+void platform_init(Optional<ByteString> cryfox_binary_path)
 {
-    s_ladybird_binary_path = move(ladybird_binary_path);
+    s_cryfox_binary_path = move(cryfox_binary_path);
 
-    s_ladybird_resource_root = [] {
+    s_cryfox_resource_root = [] {
         auto home = Core::Environment::get("XDG_CONFIG_HOME"sv)
                         .value_or_lazy_evaluated_optional([]() { return Core::Environment::get("HOME"sv); });
         if (home.has_value()) {
@@ -86,14 +86,14 @@ void platform_init(Optional<ByteString> ladybird_binary_path)
 #endif
     }();
 
-    Core::ResourceImplementation::install(make<Core::ResourceImplementationFile>(MUST(String::from_byte_string(s_ladybird_resource_root))));
+    Core::ResourceImplementation::install(make<Core::ResourceImplementationFile>(MUST(String::from_byte_string(s_cryfox_resource_root))));
 }
 
 void copy_default_config_files(StringView config_path)
 {
     MUST(Core::Directory::create(config_path, Core::Directory::CreateDirectories::Yes));
 
-    auto config_resources = MUST(Core::Resource::load_from_uri("resource://ladybird/default-config"sv));
+    auto config_resources = MUST(Core::Resource::load_from_uri("resource://cryfox/default-config"sv));
 
     config_resources->for_each_descendant_file([config_path](Core::Resource const& resource) -> IterationDecision {
         auto file_path = ByteString::formatted("{}/{}", config_path, resource.filename());

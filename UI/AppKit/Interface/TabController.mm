@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -11,7 +11,7 @@
 
 #import <Application/ApplicationDelegate.h>
 #import <Interface/Autocomplete.h>
-#import <Interface/LadybirdWebView.h>
+#import <Interface/CryFoxWebView.h>
 #import <Interface/Menu.h>
 #import <Interface/Tab.h>
 #import <Interface/TabController.h>
@@ -197,15 +197,15 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
         attributed_url = [[NSMutableAttributedString alloc] init];
 
         auto* attributed_scheme_and_subdomain = [[NSAttributedString alloc]
-            initWithString:Ladybird::string_to_ns_string(url_parts->scheme_and_subdomain)
+            initWithString:CryFox::string_to_ns_string(url_parts->scheme_and_subdomain)
                 attributes:dark_attributes];
 
         auto* attributed_effective_tld_plus_one = [[NSAttributedString alloc]
-            initWithString:Ladybird::string_to_ns_string(url_parts->effective_tld_plus_one)
+            initWithString:CryFox::string_to_ns_string(url_parts->effective_tld_plus_one)
                 attributes:highlight_attributes];
 
         auto* attributed_remainder = [[NSAttributedString alloc]
-            initWithString:Ladybird::string_to_ns_string(url_parts->remainder)
+            initWithString:CryFox::string_to_ns_string(url_parts->remainder)
                 attributes:dark_attributes];
 
         [attributed_url appendAttributedString:attributed_scheme_and_subdomain];
@@ -213,7 +213,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
         [attributed_url appendAttributedString:attributed_remainder];
     } else {
         attributed_url = [[NSMutableAttributedString alloc]
-            initWithString:Ladybird::string_to_ns_string(url)
+            initWithString:CryFox::string_to_ns_string(url)
                 attributes:highlight_attributes];
     }
 
@@ -261,7 +261,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 - (NSToolbarItem*)navigate_back_toolbar_item
 {
     if (!_navigate_back_toolbar_item) {
-        auto* button = Ladybird::create_application_button([[[self tab] web_view] view].navigate_back_action());
+        auto* button = CryFox::create_application_button([[[self tab] web_view] view].navigate_back_action());
 
         _navigate_back_toolbar_item = [[NSToolbarItem alloc] initWithItemIdentifier:TOOLBAR_NAVIGATE_BACK_IDENTIFIER];
         [_navigate_back_toolbar_item setView:button];
@@ -273,7 +273,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 - (NSToolbarItem*)navigate_forward_toolbar_item
 {
     if (!_navigate_forward_toolbar_item) {
-        auto* button = Ladybird::create_application_button([[[self tab] web_view] view].navigate_forward_action());
+        auto* button = CryFox::create_application_button([[[self tab] web_view] view].navigate_forward_action());
 
         _navigate_forward_toolbar_item = [[NSToolbarItem alloc] initWithItemIdentifier:TOOLBAR_NAVIGATE_FORWARD_IDENTIFIER];
         [_navigate_forward_toolbar_item setView:button];
@@ -285,7 +285,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 - (NSToolbarItem*)reload_toolbar_item
 {
     if (!_reload_toolbar_item) {
-        auto* button = Ladybird::create_application_button(WebView::Application::the().reload_action());
+        auto* button = CryFox::create_application_button(WebView::Application::the().reload_action());
 
         _reload_toolbar_item = [[NSToolbarItem alloc] initWithItemIdentifier:TOOLBAR_RELOAD_IDENTIFIER];
         [_reload_toolbar_item setView:button];
@@ -316,7 +316,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 - (NSToolbarItem*)zoom_toolbar_item
 {
     if (!_zoom_toolbar_item) {
-        auto* button = Ladybird::create_application_button([[[self tab] web_view] view].reset_zoom_action());
+        auto* button = CryFox::create_application_button([[[self tab] web_view] view].reset_zoom_action());
 
         _zoom_toolbar_item = [[NSToolbarItem alloc] initWithItemIdentifier:TOOLBAR_ZOOM_IDENTIFIER];
         [_zoom_toolbar_item setView:button];
@@ -409,7 +409,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 
 - (void)windowDidMove:(NSNotification*)notification
 {
-    auto position = Ladybird::ns_point_to_gfx_point([[self tab] frame].origin);
+    auto position = CryFox::ns_point_to_gfx_point([[self tab] frame].origin);
     [[[self tab] web_view] setWindowPosition:position];
 }
 
@@ -507,7 +507,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
     }
 
     auto location = [self.autocomplete selectedSuggestion].value_or_lazy_evaluated([&]() {
-        return Ladybird::ns_string_to_string([[text_view textStorage] string]);
+        return CryFox::ns_string_to_string([[text_view textStorage] string]);
     });
 
     [self navigateToLocation:move(location)];
@@ -518,7 +518,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 {
     auto* location_search_field = (LocationSearchField*)[self.location_toolbar_item view];
 
-    auto url_string = Ladybird::ns_string_to_string([location_search_field stringValue]);
+    auto url_string = CryFox::ns_string_to_string([location_search_field stringValue]);
     [self setLocationFieldText:url_string];
 }
 
@@ -526,7 +526,7 @@ static NSString* const TOOLBAR_TAB_OVERVIEW_IDENTIFIER = @"ToolbarTabOverviewIde
 {
     auto* location_search_field = (LocationSearchField*)[self.location_toolbar_item view];
 
-    auto url_string = Ladybird::ns_string_to_string([location_search_field stringValue]);
+    auto url_string = CryFox::ns_string_to_string([location_search_field stringValue]);
     m_autocomplete->query_autocomplete_engine(move(url_string));
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, kleines Filmröllchen <malu.bertsch@gmail.com>
  * Copyright (c) 2022, the SerenityOS developers.
  *

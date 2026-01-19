@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2021, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021-2023, Linus Groh <linusg@serenityos.org>
  * Copyright (c) 2021, Luke Wilde <lukew@serenityos.org>
  * Copyright (c) 2022, Ali Mohammad Pur <mpfard@serenityos.org>
@@ -17,7 +17,7 @@
 #include <LibIDL/IDLParser.h>
 #include <LibIDL/Types.h>
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     Core::ArgsParser args_parser;
     StringView path;

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2024, Matthew Olsson <mattco@serenityos.org>
- * Copyright (c) 2024, Sam Atkins <sam@ladybird.org>
+ * Copyright (c) 2024, Sam Atkins <sam@cryfox.org>
  * Copyright (c) 2025, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause

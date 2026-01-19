@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2022-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -39,19 +39,19 @@ void set_default_interface_mode(InterfaceMode interface_mode)
     default_interface_mode = interface_mode;
 }
 
-static Response deserialize_as_ladybird_capability(StringView name, JsonValue value)
+static Response deserialize_as_cryfox_capability(StringView name, JsonValue value)
 {
-    if (name == "ladybird:headless"sv) {
+    if (name == "cryfox:headless"sv) {
         if (!value.is_bool())
-            return Error::from_code(ErrorCode::InvalidArgument, "Extension capability ladybird:headless must be a boolean"sv);
+            return Error::from_code(ErrorCode::InvalidArgument, "Extension capability cryfox:headless must be a boolean"sv);
     }
 
     return value;
 }
 
-static void set_default_ladybird_capabilities(JsonObject& options)
+static void set_default_cryfox_capabilities(JsonObject& options)
 {
-    options.set("ladybird:headless"sv, default_interface_mode == InterfaceMode::Headless);
+    options.set("cryfox:headless"sv, default_interface_mode == InterfaceMode::Headless);
 }
 
 // https://w3c.github.io/webdriver/#dfn-validate-capabilities
@@ -145,8 +145,8 @@ static ErrorOr<JsonObject, Error> validate_capabilities(JsonValue const& capabil
         else if (name.contains(':')) {
             // If name is known to the implementation, let deserialized be the result of trying to deserialize value in
             // an implementation-specific way. Otherwise, let deserialized be set to value.
-            if (name.starts_with_bytes("ladybird:"sv))
-                deserialized = TRY(deserialize_as_ladybird_capability(name, value));
+            if (name.starts_with_bytes("cryfox:"sv))
+                deserialized = TRY(deserialize_as_cryfox_capability(name, value));
         }
 
         // -> The remote end is an endpoint node
@@ -273,7 +273,7 @@ static JsonValue match_capabilities(JsonObject const& capabilities, SessionFlags
 
     // 3. Optionally add extension capabilities as entries to matched capabilities. The values of these may be elided,
     //    and there is no requirement that all extension capabilities be added.
-    set_default_ladybird_capabilities(matched_capabilities);
+    set_default_cryfox_capabilities(matched_capabilities);
 
     // 3. For each name and value corresponding to capabilities's own properties:
     auto result = capabilities.try_for_each_member([&](auto const& name, auto const& value) -> ErrorOr<void> {
@@ -436,9 +436,9 @@ Response process_capabilities(JsonValue const& parameters, SessionFlags flags)
     return JsonValue {};
 }
 
-LadybirdOptions::LadybirdOptions(JsonObject const& capabilities)
+CryFoxOptions::CryFoxOptions(JsonObject const& capabilities)
 {
-    if (auto headless = capabilities.get_bool("ladybird:headless"sv); headless.has_value())
+    if (auto headless = capabilities.get_bool("cryfox:headless"sv); headless.has_value())
         this->headless = *headless;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2020, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2023, Andrew Kaster <akaster@serenityos.org>
  * Copyright (c) 2023, Lucas Chollet <lucas.chollet@serenityos.org>
  *
@@ -17,7 +17,7 @@
 #    include <LibCore/Platform/ProcessStatisticsMach.h>
 #endif
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     AK::set_rich_debug_enabled(true);
 

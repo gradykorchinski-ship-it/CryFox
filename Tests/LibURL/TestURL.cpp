@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2022, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2022, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2021, the SerenityOS developers.
  * Copyright (c) 2025, Shannon Booth <shannon@serenityos.org>
  *
@@ -637,9 +637,9 @@ TEST_CASE(get_registrable_domain)
         EXPECT(!domain.has_value());
     }
     {
-        auto domain = URL::get_registrable_domain("ladybird.github.io"sv);
+        auto domain = URL::get_registrable_domain("cryfox.github.io"sv);
         VERIFY(domain.has_value());
-        EXPECT_EQ(*domain, "ladybird.github.io"sv);
+        EXPECT_EQ(*domain, "cryfox.github.io"sv);
     }
     {
         auto domain = URL::Parser::parse_host("a.example"sv)->registrable_domain();
@@ -706,9 +706,9 @@ TEST_CASE(same_site)
     auto opaque_origin = URL::Origin::create_opaque();
     auto second_opaque_origin = URL::Origin::create_opaque();
 
-    auto site1_https_url = URL::Parser::basic_parse("https://www.ladybird.org"sv).value();
-    auto site1_https_second_url = URL::Parser::basic_parse("https://www.ladybird.org/some/file/path"sv).value();
-    auto site1_http_url = URL::Parser::basic_parse("http://www.ladybird.org"sv).value();
+    auto site1_https_url = URL::Parser::basic_parse("https://www.cryfox.org"sv).value();
+    auto site1_https_second_url = URL::Parser::basic_parse("https://www.cryfox.org/some/file/path"sv).value();
+    auto site1_http_url = URL::Parser::basic_parse("http://www.cryfox.org"sv).value();
 
     auto site2_https_url = URL::Parser::basic_parse("https://www.serenityos.org"sv).value();
 
@@ -730,29 +730,29 @@ TEST_CASE(same_origin_domain)
     EXPECT(opaque1.is_same_origin_domain(opaque1));
     EXPECT(!opaque1.is_same_origin_domain(opaque2));
 
-    auto https_origin = URL::Parser::basic_parse("https://www.ladybird.org"sv).value().origin();
+    auto https_origin = URL::Parser::basic_parse("https://www.cryfox.org"sv).value().origin();
 
     // Opaque and tuple origin
     EXPECT(!opaque1.is_same_origin_domain(https_origin));
 
-    auto https_default = URL::Parser::basic_parse("https://www.ladybird.org"sv).value().origin();
-    auto https_path = URL::Parser::basic_parse("https://www.ladybird.org/some/path"sv).value().origin();
-    auto https_443 = URL::Parser::basic_parse("https://www.ladybird.org:443"sv).value().origin();
-    auto https_444 = URL::Parser::basic_parse("https://www.ladybird.org:444"sv).value().origin();
+    auto https_default = URL::Parser::basic_parse("https://www.cryfox.org"sv).value().origin();
+    auto https_path = URL::Parser::basic_parse("https://www.cryfox.org/some/path"sv).value().origin();
+    auto https_443 = URL::Parser::basic_parse("https://www.cryfox.org:443"sv).value().origin();
+    auto https_444 = URL::Parser::basic_parse("https://www.cryfox.org:444"sv).value().origin();
 
     // Same scheme + host + effective port
     EXPECT(https_default.is_same_origin_domain(https_path));
     EXPECT(https_default.is_same_origin_domain(https_443));
     EXPECT(!https_default.is_same_origin_domain(https_444));
 
-    auto http_origin = URL::Parser::basic_parse("http://www.ladybird.org"sv).value().origin();
+    auto http_origin = URL::Parser::basic_parse("http://www.cryfox.org"sv).value().origin();
 
     // Scheme mismatch
 
     EXPECT(!https_default.is_same_origin_domain(http_origin));
 
     auto other_host = URL::Parser::basic_parse("https://www.serenityos.org"sv).value().origin();
-    auto subdomain = URL::Parser::basic_parse("https://sub.ladybird.org"sv).value().origin();
+    auto subdomain = URL::Parser::basic_parse("https://sub.cryfox.org"sv).value().origin();
 
     // Host mismatch (no domain relaxation)
     EXPECT(!https_default.is_same_origin_domain(other_host));
@@ -772,11 +772,11 @@ TEST_CASE(same_origin_domain)
     // File scheme
     EXPECT(file1.is_same_origin_domain(file2));
 
-    auto a_relaxed = URL::Origin { "https"_string, "a.ladybird.org"_string, 443, "ladybird.org"_string };
-    auto b_relaxed = URL::Origin { "https"_string, "b.ladybird.org"_string, 443, "ladybird.org"_string };
-    auto b_unrelaxed = URL::Parser::basic_parse("https://b.ladybird.org"sv).value().origin();
+    auto a_relaxed = URL::Origin { "https"_string, "a.cryfox.org"_string, 443, "cryfox.org"_string };
+    auto b_relaxed = URL::Origin { "https"_string, "b.cryfox.org"_string, 443, "cryfox.org"_string };
+    auto b_unrelaxed = URL::Parser::basic_parse("https://b.cryfox.org"sv).value().origin();
     auto c_relaxed = URL::Origin { "https"_string, "c.serenityos.org"_string, 443, "serenityos.org"_string };
-    auto http_relaxed = URL::Origin { "http"_string, "a.ladybird.org"_string, 80, "ladybird.org"_string };
+    auto http_relaxed = URL::Origin { "http"_string, "a.cryfox.org"_string, 80, "cryfox.org"_string };
 
     // Origin domain
     EXPECT(a_relaxed.is_same_origin_domain(b_relaxed));

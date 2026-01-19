@@ -50,7 +50,7 @@ compile_ipc(UIProcessServer.ipc UIProcessServerEndpoint.h)
 compile_ipc(UIProcessClient.ipc UIProcessClientEndpoint.h)
 
 if (NOT APPLE AND NOT CMAKE_INSTALL_LIBEXECDIR STREQUAL "libexec")
-    set_source_files_properties(Utilities.cpp PROPERTIES COMPILE_DEFINITIONS LADYBIRD_LIBEXECDIR="${CMAKE_INSTALL_LIBEXECDIR}")
+    set_source_files_properties(Utilities.cpp PROPERTIES COMPILE_DEFINITIONS CRYFOX_LIBEXECDIR="${CMAKE_INSTALL_LIBEXECDIR}")
 endif()
 
 set(GENERATED_SOURCES
@@ -68,7 +68,7 @@ set(GENERATED_SOURCES
     UIProcessServerEndpoint.h
 )
 
-ladybird_lib(LibWebView webview EXPLICIT_SYMBOL_EXPORT)
+cryfox_lib(LibWebView webview EXPLICIT_SYMBOL_EXPORT)
 target_link_libraries(LibWebView PRIVATE LibCore LibDatabase LibDevTools LibFileSystem LibGfx LibHTTP LibImageDecoderClient LibIPC LibRequests LibJS LibWeb LibUnicode LibURL LibSyntax LibTextCodec)
 
 if (APPLE)

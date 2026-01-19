@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2018-2021, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2018-2021, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, Tobias Christiansen <tobyase@serenityos.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -315,7 +315,7 @@ void TextNode::compute_text_for_rendering()
     // Apply text-transform
     // FIXME: This can generate more code points than there were before; we need to find a better way to map the
     //        resulting paintable fragments' offsets into the original text node data.
-    //        See: https://github.com/LadybirdBrowser/ladybird/issues/6177
+    //        See: https://github.com/CryFoxBrowser/cryfox/issues/6177
     auto parent_element = dom_node().parent_element();
     auto const maybe_lang = parent_element ? parent_element->lang() : Optional<String> {};
     auto const lang = maybe_lang.has_value() ? maybe_lang.value() : Optional<StringView> {};

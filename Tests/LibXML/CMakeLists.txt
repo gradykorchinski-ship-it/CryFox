@@ -3,5 +3,5 @@ set(TEST_SOURCES
 )
 
 foreach(source IN LISTS TEST_SOURCES)
-    ladybird_test("${source}" LibXML LIBS LibXML)
+    cryfox_test("${source}" LibXML LIBS LibXML)
 endforeach()

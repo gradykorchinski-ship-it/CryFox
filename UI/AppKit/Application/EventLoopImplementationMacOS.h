@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025, Tim Flynn <trflynn89@ladybird.org>
+ * Copyright (c) 2023-2025, Tim Flynn <trflynn89@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -10,7 +10,7 @@
 #include <AK/NonnullOwnPtr.h>
 #include <LibCore/EventLoopImplementation.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 class EventLoopManagerMacOS final : public Core::EventLoopManager {
 public:

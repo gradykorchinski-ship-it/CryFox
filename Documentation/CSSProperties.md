@@ -1,7 +1,7 @@
 # Adding or Modifying a CSS Property
 
 There are several different places you need to make changes in order to add or modify a CSS property.
-These are listed below in the order that Ladybird deals with them, starting at parsing and ending with them being used.
+These are listed below in the order that CryFox deals with them, starting at parsing and ending with them being used.
 
 ## Data
 

@@ -18,7 +18,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 String ns_string_to_string(NSString*);
 NSString* string_to_ns_string(StringView);

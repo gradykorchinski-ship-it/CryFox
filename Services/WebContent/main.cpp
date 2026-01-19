@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2020-2024, Andreas Kling <andreas@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -59,7 +59,7 @@ static ErrorOr<void> reinitialize_resource_loader(IPC::File const& image_decoder
 static ErrorOr<void> initialize_image_decoder(int image_decoder_socket);
 static ErrorOr<void> reinitialize_image_decoder(IPC::File const& image_decoder_socket);
 
-ErrorOr<int> ladybird_main(Main::Arguments arguments)
+ErrorOr<int> cryfox_main(Main::Arguments arguments)
 {
     AK::set_rich_debug_enabled(true);
 
@@ -84,7 +84,7 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
 
     StringView command_line {};
     StringView executable_path {};
-    auto config_path = ByteString::formatted("{}/ladybird/default-config", WebView::s_ladybird_resource_root);
+    auto config_path = ByteString::formatted("{}/cryfox/default-config", WebView::s_cryfox_resource_root);
     StringView mach_server_name {};
     Vector<ByteString> certificates;
     int request_server_socket { -1 };
@@ -107,7 +107,7 @@ ErrorOr<int> ladybird_main(Main::Arguments arguments)
     Core::ArgsParser args_parser;
     args_parser.add_option(command_line, "Browser process command line", "command-line", 0, "command_line");
     args_parser.add_option(executable_path, "Browser process executable path", "executable-path", 0, "executable_path");
-    args_parser.add_option(config_path, "Ladybird configuration path", "config-path", 0, "config_path");
+    args_parser.add_option(config_path, "CryFox configuration path", "config-path", 0, "config_path");
     args_parser.add_option(request_server_socket, "File descriptor of the socket for the RequestServer connection", "request-server-socket", 'r', "request_server_socket");
     args_parser.add_option(image_decoder_socket, "File descriptor of the socket for the ImageDecoder connection", "image-decoder-socket", 'i', "image_decoder_socket");
     args_parser.add_option(is_layout_test_mode, "Is layout test mode", "layout-test-mode");

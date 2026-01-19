@@ -134,7 +134,7 @@ public:
     Optional<Core::TimeZoneWatcher&> time_zone_watcher();
 
 protected:
-    explicit Application(Optional<ByteString> ladybird_binary_path = {});
+    explicit Application(Optional<ByteString> cryfox_binary_path = {});
 
     ErrorOr<void> initialize(Main::Arguments const&);
 

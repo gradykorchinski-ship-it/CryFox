@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021-2023, Andreas Kling <andreas@ladybird.org>
+ * Copyright (c) 2021-2023, Andreas Kling <andreas@cryfox.org>
  * Copyright (c) 2022, Sam Atkins <atkinssj@serenityos.org>
  * Copyright (c) 2022, Tobias Christiansen <tobyase@serenityos.org>
  * Copyright (c) 2023, MacDue <macdue@dueutil.tech>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

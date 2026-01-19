@@ -108,6 +108,7 @@
       "platform": "windows"
     },
     "libxml2",
+    "nlohmann-json",
     "openssl",
     {
       "name": "qtbase",

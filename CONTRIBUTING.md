@@ -1,10 +1,10 @@
-# Contributing to Ladybird
+# Contributing to CryFox
 
-When contributing to Ladybird, make sure that the changes you wish to make are in line with the project direction. If you are not sure about this, open an issue first, so we can discuss it.
+When contributing to CryFox, make sure that the changes you wish to make are in line with the project direction. If you are not sure about this, open an issue first, so we can discuss it.
 
 **For your first couple of PRs, start with something small to get familiar with the project and its development processes. Please do not start by adding a large component.**
 
-Read [the Ladybird documentation](https://github.com/LadybirdBrowser/ladybird/tree/master/Documentation), including the documents in the **Development** section of the `Documentation/README.md` file.
+Read [the CryFox documentation](https://github.com/CryFoxBrowser/cryfox/tree/master/Documentation), including the documents in the **Development** section of the `Documentation/README.md` file.
 
 Everyone is welcome to work on the project, and while we have lots of fun, it's a serious kind of fun. :^)
 
@@ -23,7 +23,7 @@ Please file any bugs you find, keeping the following in mind:
 
 ## Project governance
 
-The Ladybird project is driven by the [Ladybird Browser Initiative](https://ladybird.org/), a 501(c)(3) non-profit organization.
+The CryFox project is driven by the [CryFox Browser Initiative](https://cryfox.org/), a 501(c)(3) non-profit organization.
 
 Pull requests are approved and merged by a group of maintainers. The current group of maintainers are (in alphabetical order):
 
@@ -42,7 +42,7 @@ Pull requests are approved and merged by a group of maintainers. The current gro
 
 ## Human language policy
 
-In Ladybird, we treat human language as seriously as we do programming language.
+In CryFox, we treat human language as seriously as we do programming language.
 
 The following applies to all user-facing strings, code, comments, and commit messages:
 
@@ -59,7 +59,7 @@ Note that this also applies to debug logging and other internal strings, as they
 
 When possible, please include tests when fixing bugs or adding new features.
 
-If changes you’re making have relevant [Web Platform Tests (WPT)](https://wpt.fyi/) tests — especially if the changes cause Ladybird to pass any WPT tests it hadn’t yet been passing — you should consider [importing those tests into your Ladybird clone](https://github.com/LadybirdBrowser/ladybird/blob/master/Documentation/Testing.md#importing-web-platform-tests), and then commit the imported tests along with your code changes.
+If changes you’re making have relevant [Web Platform Tests (WPT)](https://wpt.fyi/) tests — especially if the changes cause CryFox to pass any WPT tests it hadn’t yet been passing — you should consider [importing those tests into your CryFox clone](https://github.com/CryFoxBrowser/cryfox/blob/master/Documentation/Testing.md#importing-web-platform-tests), and then commit the imported tests along with your code changes.
 
 ## Code submission policy
 
@@ -68,7 +68,7 @@ Nobody is perfect, and sometimes we mess things up. That said, here are some goo
 **Do:**
 
 * Write in idiomatic project-style C++23, using the `AK` containers in all code.
-* Conform to the project coding style found in [CodingStyle.md](https://github.com/LadybirdBrowser/ladybird/blob/master/Documentation/CodingStyle.md). Use `clang-format` to automatically format C++ files.
+* Conform to the project coding style found in [CodingStyle.md](https://github.com/CryFoxBrowser/cryfox/blob/master/Documentation/CodingStyle.md). Use `clang-format` to automatically format C++ files.
 * Choose expressive variable, function and class names. Make it as obvious as possible what the code is doing.
 * Split your changes into separate, atomic commits (i.e. A commit per feature or fix, where the build, tests and the system are all functioning).
 * Make sure your commits are rebased on the master branch.
@@ -154,7 +154,7 @@ git config --add remote.upstream.fetch '+refs/notes/*:refs/notes/*'
 ```
 
 > [!NOTE]
-> The `upstream` remote in this command should be replaced with whatever you've named the LadybirdBrowser/ladybird.git
+> The `upstream` remote in this command should be replaced with whatever you've named the CryFoxBrowser/cryfox.git
 > remote in your local clone. Use `git remote -v` to find that name.
 
 Now, any time you `git fetch`, the latest notes will be fetched as well. You will see information like the following when
@@ -172,8 +172,8 @@ Date:   Mon Jul 29 10:18:25 2024 -0400
 
 Notes:
     Author: https://github.com/trflynn89
-    Commit: https://github.com/LadybirdBrowser/ladybird/commit/c1b0e180ba6
-    Pull-request: https://github.com/LadybirdBrowser/ladybird/pull/892
+    Commit: https://github.com/CryFoxBrowser/cryfox/commit/c1b0e180ba6
+    Pull-request: https://github.com/CryFoxBrowser/cryfox/pull/892
     Reviewed-by: https://github.com/AtkinsSJ ✅
 ```
 
@@ -200,4 +200,4 @@ We encourage everyone to share their personal views and opinions outside project
 
 We reserve the right to reject issues and pull requests that appear to be motivated by bad faith.
 
-Additionally, anyone found participating in social media brigading of Ladybird will be permanently banned from the project.
+Additionally, anyone found participating in social media brigading of CryFox will be permanently banned from the project.

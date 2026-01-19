@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <jni.h>
 
-namespace Ladybird {
+namespace CryFox {
 
 EventLoopThreadData& EventLoopThreadData::the()
 {
@@ -34,7 +34,7 @@ ALooperEventLoopManager::ALooperEventLoopManager(jobject timer_service)
 {
     JavaEnvironment env(global_vm);
 
-    jclass timer_class = env.get()->FindClass("org/serenityos/ladybird/TimerExecutorService$Timer");
+    jclass timer_class = env.get()->FindClass("org/serenityos/cryfox/TimerExecutorService$Timer");
     if (!timer_class)
         TODO();
     m_timer_class = reinterpret_cast<jclass>(env.get()->NewGlobalRef(timer_class));
@@ -46,7 +46,7 @@ ALooperEventLoopManager::ALooperEventLoopManager(jobject timer_service)
 
     jclass timer_service_class = env.get()->GetObjectClass(m_timer_service);
 
-    m_register_timer = env.get()->GetMethodID(timer_service_class, "registerTimer", "(Lorg/serenityos/ladybird/TimerExecutorService$Timer;ZJ)J");
+    m_register_timer = env.get()->GetMethodID(timer_service_class, "registerTimer", "(Lorg/serenityos/cryfox/TimerExecutorService$Timer;ZJ)J");
     if (!m_register_timer)
         TODO();
 

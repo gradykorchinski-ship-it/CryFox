@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2022, Andreas Kling <andreas@ladybird.org>
- * Copyright (c) 2025, Jelle Raaijmakers <jelle@ladybird.org>
+ * Copyright (c) 2022, Andreas Kling <andreas@cryfox.org>
+ * Copyright (c) 2025, Jelle Raaijmakers <jelle@cryfox.org>
  * Copyright (c) 2023-2025, Aliaksandr Kalenik <kalenik.aliaksandr@gmail.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
@@ -136,7 +136,7 @@ WebIDL::ExceptionOr<GC::Ref<TraversableNavigable>> TraversableNavigable::create_
 
     // AD-HOC: Set the default top-level emulated position data for the traversable, which points to Market St. SF.
     // FIXME: We should not emulate by default, but ask the user what to do. E.g. disable Geolocation, set an emulated
-    //        position, or allow Ladybird to engage with the system's geolocation services. This is completely separate
+    //        position, or allow CryFox to engage with the system's geolocation services. This is completely separate
     //        from the permission model for "powerful features" such as Geolocation.
     auto& realm = traversable->active_document()->realm();
     auto emulated_position_coordinates = realm.create<Geolocation::GeolocationCoordinates>(

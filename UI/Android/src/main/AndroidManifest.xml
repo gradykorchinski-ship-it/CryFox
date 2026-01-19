@@ -28,10 +28,10 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ladybird"
+        android:theme="@style/Theme.CryFox"
         tools:targetApi="33">
         <activity
-            android:name=".LadybirdActivity"
+            android:name=".CryFoxActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
             android:exported="true"
             android:launchMode="singleTop"

@@ -8,8 +8,8 @@ set(SOURCES
 
 if (ANDROID)
     add_library(imagedecoderservice SHARED
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/ImageDecoderService.cpp
-        ${LADYBIRD_SOURCE_DIR}/UI/Android/src/main/cpp/LadybirdServiceBaseJNI.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/ImageDecoderService.cpp
+        ${CRYFOX_SOURCE_DIR}/UI/Android/src/main/cpp/CryFoxServiceBaseJNI.cpp
         ${SOURCES}
     )
     target_link_libraries(imagedecoderservice PRIVATE LibWebView)
@@ -20,7 +20,7 @@ endif()
 add_executable(ImageDecoder main.cpp)
 
 target_include_directories(imagedecoderservice PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../..)
-target_include_directories(imagedecoderservice PRIVATE ${LADYBIRD_SOURCE_DIR}/Services/)
+target_include_directories(imagedecoderservice PRIVATE ${CRYFOX_SOURCE_DIR}/Services/)
 
 target_link_libraries(ImageDecoder PRIVATE imagedecoderservice LibCore LibMain LibThreading)
 target_link_libraries(imagedecoderservice PRIVATE LibCore LibGfx LibIPC LibImageDecoderClient LibMain LibThreading)

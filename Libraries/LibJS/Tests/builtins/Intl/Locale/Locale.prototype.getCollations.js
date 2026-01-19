@@ -29,7 +29,7 @@ describe("normal behavior", () => {
         testCollations(new Intl.Locale("ar", { collation: "reformed" }), ["reformed"]);
 
         // Invalid getCollations() also take precedence.
-        testCollations(new Intl.Locale("en-u-co-ladybird"), ["ladybird"]);
-        testCollations(new Intl.Locale("en", { collation: "ladybird" }), ["ladybird"]);
+        testCollations(new Intl.Locale("en-u-co-cryfox"), ["cryfox"]);
+        testCollations(new Intl.Locale("en", { collation: "cryfox" }), ["cryfox"]);
     });
 });

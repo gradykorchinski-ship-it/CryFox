@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021, Hunter Salyer <thefalsehonesty@gmail.com>
- * Copyright (c) 2025, Gregory Bertilson <gregory@ladybird.org>
+ * Copyright (c) 2025, Gregory Bertilson <gregory@cryfox.org>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */

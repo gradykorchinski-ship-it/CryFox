@@ -1,5 +1,5 @@
 <!--
-    This will display identical on Ladybird and Chromium (131.0.6778.85) (centered), but left-aligned on Firefox (129.0.2)
+    This will display identical on CryFox and Chromium (131.0.6778.85) (centered), but left-aligned on Firefox (129.0.2)
     Guessing Firefox has it right; no reason why missing height should align center (see standalone.svg where all left align)
     Suggestion: not a priority, since it works the same as chromium
     Likely a result of settings in Default.css

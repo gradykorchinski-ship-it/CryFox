@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, Andrew Kaster <andrew@ladybird.org>
+ * Copyright (c) 2024, Andrew Kaster <andrew@cryfox.org>
  * Copyright (c) 2025, stasoid <stasoid@yahoo.com>
  *
  * SPDX-License-Identifier: BSD-2-Clause
